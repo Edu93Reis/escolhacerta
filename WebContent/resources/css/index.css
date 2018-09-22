@@ -1,0 +1,116 @@
+@font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot');
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('glyphicons-halflings-regular.woff') format('woff'), url('glyphicons-halflings-regular.ttf') format('truetype'), url('glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+body{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.logo-header{
+	width: 190px;
+	display: inline-block;
+}
+.m-disabled{
+	display: none;
+}		
+#header{
+	height: 10vh;
+	background-color:orange;
+}
+#nav {
+	height: 7vh;
+}
+li.inline-items {
+	display: block;
+}
+#section{
+	height: 75vh;
+}
+			
+@media only screen and (min-width: 640px){
+	.background{
+		background-image: url(#{request.contextPath}/resources/img/background/bg.png);
+		opacity: 0.8;
+		filter: alpha(opacity=80); /* PARA IE8 ou superiores */
+		-webkit-background-size: cover; /*Css safari e chrome*/
+		-moz-background-size: cover; /*Css firefox*/
+		-ms-background-size: cover; /*Css IE não use mer#^@%#*/
+		-o-background-size: cover; /*Css Opera*/				    
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.m-disabled{
+		display: none;
+	}		
+	div.overlay{
+		background-color: rgba(150, 50, 255, 0.5);
+		/*position: relative;
+		z-index:0;*/
+	}
+	div.over{
+		/*position: absolute;
+		z-index:1;
+		top: 25%;
+		left: 40%;*/
+	}
+}
+			
+input.form-control {				
+	color: blue;
+	text-weight: heavy;
+}
+button.btn.btn-default {
+	background-color: white;
+	border-left: 0px solid #fff !important;				
+	border-top-right: .25rem !important;
+	border-bottom-right: .25rem !important;
+}
+.btn.btn-default.search{
+	border-top-right: .25rem !important;
+	border-bottom-right: .25rem !important;
+}
+.fas.fa-search{
+	color: blue;
+}
+button.btn.dropdown-toggle{
+	background-color: white;
+	border: none;
+	border-radius: 0px;
+	padding: 0px;
+}
+#footer{
+	height: 7vh;
+}
+button.close, h3.modal-title {
+	color: blue
+}			
+			
+@media only screen and (max-width: 576px){
+	#nav{
+		height: 10vh;
+		background: orange;				
+	}
+	div #section{
+		height: 80vh;
+	}
+	div.logo-header {
+		width: 90%;
+		display: inline;
+	}
+	div.link{
+		text-align: right;
+	}
+	img.mobile-img{
+		display: block;
+	}
+	div.row.justify-content-center{
+		width: 90%;
+	}
+	div #footer {
+		height: 10vh;
+	}
+	.m-disabled{
+		display: none;
+	}		
+}	

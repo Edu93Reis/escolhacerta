@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="Index EscolhaCerta"/>
+  		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  		<title>Escolha Certa</title>
+  		<h:outputStylesheet library="css" name="index.css" />
+  		<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+  
+		<!-- CSS do Bootstrap -->			  
+		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
+		<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" /> 
+</h:head>
+<h:body>
+	<div id="nav" class="d-block d-sm-none d-lg-none">
+		<div id="div" class="logo-header text-center">
+			<!-- class="mobile-img" -->
+			<h:graphicImage id="img" value="/resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" styleClass="m-disabled" />
+		</div>		
+	</div>
+	
+	<div id="header" class="d-none d-sm-block nav-container">
+		<div class="px-5 py-3" style="background-color:orange;">
+			<div class="page-title logo-header">
+				<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
+						 alt="Logotipo EsolhaCerta" />
+			</div>
+			<div class="navbar-header float-right">
+			<!-- Resolver problema de renderização ui:repeat, testar jsfc do facelets, estudar facelets -->
+			<!-- <ul jsfc="ui:repeat" 
+				value="#{categoriaManagedBean.categoria}"
+				var="categoria" > -->
+			<ul class="nav navbar-nav float-right be-user-nav" style="display: block; color: white;">
+			<h:form>
+				<!-- ui:repeat: componente JSF para iteração de Listas, Arrays, etc..
+				var : indica nome pelo qual cada item da iteração será chamado
+				value : daonde ele busca os valores para iteração  -->
+				<ui:repeat var="categoria" value="#{categoriaManagedBean.categoria}">			
+					<li style="float: left; width:5;">|</li>
+					<li class="disabled d-none" style="float:left; width:25;" jsf:rendered="#{not empty usuarioBean.usuario}"> 
+						<!-- Equivalente ao a href :: value aponta para link -->
+						
+							<h:link value="#{loginManagedBean.usuario.nome}"
+									styleClass="navbar-brand"
+									action="areadousuario?faces-redirect=true" 
+									style="color: white;"
+									rendered="#{loginManagedBean.usuario.idUser eq true}">
+								<!-- Ícone de usuário -->
+								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
+							</h:link>			
+									
+					</li>
+					<li class="disabled" style="float: left; width:25;">
+					<!-- Renderiza a href :: value == saída de texto do botão
+						 action :: envia para a pagina cadastro.xhtml --> 
+						<h:commandLink value="Cadastre-se" action="cadastro" 
+							styleClass="navbar-brand"
+							style="color: white;"
+						/>
+					</li>
+					<li class="disabled" style="float: left; width:25;"> 
+						<h:commandButton value="Login"
+							styleClass="navbar-brand" 
+							jsf:data-toggle="modal" 
+							jsf:data-target="#loginModal"
+							style="color: white; border:none; background:none; cursor: default;"
+						/>
+					</li>
+					<!-- <li class="disabled" style="float: left; width:25;"> 
+						<a href="#" class="navbar-brand" action="areadousuario?faces-redirect=true" style="color: white;" data-toggle="modal" data-target="#loginModal"> Login </a> </li>  -->
+					<li class="disabled d-none" style="float: left; width:25;">
+					<!-- Renderiza a href :: value == saída de texto do botão
+						 outocme :: para onde o link enviará :: usar sem .xhtml? 
+						 action :: redireciona a página
+					-->
+					
+						<h:commandLink value="Sair"
+							action="areadousuario?faces-redirect=true"
+							styleClass="navbar-brand"  style="color: white;"
+						/> 
+					
+					</li>				
+			   </ui:repeat>
+			   </h:form>						
+			</ul>						 				
+		   </div>
+		</div>
+	</div>
+	<!-- Menu de categorias -->
+	<div class="d-none d-sm-block">
+		<div class="fluid-continer">				
+			<ul>
+				<ui:repeat var="categoria" value="#{categoriasBean.categorias}" >
+					<li class="inline-items d-inline">
+						| #{categoriaManagedBean.getCategoria()}
+					</li>					
+					<div class="btn-group">
+					<h:form id="categoria">						
+						<h:commandButton value="Mais Categorias"
+							styleClass="btn dropdown-toggle" 
+							jsf:data-toggle="dropdown" 
+							jsf:aria-haspopup="true" 
+							jsf:aria-expanded="false"							
+						/>
+																	
+						<ul class="dropdown-menu dropdown-menu-right">
+						   <li>
+						   		<h:commandLink value="#{categoriasBean.categoria}"
+									action="index_jsf"
+									styleClass="dropdown-item"
+								/>
+						   	</li>				   
+						</ul>
+					</h:form>
+					</div>					
+				</ui:repeat>
+			</ul>
+		</div>
+	</div>
+	<!-- Área das pesquisas --> 
+
+	<div id="section" class="background"> 
+		<!-- fluid-container -->
+		<div class="pt-5 fluid-container">  
+		<!-- align-self-center -->			
+			<!-- justify-content-center align-self-center -->
+			  <div class="d-none d-sm-block row">			  				  	
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+					<h:commandLink action="index.xhtml">
+						<h:graphicImage value="/resources/img/logo-escolha-certa-big.png" 
+										alt="Logotipo EsolhaCerta" 
+										styleClass="img-responsive" />
+					</h:commandLink>
+				</div>				
+			  </div>
+			  <div class="row justify-content-center">			  					
+		    	<div class=" col-xs-6 col-offset-xs-3 col-sm-6 col-md-6 col-lg-6 align-self-center">
+		            <h:form action="#" method="get">
+		              <div class="input-group">		         
+		              	 <h:inputText styleClass="form-control"
+		              	 			  id="system-search" 
+		              	 			  jsf:placeholder="Digite sua pesquisa..."
+		              	 			  value="" 
+		              	 			  jsf:name="q"/>		              	             
+		                 <span class="input-group-btn">
+		                   <h:commandLink styleClass="btn btn-default search" style="background: #e8eaed; border-bottom-left-radius: 0px; border-top-left-radius: 0px;">
+		                   		<i class="fas fa-search"></i>
+		                   </h:commandLink>
+		                 </span>		              
+					  </div>
+		            </h:form>		            
+        		</div>        		
+        	  </div>        	 
+        <!-- encerra fluid-container -->
+       </div>	         
+	</div>
+	
+	<!-- footer -->
+	<div id="footer" class="nav-container">
+		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+	</div>		
+	
+	<!-- Modal Login -->
+	<div class="modal fade" 
+		 jsf:role="dialog" 
+		 id="loginModal" 
+		 jsf:tabindex="-1" 
+		 jsf:aria-labelledby="exampleModalLabel" 
+		 jsf:aria-hidden="true">
+	    <div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">Efetue Login</h3>
+						<h:commandLink styleClass="close" jsf:data-dismiss="modal"
+									   style="background: #e8eaed; border-bottom-left-radius: 0px; border-top-left-radius: 0px;">
+						 	<i class="fas fa-times"></i>
+						</h:commandLink>			
+				</div>
+			
+				<div class="modal-body">
+					<div class="form-group">
+						<label>E-mail:</label>
+						<h:inputText name="email" 
+									 styleClass="form-control" 
+									 jsf:placeholder="Email do Usuário..."
+									 value="#{LoginManagedBean.usuario.emailUsuario}"/>									 
+					</div>
+					<div class="form-group">
+						<label>Senha:</label>
+						<h:inputSecret name="passowrd" 
+									 styleClass="form-control" 
+									 jsf:placeholder="Digite senha..."
+									 value="#{LoginManagedBean.usuario.senha}"/>									 
+					</div>
+				</div>
+						
+				<div class="modal-footer">
+				   <h:commandButton value="Logar"
+				   					styleClass="btn btn-sucess" 
+				   					action="#{LoginManagedbean.inserirUsuario}"
+				   />				   				   
+				</div>
+			</div>
+		</div>	
+	</div> 
+	<!-- Modal fim -->
+	
+<!-- Javascript das dependências do Bootstrap -->
+<h:outputScript name="jquery.min.js" library="bootstrap/js" />
+<h:outputScript name="popper.min.js" library="js" />
+<h:outputScript name="bootstrap.min.js" library="js" />					
+<!-- 
+<script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+ -->
+</h:body>
+</html>

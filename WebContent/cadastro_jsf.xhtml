@@ -1,0 +1,248 @@
+<!-- <!DOCTYPE html>  -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
+	<!-- xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
+	<!-- jsf:id == chamada do elemento passthrough do JSF para perfmitir o uso de tags do html no JSF -->
+<h:head>	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Página Cadastro EscolhaCerta"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Cadastro</title>				
+		
+<h:outputStylesheet library="css" name="cadastro.css" />
+<!-- biblioteca de CSS do Bootstrap -->
+<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+<!-- favicon == icone na aba de título do navegador, #{request.contextPath} aponta para a raíz do projeto 
+	para ser possível -->
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
+
+</h:head>
+<h:body>
+<!-- Header cadastro mobile -->
+<div class="container d-block d-sm-none d-lg-none clearfix">
+	<div class="row">
+		<div class="logo-header col-xs-3 col-offset-xs-3">
+			<h:graphicImage id="img" 
+					value="/resources/img/logo-escolha-certa-mini.png" 
+					alt="Logotipo EsolhaCerta" 
+					styleClass="mobile-img" />				
+		</div>
+	</div>
+</div>
+	
+<!-- Cadastro Mobile -->
+<div class="row">
+	<div class="d-block d-sm-none">
+	<h1 class="display-5 ml-5 mt-3">Cadastre-se</h1>
+		<div class="container ml-4">
+			<span role="presentation" class="active">
+				<h:form>
+					<h:link value="Dados Cadastrados" 
+							outcome="" />		
+				</h:form>		
+			</span>
+			
+		<div class="list-group">
+		<h:form>
+			<p class="list-group-item">
+				<h:outputText>Email:</h:outputText>
+				<h:inputText jsf:placeholder="Digite seu email ..."
+							 jsf:type="email" 
+							 styleClass="form-control" 
+							 aria-describedby="sizing-addon3" 
+							 value="#{loginManagedBean.usuario.email}"/>
+			</p>	
+			<p class="list-group-item">
+					<h:outputText> Senha: </h:outputText> <h:inputSecret jsf:placeholder="Digite sua senha ..." 
+								class="form-control" 
+								aria-describedby="sizing-addon3" 
+								value="#{loginManagedBean.usuario.senha}" />					
+			</p>
+			<p class="form-group">
+				<p class="list-group-item"><h:outputText> Nasc.: </h:outputText></p>
+				<span class='input-group date' id='datetimepicker1'>				
+					<h:inputText jsf:placeholder="Digite seu nasc. ..." 
+								 styleClass="form-control"
+								 jsf:type="date" 
+								 value="#{loginManagedBean.usuario.nasc}" >
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:inputText>
+					<span class="input-group-addon">
+						<span class="fa fa-calendar"></span>
+					</span>
+				</span>
+			</p>
+			<p class="list-group-item">	
+				<h:outputText> CPF: </h:outputText> 
+				<h:inputText jsf:placeholder="Digite seu CPF ..." 
+							class="form-control" aria-describedby="sizing-addon3"  value="#{loginManagedBean.usuario.CPF}" />
+			</p>
+			<p class="list-group-item">	
+			<h:outputText>Cidade: </h:outputText> 
+				<h:inputText  jsf:placeholder="Digite seu Cidade ..." 
+							  styleClass="form-control" jsf:aria-describedby="sizing-addon3"
+							  value="#{loginManagedBean.usuario.cidade}" />
+			</p>								
+			<p class="list-group-item">	
+				<h:outputText>Estado:	</h:outputText>
+				<h:selectOneMenu value="#{loginManagedBean.usuario.estado}"/>
+				<!-- ui:repeat itera todos os itens de estado --> 
+				<ui:repeat class="dropdown-menu" var="item" value="#{loginManagedBean.usuario.estado}">
+					<li>#{item.toString()}</li>
+				</ui:repeat>									
+			</p>
+			<h:commandButton value="Salvar" action="#{cadastroManagedBean.incluiUsuario()}" class="btn btn-default" />
+		</h:form>
+	</div>
+</div>
+
+<div class="col-xs-4 col-offset-xs-4" aria-label="...">
+    <ul class="pager">
+	    <li>
+			<h:link outome="#">
+				<span jsf:icon="far fa-circle"></span>
+			 </h:link>
+		</li>
+		<li>
+			<h:link outome="#">
+				<span jsf:icon="far fa-circle"></span>
+			</h:link>
+		</li>
+    </ul>
+</div>
+		
+</div>	 
+<!-- Fim cadastro mobile -->
+
+<!-- Cadastro tablet and up -->
+<div class="form d-none d-sm-block col-xs-12 col-sm-8 col-md-8 col-lg-8 pb-5">			
+	<div role="main" class="">
+		<div class="d-none d-sm-block pl-5 pt-3">
+			<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" />			
+		</div>
+		<div id="container text-right">		
+		<!-- Display: determina tamanho do texto (mais alto menor), m-5 margem -->
+			<h1 class="display-5 ml-5 mt-3">Cadastre-se</h1>				
+				<div class="ml-5 mt-4">
+					<div class="input-group">
+						<!-- Aqui começa o formulário de cadastro -->
+						<h:form>						  
+						  <span style="width:100%">
+						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
+							<div class="d-inline-block">
+								<h:outputText value="E-mail: " style="font-weight: bold;" /> 
+							</div> 
+								<h:inputText jsf:placeholder="Digite seu email ..." 
+											 jsf:type="email"
+											 styleClass="form-control col-md-7 col-lg-7" 
+									     	 jsf:aria-describedby="sizing-addon3" 
+									     	 value="#{loginManagedBean.usuario.email}" />									
+						  </span>
+						  
+						  <span style="width:40%">		
+						  	<!-- col-md-2 col-lg-2 -->					
+							<div class="d-inline-block">
+								<h:outputText value="Senha: " style="font-weight: bold;" />
+							</div>
+								<h:inputSecret jsf:placeholder="Digite sua senha ..."									  		   
+											   styleClass="form-control col-md-7 col-lg-7" 
+											   jsf:aria-describedby="sizing-addon3" 
+											   value="#{loginManagedBean.usuario.senha}"/>								
+						  </span>
+						  
+						  <span style="width:100%">											
+							<p class="form-group">
+								<!-- col-md-2 col-lg-2 -->
+								<div class="d-inline-block">
+									<h:outputText value="Nasc.: " style="font-weight: bold;" />
+								</div>
+								<span class='input-group date' id='datetimepicker1' style="width: 350px;">				
+									<h:inputText jsf:placeholder="Digite seu nasc. ..." 
+												 jsf:type="date"
+												 styleClass="form-control col-md-7 col-lg-7" value="#{loginManagedBean.usuario.nasc}" 
+												 style="width:90% !important;">
+										<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:inputText>
+									<span class="input-group-addon">
+					                	<span class="glyphicon glyphicon-calendar"></span>
+					                </span>
+								</span>								
+							</p>
+						  </span>
+						  
+						  <span style="width:60%">	
+						  	<!-- col-md-2 col-lg-2 -->
+							<div class="d-inline-block">
+								<h:outputText value="CPF: " style="font-weight: bold;" />
+							</div>							
+							<h:inputText jsf:placeholder="Digite seu CPF ..." 
+										 styleClass="form-control col-md-7 col-lg-7" 
+										 jsf:aria-describedby="sizing-addon3"  
+										 value="#{loginManagedBean.usuario.cpf}" />							
+						  </span>
+						  
+						  <span style="width:50%">
+						  	<!-- col-md-2 col-lg-2 -->	
+							<div class="d-inline-block"> <h:outputText value="Cidade:" style="font-weight: bold;" /> </div> 
+								<h:inputText jsf:placeholder="Digite seu Cidade ..." 
+											 styleClass="form-control col-md-7 col-lg-7" 
+											 aria-describedby="sizing-addon3" 
+											 value="#{loginManagedBean.usuario.cidade}" />															
+						  </span>
+						  
+						  <span style="width:70%">		
+						  	<!-- col-md-2 col-lg-2 -->			
+							<div class="d-inline-block">
+								<h:outputText value="Estado: " style="font-weight: bold;" />
+							</div>
+								<!-- dropdown-menu col-md-7 col-lg-7 -->
+								<h:selectOneMenu styleClass="">
+										<f:selectItems value="#{loginManagedBean.usuario.estado}" />
+								</h:selectOneMenu> 
+									<!-- <ui:repeat class="dropdown-menu col-md-7 col-lg-7" var="item" value="#{gestaoProdutosBean_Aula2.produtos}">
+										<li>#{item.nome}</li>
+									</ui:repeat>  -->								
+						  </span>						  	
+							
+						  <p><h:commandButton value="Cadastrar" action="#{cadastroManagedBean.incluiUsuario()}" styleClass="btn btn-default" style="float: right" /></p>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<!-- Informação lateral, apresentação do site -->				
+<aside role="complementary" class="d-none d-sm-block presentation col-xs-0 col-sm-4 col-md-4 col-lg-4">								
+	<div class="position">
+		<h:graphicImage value="/resources/img/lamp.png" alt="Lampada" />
+		<p>A <b>EscolhaCerta</b> de um produto nunca foi tão fácil</p>
+		<p class="text-box d-inline">Você busca produtos de acordo com a experiência de outros consumidores.</p>
+	</div>		
+</aside>
+<!-- Termina sessão lateral de apresentação do site -->
+<!-- div de encerramento do container -->
+</div>
+<!-- footer -->
+<footer class="nav-container">
+	<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+</footer>		
+		
+		<!-- Calendar code -->
+		<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+		
+		<!-- Javascript das dependências do Bootstrap -->					
+		<script src="resources/bootstrap/js/jquery.min.js"></script>
+	  	<script src="resources/bootstrap/js/popper.min.js"></script>
+	  	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+</h:body>
+</html>
