@@ -1,77 +1,47 @@
 package com.escolhacerta.model;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-
-import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Usuario;
-
-
+import com.escolhacerta.util.ConnectionFactory;
 
 public class UsuarioDAO {
-	private EntityManagerFactory factory = Persistence
-			.createEntityManagerFactory("usuarios");
-	private EntityManager em = factory.createEntityManager();
+	private Connection conn;
 	
-/* inserir usuario, buscar um usuario, listar usuarios, remover usuario, alterar dados usuario */
-	public Usuario getUsuario(String emailUsuario, String senha) {
+	public UsuarioDAO() {
+		//construtor abre a conexão
 		try {
-			//createQuery cria uma lista de objetos
-			Usuario usuario = (Usuario) em
-					.createQuery(
-							"SELECT u from Usuario u where u.emailUsuario = :email and u.senha = :senha")
-							.setParameter("email", emailUsuario)
-							.setParameter("senha", senha).getSingleResult();
-			return usuario;
-		} catch (NoResultException ex) {
-			return null;
+			this.conn = new ConnectionFactory().getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	/*public boolean setUsuario(String emailUsuario, String nmUsuario, String idPassword, 
-								Date dtNasc, String nmCidade, String nmEstado, String cdCep){
-		Usuario user = (Usuario) em.setParameter("email", emailUsuario)
-								   .setParameter("nome", nmUsuario)
+	// grava no banco de dados toda a instancia de um objeto Usuario
+	public void adiciona(Usuario usuario) {
+		//java.sql.Date nasc = new java.sql.Date(usuario.getNasc());
 		
-		//salvar como integer devido ao id
-		Integer newUser = session.save(user); 
-		
-	}*/
-	
-	public boolean inserirUsuario(Usuario usuario) {
 		try {
-			//cria o insert dos dados recebidos no select
-			em.persist(usuario);
-			return true;
-		} catch (Exception ex){
-			ex.printStackTrace();
-			return false;
+			//+ "(emailUsuario, nmUsuario, idPassword, dtNasc, nmCidade, nmEstado, cdCep)" +
+			PreparedStatement stmt = conn.prepareStatement("insert into usuario "
+					+ "(emailUsuario, nmUsuario, idPassword, nmCidade, nmEstado, cdCep)" + 
+										" values (?, ?, ?, ?, ?, ?)");
+
+			stmt.setString(1, usuario.getEmail());
+			stmt.setString(2, usuario.getNome());
+			stmt.setString(3, usuario.getSenha());
+			//stmt.setDate(4, new java.sql.Date(usuario.getNasc()));
+			stmt.setString(4, usuario.getCidade());
+			stmt.setString(5, usuario.getEstado());
+			stmt.setInt(6, usuario.getCep());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
-	
-	public boolean atualizaUsuario(Usuario usuario) {
-		try {
-			//cria insert para os dados recebidos
-			em.refresh(usuario);
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return false;
-		}
-	}
-	
-	public boolean deletaUsuario(Usuario usuario) {
-		try {
-			//cria delete para os dados recebidos
-			em.remove(usuario);
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return false;
-		}
-	}
+
 }

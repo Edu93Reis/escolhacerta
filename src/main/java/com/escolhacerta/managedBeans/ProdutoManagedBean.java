@@ -16,10 +16,9 @@ import com.escolhacerta.util.HibernateUtil;
 
 
 @SuppressWarnings("deprecation")
-@ManagedBean(name = "consultaManagedBean")
-@Named
+@ManagedBean(name = "produtoManagedBean")
 @ViewScoped
-public class ConsultaManagedBean {
+public class ProdutoManagedBean {
 	//salva a listagem de produtos do banco de dados
 	//dentro do Arraylist para futura listagem
 	private List<Produto> produtos = new ArrayList<Produto>();

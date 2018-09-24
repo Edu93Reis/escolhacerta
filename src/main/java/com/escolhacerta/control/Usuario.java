@@ -1,12 +1,13 @@
 package com.escolhacerta.control;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +21,16 @@ import javax.persistence.TemporalType;
 ** e, por conta disso, este bean deve implementar a interface Serializable */
 public class Usuario implements Serializable {	
 	private static final long serialVersionUID = 3445560597837908750L;
+	private List<String> list_estados = new ArrayList<String>(){
+		{
+		 add("Acre"); add("Alagoas"); add("Amapá"); add("Amazonas"); add("Bahia");
+		 add("Ceará"); add("Distrito Federal"); add("Espírito Santo"); add("Goiás"); add("Maranhão");
+		 add("Mato Grosso"); add("Mato Grosso do Sul"); add("Minas Gerais"); add("Pará"); add("Paraíba");
+		 add("Paraná"); add("Pernambuco"); add("Piauí"); add("Rio de Janeiro"); add("Rio Grande do Norte");
+		 add("Rio Grande do Sul"); add("Rondônia"); add("Roraima"); add("Santa Catarina");
+		 add("São Paulo"); add("Sergipe"); add("Tocantins");
+		 }
+	};
 	private Integer idUsuario;
 	private String email;
 	private String nome;
@@ -29,6 +40,7 @@ public class Usuario implements Serializable {
 	private Integer idEndereco;
 	private String cidade;
 	private String estado;
+	private String estados;
 	private Integer cep;
 	
 	//indica��o do Hibernate por annotations de 
@@ -63,7 +75,8 @@ public class Usuario implements Serializable {
 	}
 	
 	public void setNome(String nome) {
-		if(nome.equals(null) || nome.getClass().toString() != "String" || nome.equals("  ")){
+		//|| nome.getClass().toString() != "String" || nome.equals("  ")
+		if(nome.equals(null)){
 			System.out.println("Insira valor no campo nome!");
 		}else{
 			this.nome = nome;
@@ -76,7 +89,8 @@ public class Usuario implements Serializable {
 	}
 	
 	public void setSenha(String senha) {
-		if(senha.equals(null) || senha.equals("  ") || senha.getClass().toString() != "String"){
+		// || senha.equals("  ") || senha.getClass().toString() != "String"
+		if(senha.equals(null)){
 			System.out.println("Insira valor no campo senha!");
 		}else{		
 			this.senha = senha;
@@ -84,14 +98,15 @@ public class Usuario implements Serializable {
 	}
 	
 	//@TemporalType.Date --> necess�rio para lidar com datas no Java com precis�o
-	@Temporal(TemporalType.DATE)
-	@Column(name="nascimento", nullable=false)
+	//@Temporal(TemporalType.DATE)
+	//@Column(name="nascimento", nullable=false)
 	public Date getNasc() {
 		return nasc;
 	}
 
 	public void setNasc(Date nasc) {
-		if(nasc.equals(null) || !(nasc.getClass().isAssignableFrom(new Date().getClass())) ) {
+		//|| !(nasc.getClass().isAssignableFrom(new Date().getClass()))
+		if(nasc.equals(null)) {
 			System.out.println("Insira valor no campo nascimento!");
 		}else{
 			this.nasc = nasc;
@@ -104,7 +119,8 @@ public class Usuario implements Serializable {
 	}
 	
 	public void setCPF(String cpf) {
-		if(cpf.equals(null) || cpf.equals("") || cpf.equals("  ") || cpf.contains("   ") || cpf.getClass().toString() != "String"){
+		// || cpf.equals("") || cpf.equals("  ") || cpf.contains("   ") || cpf.getClass().toString() != "String"
+		if(cpf.equals(null)){
 			System.out.println("Insira valor no campo CPF!");
 		}else{	
 			this.cpf = cpf;
@@ -123,7 +139,8 @@ public class Usuario implements Serializable {
 	}
 	
 	public void setCidade(String cidade) {
-		if(cidade.equals(null) || cidade.getClass().toString() != "String" || cidade.equals("  ")){
+		//|| cidade.getClass().toString() != "String" || cidade.equals("  ")
+		if(cidade.equals(null)){
 			System.out.println("Insira valor no campo cidade!");
 		}else{		
 			this.cidade = cidade;
@@ -134,13 +151,22 @@ public class Usuario implements Serializable {
 		return estado;
 	}
 	
+	//|| estado.equals("  ") || estado.getClass().toString() != "String"
 	public void setEstado(String estado) {
-		if(estado.equals(null) || estado.equals("  ") || estado.getClass().toString() != "String") {
+		if(estado.equals(null)) {
 			System.out.println("Insira valor no campo estado!");
-		}else{		
+		}else{
 			this.estado = estado;
 		}
 	}
+	
+	public void setEstados(){
+		for(String estado : list_estados){
+			this.estados = estado;
+		}
+	}
+	
+	
 	
 	public Integer getCep() {
 		return cep;

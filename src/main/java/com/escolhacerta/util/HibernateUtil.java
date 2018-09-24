@@ -19,11 +19,11 @@ public class HibernateUtil {
 	
 	static {
 		
-		//representa configura��o do Hibernate
+		//representa configuração do Hibernate
 		try{
-			//representa configura��o do Hibernate
+			//representa configuração do Hibernate
 			Configuration config = new Configuration();
-			//l� as configura��es do hibernate.cfg.xml
+			//l� as configuraões do hibernate.cfg.xml
 			config.configure();
 			
 			//aplica as configura��es passadas no hibernate.cfg.xml

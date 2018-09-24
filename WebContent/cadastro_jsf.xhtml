@@ -22,6 +22,219 @@
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
 
+<script type="text/javascript">
+                $(function(e) {
+                    $('#cpf').hide();
+                });
+        
+                function show_hide(){
+                    var valor = $("#country").val();
+
+                    if(valor == 'Brazil'){
+                         $("#cpf").show();
+                         $("#cpf").attr('required', ''); 
+                     } else {
+                         $("#cpf").hide();
+                         $("#cpf").removeAttr('required');
+                     }
+                };
+ </script>           
+<!--                function nameValidation(){
+                    var nome = $("#name").val();
+                    if(nome == " " || nome == null || nome.length < 3){
+                        this.nameError()
+                    }
+                    else {
+                        $("#name").css('border-color','black');
+                        $("#div_name").hide();
+                        return true;
+                    }
+                }
+                
+                function nameError(){
+                    $("#div_name").css('color','red');
+                    $("#name").css('border-color','red');
+                    $("#div_name").text("Name not valid!").show();    
+                    return false;
+                }
+            
+                function usernameValidation(){
+                    var usuario = $("#username").val();
+                    if(usuario == " " || usuario == null || usuario.length < 3){
+                        this.usernameError()
+                    }
+                    else {
+                        $("#div_username").hide();
+                        $("#username").css('border-color','black');
+                        return true;
+                    }
+                }
+            
+                function usernameError(){
+                    $("#div_username").css('color','red');
+                    $("#username").css('border-color','red');
+                    $("#div_username").text("Username not valid!").show();    
+                    return false;
+                }
+            
+                function pwdValidation1(){
+                    var senha = $("#pwd1").val();
+                    var regex = /^(?=(?:.*?[A-Z]))(?=(?:.*?[0-9]))(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/; 
+
+                    if(senha.length < 8)
+                    {
+                        $("#div_pwd1").css('color','red');
+                        $("#pwd1").css('border-color','red');
+                        $("#div_pwd1").text("Password must be at least 8 characters long.").show(); 
+                        return false;
+                    }
+                    else if(!regex.exec(senha))
+                    {
+                        $("#div_pwd1").css('color','red');
+                        $("#pwd1").css('border-color','red');
+                        $("#div_pwd1").text("Password must contain at least 1 capital character, 1 number and 1 especial character.").show(); 
+                        return false;
+                    }
+                        $("#pwd1").css('border-color','black');
+                        $("#div_pwd1").hide();
+                    return true;
+                }
+            
+                function pwdValidation2(){
+                    return true;
+                }
+            
+                function pwdComparationValidation(){
+                    var pwd1 = $("#pwd1").val();
+                    var pwd2 = $("#pwd2").val();
+                    if(pwd1==pwd2){
+                        $("#div_pwd2").hide();
+                        $("#pwd2").css('border-color','black');
+                        return true;
+                    }
+                    else{
+                        $("#div_pwd2").css('color','red');
+                        $("#pwd2").css('border-color','red');
+                        $("#div_pwd2").text("The passwords don't match.").show();  
+                        return false;
+                    }
+                }
+            
+                function emailValidation(){
+                    var email = $("#email").val();
+                    var user = email.substr(0, email.indexOf("@"));
+                    console.log(user);
+                    var domain = email.substr(email.indexOf("@"),email.length);
+                    console.log(domain);
+
+                    if ((user.length >=1) &&
+                        (domain.length >=3) && 
+                        (user.search("@")==-1) && 
+                        (domain.search("@")!=-1) &&
+                        (user.search(" ")==-1) && 
+                        (domain.search(" ")==-1) &&
+                        (domain.search(".")!=-1) &&      
+                        (domain.indexOf(".") >=1)&& 
+                        (domain.lastIndexOf(".") < domain.length - 1)) {
+                        
+                            $("#div_email").hide();
+                            $("#email").css('border-color','black');
+                            return true;
+                        
+                    } else {
+                        $("#div_email").css('color','red');
+                        $("#email").css('border-color','red');
+                        $("#div_email").text("Invalid email.").show(); 
+                        return false;
+                    }
+                    
+                }
+            
+                function cpfValidation(){
+                    var cpf = $("#cpf").val();
+                    var sum;
+                    var rest;
+                    sum = 0;
+                    if (cpf == "00000000000"){
+                        return cpfError();
+                    }
+
+                    for (i=1; i<=9; i++){
+                        sum = sum + parseInt(cpf.substring(i-1, i)) * (11 - i);
+                    }
+                    rest = (sum * 10) % 11;
+
+                    if ((rest == 10) || (rest == 11)){
+                        rest = 0;
+                    }
+                    if (rest != parseInt(cpf.substring(9, 10)) ){
+                        return cpfError();
+                    }
+
+                    sum = 0;
+                    for (i = 1; i <= 10; i++){
+                        sum = sum + parseInt(cpf.substring(i-1, i)) * (12 - i);
+                    }
+                    rest = (sum * 10) % 11;
+
+                    if ((rest == 10) || (rest == 11)){
+                        rest = 0;
+                    }
+                    if (rest != parseInt(cpf.substring(10, 11) ) ){
+                        return cpfError();
+                    }
+                    $("#div_cpf").hide();
+                    $("#cpf").css('border-color','black');
+                    return true;
+                }
+            
+                function cpfError(){
+                    $("#div_cpf").css('color','red');
+                    $("#cpf").css('border-color','red');
+                    $("#div_cpf").text("CPF not valid!").show();
+                    return false;
+                }
+
+                function allValidations(){
+                    var count = 0;
+                    if(!nameValidation()){
+                        count++;
+                    }
+                    if(!usernameValidation()){
+                        count++;
+                    }
+                    if(!pwdValidation1()){
+                        count++;
+                    }
+                    if(!pwdValidation2()){
+                        count++;
+                    }
+                    if(!pwdComparationValidation()){
+                        count++;
+                    }
+                    if(!emailValidation()){
+                        count++;
+                    }
+                    var country = $("#country").val();
+                    if(country=='Brazil'){
+                        if(!cpfValidation()){
+                            count++;
+                            console.log("Oi");
+                        }
+                    }
+                    if(count==0)
+                        return true;
+                    else
+                        console.log(count);
+                        return false;
+                }
+            
+                    $(document).ready(function () { 
+                    var $seuCampoCpf = $("#cpf");
+                    $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+                });
+            
+</script>  -->
 </h:head>
 <h:body>
 <!-- Header cadastro mobile -->
@@ -46,23 +259,24 @@
 					<h:link value="Dados Cadastrados" 
 							outcome="" />		
 				</h:form>		
+				Teste: #{userareaManagedBean.usuario.getNome(0)}
 			</span>
 			
 		<div class="list-group">
-		<h:form>
+		<h:form id="cadastroUsuario">
 			<p class="list-group-item">
 				<h:outputText>Email:</h:outputText>
 				<h:inputText jsf:placeholder="Digite seu email ..."
 							 jsf:type="email" 
 							 styleClass="form-control" 
 							 aria-describedby="sizing-addon3" 
-							 value="#{loginManagedBean.usuario.email}"/>
+							 value="#{cadastroManagedBean.usuario.email}"/>
 			</p>	
 			<p class="list-group-item">
 					<h:outputText> Senha: </h:outputText> <h:inputSecret jsf:placeholder="Digite sua senha ..." 
 								class="form-control" 
 								aria-describedby="sizing-addon3" 
-								value="#{loginManagedBean.usuario.senha}" />					
+								value="#{cadastroManagedBean.usuario.senha}" />					
 			</p>
 			<p class="form-group">
 				<p class="list-group-item"><h:outputText> Nasc.: </h:outputText></p>
@@ -70,7 +284,7 @@
 					<h:inputText jsf:placeholder="Digite seu nasc. ..." 
 								 styleClass="form-control"
 								 jsf:type="date" 
-								 value="#{loginManagedBean.usuario.nasc}" >
+								 value="#{cadastroManagedBean.usuario.nasc}" >
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:inputText>
 					<span class="input-group-addon">
@@ -81,19 +295,19 @@
 			<p class="list-group-item">	
 				<h:outputText> CPF: </h:outputText> 
 				<h:inputText jsf:placeholder="Digite seu CPF ..." 
-							class="form-control" aria-describedby="sizing-addon3"  value="#{loginManagedBean.usuario.CPF}" />
+							class="form-control" aria-describedby="sizing-addon3"  value="#{cadastroManagedBean.usuario.CPF}" />
 			</p>
 			<p class="list-group-item">	
 			<h:outputText>Cidade: </h:outputText> 
 				<h:inputText  jsf:placeholder="Digite seu Cidade ..." 
 							  styleClass="form-control" jsf:aria-describedby="sizing-addon3"
-							  value="#{loginManagedBean.usuario.cidade}" />
+							  value="#{cadastroManagedBean.usuario.cidade}" />
 			</p>								
 			<p class="list-group-item">	
 				<h:outputText>Estado:	</h:outputText>
-				<h:selectOneMenu value="#{loginManagedBean.usuario.estado}"/>
+				<h:selectOneMenu value="#{cadastroManagedBean.usuario.estado}"/>
 				<!-- ui:repeat itera todos os itens de estado --> 
-				<ui:repeat class="dropdown-menu" var="item" value="#{loginManagedBean.usuario.estado}">
+				<ui:repeat class="dropdown-menu" var="item" value="#{cadastroManagedBean.usuario.estado}">
 					<li>#{item.toString()}</li>
 				</ui:repeat>									
 			</p>
@@ -132,7 +346,7 @@
 				<div class="ml-5 mt-4">
 					<div class="input-group">
 						<!-- Aqui começa o formulário de cadastro -->
-						<h:form>						  
+						<h:form id="cadastroUser">						  
 						  <span style="width:100%">
 						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
 							<div class="d-inline-block">
@@ -142,7 +356,7 @@
 											 jsf:type="email"
 											 styleClass="form-control col-md-7 col-lg-7" 
 									     	 jsf:aria-describedby="sizing-addon3" 
-									     	 value="#{loginManagedBean.usuario.email}" />									
+									     	 value="#{cadastroManagedBean.usuario.email}" />									
 						  </span>
 						  
 						  <span style="width:40%">		
@@ -153,7 +367,7 @@
 								<h:inputSecret jsf:placeholder="Digite sua senha ..."									  		   
 											   styleClass="form-control col-md-7 col-lg-7" 
 											   jsf:aria-describedby="sizing-addon3" 
-											   value="#{loginManagedBean.usuario.senha}"/>								
+											   value="#{cadastroManagedBean.usuario.senha}"/>								
 						  </span>
 						  
 						  <span style="width:100%">											
@@ -165,7 +379,8 @@
 								<span class='input-group date' id='datetimepicker1' style="width: 350px;">				
 									<h:inputText jsf:placeholder="Digite seu nasc. ..." 
 												 jsf:type="date"
-												 styleClass="form-control col-md-7 col-lg-7" value="#{loginManagedBean.usuario.nasc}" 
+												 styleClass="form-control col-md-7 col-lg-7" 
+												 value="#{cadastroManagedBean.usuario.nasc}" 
 												 style="width:90% !important;">
 										<f:convertDateTime pattern="dd/MM/yyyy"/>
 									</h:inputText>
@@ -184,7 +399,7 @@
 							<h:inputText jsf:placeholder="Digite seu CPF ..." 
 										 styleClass="form-control col-md-7 col-lg-7" 
 										 jsf:aria-describedby="sizing-addon3"  
-										 value="#{loginManagedBean.usuario.cpf}" />							
+										 value="#{cadastroManagedBean.usuario.CPF}" />							
 						  </span>
 						  
 						  <span style="width:50%">
@@ -193,7 +408,7 @@
 								<h:inputText jsf:placeholder="Digite seu Cidade ..." 
 											 styleClass="form-control col-md-7 col-lg-7" 
 											 aria-describedby="sizing-addon3" 
-											 value="#{loginManagedBean.usuario.cidade}" />															
+											 value="#{cadastroManagedBean.usuario.cidade}" />															
 						  </span>
 						  
 						  <span style="width:70%">		
@@ -202,8 +417,9 @@
 								<h:outputText value="Estado: " style="font-weight: bold;" />
 							</div>
 								<!-- dropdown-menu col-md-7 col-lg-7 -->
-								<h:selectOneMenu styleClass="">
-										<f:selectItems value="#{loginManagedBean.usuario.estado}" />
+								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> -->
+								<h:selectOneMenu styleClass="" value="#{cadastroManagedBean.usuario.estado}">
+										<f:selectItems value="#{cadastroManagedBean.usuario.estados}" />
 								</h:selectOneMenu> 
 									<!-- <ui:repeat class="dropdown-menu col-md-7 col-lg-7" var="item" value="#{gestaoProdutosBean_Aula2.produtos}">
 										<li>#{item.nome}</li>
