@@ -8,21 +8,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/* indicação de que esta é uma entidade da JPA (persistencia Java) */
-@Entity
-/* Indicação do Hibernate de qual será a tabela em que serão persistidos os dados */
-@Table(name="Categoria")
+/* indicaï¿½ï¿½o de que esta ï¿½ uma entidade da JPA (persistencia Java) */
+//@Entity
+/* Indicaï¿½ï¿½o do Hibernate de qual serï¿½ a tabela em que serï¿½o persistidos os dados */
+//@Table(name="Categoria")
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 8782690768665611462L;
-	//indicação do Hibernate por annotations de 
-	//@Id --> chave primária, @GeneratedValue --> valor gerado automaticamente, e nome e características 
+	//indicaï¿½ï¿½o do Hibernate por annotations de 
+	//@Id --> chave primï¿½ria, @GeneratedValue --> valor gerado automaticamente, e nome e caracterï¿½sticas 
 	//das colunas que equivalem ao atributo (atributo idUsuario == coluna idUsuario no MySQL)
-	@Id
-	@GeneratedValue
-	@Column(name="idCategoria", nullable=false, unique=true)
+	//@Id
+	//@GeneratedValue
+	//@Column(name="idCategoria", nullable=false, unique=true)
 	private Integer idCategoria;
-	@Column(name="nmCategoria", nullable=false, unique=true)
+	//@Column(name="nmCategoria", nullable=false, unique=true)
 	private String nomeCategoria;
+	
+	public Categoria(){
+	}
+	
+	public Categoria(String nomeCategoria){
+		this.nomeCategoria = nomeCategoria;
+	}
 	
 	public Integer getId(){
 		return this.idCategoria;
@@ -30,5 +37,9 @@ public class Categoria implements Serializable {
 	
 	public void setCategoria(String nomeCategoria){
 		this.nomeCategoria = nomeCategoria;
+	}
+	
+	public String getCategoria(){
+		return this.nomeCategoria;
 	}
 }

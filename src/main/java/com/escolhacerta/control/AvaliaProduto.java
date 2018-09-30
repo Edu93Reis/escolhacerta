@@ -7,10 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/* indicação de que esta é uma entidade da JPA (persistencia Java) */
-@Entity
-/* Indicação do Hibernate de qual será a tabela em que serão persistidos os dados */
-@Table(name="modelo")
+/* indicaï¿½ï¿½o de que esta ï¿½ uma entidade da JPA (persistencia Java) */
+//@Entity
+/* Indicaï¿½ï¿½o do Hibernate de qual serï¿½ a tabela em que serï¿½o persistidos os dados */
+//@Table(name="modelo")
 public class AvaliaProduto implements Serializable {
 	private static final long serialVersionUID = 1516958479294508565L;
 	protected Integer pontuacao;
@@ -18,15 +18,20 @@ public class AvaliaProduto implements Serializable {
 	public AvaliaProduto(){		
 	}
 	
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	public Integer getPontuacao() {
 		return pontuacao;
 	}
 	
-	/* estudar se vai deixar retorno int ou double na média da pontuação */
+	/* estudar se vai deixar retorno int ou double na mï¿½dia da pontuaï¿½ï¿½o */
 	public void setPontuacao(Integer pontuacao) {
 		this.pontuacao = pontuacao;
+	}
+
+	public void pesquisa() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

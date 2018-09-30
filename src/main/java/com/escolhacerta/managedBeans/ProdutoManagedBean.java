@@ -1,5 +1,6 @@
 package com.escolhacerta.managedBeans;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
+import com.escolhacerta.control.Categoria;
+
+//import org.hibernate.Session;
+//import org.hibernate.criterion.Order;
 
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.util.HibernateUtil;
@@ -25,14 +28,18 @@ public class ProdutoManagedBean {
 	
 	@PostConstruct
 	public void inicializar(){
-		new HibernateUtil();
+		/*new HibernateUtil();
 		Session session = HibernateUtil.getSession();
 		
 		this.produtos = session.createCriteria(Produto.class)
 				.addOrder(Order.asc("dtCadastro"))
 				.list();
 		
-		session.close();
+		session.close();*/
+	}
+	
+	public Categoria listaCategorias(){
+		
 	}
 	
 	public List<Produto> getProdutos(){

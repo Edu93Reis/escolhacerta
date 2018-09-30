@@ -1,21 +1,21 @@
 package com.escolhacerta.util;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.Persistence;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
+//import org.hibernate.cfg.Configuration;
+//import org.hibernate.service.ServiceRegistry;
+//import org.hibernate.service.ServiceRegistryBuilder;
 
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 public class HibernateUtil {
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory("escolhaCerta");
+	//EntityManagerFactory factory = Persistence.createEntityManagerFactory("escolhaCerta");
 	//sess�o = conex�o no hibernate
 	//configura f�brica de sess�es do Hibernate 
 	//para persist�ncia de dados 
-	private static final SessionFactory sessionFactory;
+	/*private static final SessionFactory sessionFactory;
 	
 	static {
 		
@@ -46,5 +46,5 @@ public class HibernateUtil {
 	//fecha a conex�o
 	public static void closeSession(){
 		sessionFactory.close();
-	}
+	} */
 }

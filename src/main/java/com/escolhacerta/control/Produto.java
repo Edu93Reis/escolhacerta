@@ -1,8 +1,10 @@
 package com.escolhacerta.control;
 
+import com.escolhacerta.control.Pesquisa;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,14 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /* indica��o de que esta � uma entidade da JPA (persistencia Java) */
-@Entity
+//@Entity
 /* Indica��o do Hibernate de qual ser� a tabela em que ser�o persistidos os dados */
-@Table(name="produto")
+//@Table(name="produto")
 public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	private static final long serialVersionUID = -3295609497396391454L;
 	//add comentario
 	//@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private Integer idProduto;
 	private String marca;
 	private Integer idModelo;
@@ -28,6 +30,7 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	private String comentario;
 	private BigDecimal preco;
 	private Date dtCadastro;
+	public static List<Produto> produtos;
 	
 	public Produto(){
 	}
@@ -110,6 +113,5 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	@Override
 	public void pesquisa() {
 		// TODO Auto-generated method stub
-		
 	}
 }

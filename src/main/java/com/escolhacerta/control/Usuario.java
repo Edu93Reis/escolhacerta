@@ -14,9 +14,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /* indica��o de que esta � uma entidade da JPA (persistencia Java) */
-@Entity
+//@Entity
 /* Indica��o do Hibernate de qual ser� a tabela em que ser�o persistidos os dados */
-@Table(name="usuario")
+//@Table(name="usuario")
 /* A cada requisi��o realizada o bean � gravado em um �map�, chamado de �view map� 
 ** e, por conta disso, este bean deve implementar a interface Serializable */
 public class Usuario implements Serializable {	
@@ -46,9 +46,9 @@ public class Usuario implements Serializable {
 	//indica��o do Hibernate por annotations de 
 	//@Id --> chave prim�ria, @GeneratedValue --> valor gerado automaticamente, e nome e caracter�sticas 
 	//das colunas que equivalem ao atributo (atributo idUsuario == coluna idUsuario no MySQL)  
-	@Id
-	@GeneratedValue
-	@Column(name="idUsuario", nullable=false, unique=true)
+	//@Id
+	//@GeneratedValue
+	//@Column(name="idUsuario", nullable=false, unique=true)
 	public Integer getIdUser(){
 		return this.idUsuario;
 	}
@@ -57,10 +57,6 @@ public class Usuario implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 	
-	//indica��o de coluna � obrigat�ria para o funcionamento 
-	//apenas quando o nome do atributo 
-	//n�o bate com o nome da coluna no Banco de Dados, como nesse caso
-	@Column(name="emailUsuario", nullable=false, unique=true)
 	public String getEmail(){
 		return email;
 	}
@@ -69,7 +65,6 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 	
-	@Column(name="nmUsuario", nullable=false, unique=true)
 	public String getNome() {
 		return nome;
 	}
@@ -83,13 +78,11 @@ public class Usuario implements Serializable {
 		}
 	}
 	
-	@Column(name="cdSenha", nullable=false)
 	public String getSenha() {
 		return senha;
 	}
 	
 	public void setSenha(String senha) {
-		// || senha.equals("  ") || senha.getClass().toString() != "String"
 		if(senha.equals(null)){
 			System.out.println("Insira valor no campo senha!");
 		}else{		
@@ -97,15 +90,11 @@ public class Usuario implements Serializable {
 		}
 	}
 	
-	//@TemporalType.Date --> necess�rio para lidar com datas no Java com precis�o
-	//@Temporal(TemporalType.DATE)
-	//@Column(name="nascimento", nullable=false)
 	public Date getNasc() {
 		return nasc;
 	}
 
 	public void setNasc(Date nasc) {
-		//|| !(nasc.getClass().isAssignableFrom(new Date().getClass()))
 		if(nasc.equals(null)) {
 			System.out.println("Insira valor no campo nascimento!");
 		}else{
@@ -113,13 +102,11 @@ public class Usuario implements Serializable {
 		}
 	}
 	
-	@Column(name="cdCpf", nullable=false, unique=true)
 	public String getCPF() {
 		return cpf;
 	}
 	
 	public void setCPF(String cpf) {
-		// || cpf.equals("") || cpf.equals("  ") || cpf.contains("   ") || cpf.getClass().toString() != "String"
 		if(cpf.equals(null)){
 			System.out.println("Insira valor no campo CPF!");
 		}else{	
@@ -127,9 +114,6 @@ public class Usuario implements Serializable {
 		}
 	}
 	
-	//caso use dois Ids ele entende como uma composite Class
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getEndereco(){
 		return idEndereco;
 	}
@@ -139,7 +123,6 @@ public class Usuario implements Serializable {
 	}
 	
 	public void setCidade(String cidade) {
-		//|| cidade.getClass().toString() != "String" || cidade.equals("  ")
 		if(cidade.equals(null)){
 			System.out.println("Insira valor no campo cidade!");
 		}else{		
@@ -165,8 +148,6 @@ public class Usuario implements Serializable {
 			this.estados = estado;
 		}
 	}
-	
-	
 	
 	public Integer getCep() {
 		return cep;

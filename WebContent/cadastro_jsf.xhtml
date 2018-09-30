@@ -259,11 +259,19 @@
 					<h:link value="Dados Cadastrados" 
 							outcome="" />		
 				</h:form>		
-				Teste: #{userareaManagedBean.usuario.getNome(0)}
+				Teste: #{userAreaManagedBean.usuario.getNome(0)}
 			</span>
 			
 		<div class="list-group">
 		<h:form id="cadastroUsuario">
+			<p class="list-group-item">
+				<h:outputText>Nome:</h:outputText>
+				<h:inputText jsf:placeholder="Digite seu nome ..."
+							 jsf:type="text" 
+							 styleClass="form-control" 
+							 aria-describedby="sizing-addon3" 
+							 value="#{cadastroManagedBean.usuario.nome}"/>
+			</p>
 			<p class="list-group-item">
 				<h:outputText>Email:</h:outputText>
 				<h:inputText jsf:placeholder="Digite seu email ..."
@@ -303,14 +311,14 @@
 							  styleClass="form-control" jsf:aria-describedby="sizing-addon3"
 							  value="#{cadastroManagedBean.usuario.cidade}" />
 			</p>								
-			<p class="list-group-item">	
+			<!-- <p class="list-group-item">	
 				<h:outputText>Estado:	</h:outputText>
-				<h:selectOneMenu value="#{cadastroManagedBean.usuario.estado}"/>
+				<h:selectOneMenu value="#{cadastroManagedBean.usuario.estado}"/>  -->
 				<!-- ui:repeat itera todos os itens de estado --> 
-				<ui:repeat class="dropdown-menu" var="item" value="#{cadastroManagedBean.usuario.estado}">
+			<!-- <ui:repeat class="dropdown-menu" var="item" value="#{cadastroManagedBean.usuario.estado}">
 					<li>#{item.toString()}</li>
 				</ui:repeat>									
-			</p>
+			</p>  -->
 			<h:commandButton value="Salvar" action="#{cadastroManagedBean.incluiUsuario()}" class="btn btn-default" />
 		</h:form>
 	</div>
@@ -340,13 +348,27 @@
 		<div class="d-none d-sm-block pl-5 pt-3">
 			<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" />			
 		</div>
-		<div id="container text-right">		
+		<div id="container text-right">
+				
 		<!-- Display: determina tamanho do texto (mais alto menor), m-5 margem -->
 			<h1 class="display-5 ml-5 mt-3">Cadastre-se</h1>				
 				<div class="ml-5 mt-4">
 					<div class="input-group">
 						<!-- Aqui começa o formulário de cadastro -->
-						<h:form id="cadastroUser">						  
+						<h:form id="cadastroUser">
+						  <span style="width:100%">
+						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
+							<div class="d-inline-block">
+								<h:outputText value="Nome: " style="font-weight: bold;" /> 
+							</div> 
+								<h:inputText jsf:placeholder="Digite seu nome ..." 
+											 jsf:type="text"
+											 id="nome"
+											 styleClass="form-control col-md-7 col-lg-7" 
+									     	 jsf:aria-describedby="sizing-addon3" 
+									     	 value="#{cadastroManagedBean.usuario.nome}" />									
+						  </span>
+						  						  
 						  <span style="width:100%">
 						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
 							<div class="d-inline-block">
@@ -354,6 +376,7 @@
 							</div> 
 								<h:inputText jsf:placeholder="Digite seu email ..." 
 											 jsf:type="email"
+											 id="email"
 											 styleClass="form-control col-md-7 col-lg-7" 
 									     	 jsf:aria-describedby="sizing-addon3" 
 									     	 value="#{cadastroManagedBean.usuario.email}" />									
@@ -364,7 +387,8 @@
 							<div class="d-inline-block">
 								<h:outputText value="Senha: " style="font-weight: bold;" />
 							</div>
-								<h:inputSecret jsf:placeholder="Digite sua senha ..."									  		   
+								<h:inputSecret jsf:placeholder="Digite sua senha ..."
+											   id="senha"									  		   
 											   styleClass="form-control col-md-7 col-lg-7" 
 											   jsf:aria-describedby="sizing-addon3" 
 											   value="#{cadastroManagedBean.usuario.senha}"/>								
@@ -379,10 +403,10 @@
 								<span class='input-group date' id='datetimepicker1' style="width: 350px;">				
 									<h:inputText jsf:placeholder="Digite seu nasc. ..." 
 												 jsf:type="date"
-												 styleClass="form-control col-md-7 col-lg-7" 
+												 styleClass="form-control col-md-7 col-lg-7"												 
 												 value="#{cadastroManagedBean.usuario.nasc}" 
 												 style="width:90% !important;">
-										<f:convertDateTime pattern="dd/MM/yyyy"/>
+										<f:convertDateTime pattern="dd/MM/yyyy" id="Data de Nascimento" />
 									</h:inputText>
 									<span class="input-group-addon">
 					                	<span class="glyphicon glyphicon-calendar"></span>
@@ -396,7 +420,8 @@
 							<div class="d-inline-block">
 								<h:outputText value="CPF: " style="font-weight: bold;" />
 							</div>							
-							<h:inputText jsf:placeholder="Digite seu CPF ..." 
+							<h:inputText jsf:placeholder="Digite seu CPF ..."
+										 id="CPF" 
 										 styleClass="form-control col-md-7 col-lg-7" 
 										 jsf:aria-describedby="sizing-addon3"  
 										 value="#{cadastroManagedBean.usuario.CPF}" />							
@@ -405,7 +430,8 @@
 						  <span style="width:50%">
 						  	<!-- col-md-2 col-lg-2 -->	
 							<div class="d-inline-block"> <h:outputText value="Cidade:" style="font-weight: bold;" /> </div> 
-								<h:inputText jsf:placeholder="Digite seu Cidade ..." 
+								<h:inputText jsf:placeholder="Digite seu Cidade ..."
+											 id="Cidade" 
 											 styleClass="form-control col-md-7 col-lg-7" 
 											 aria-describedby="sizing-addon3" 
 											 value="#{cadastroManagedBean.usuario.cidade}" />															
@@ -418,15 +444,20 @@
 							</div>
 								<!-- dropdown-menu col-md-7 col-lg-7 -->
 								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> -->
-								<h:selectOneMenu styleClass="" value="#{cadastroManagedBean.usuario.estado}">
-										<f:selectItems value="#{cadastroManagedBean.usuario.estados}" />
+								<h:selectOneMenu id="Estadp"
+												 styleClass="" 
+												 value="#{cadastroManagedBean.usuario.estado}">
+										<f:selectItems value="#{cadastroManagedBean.usuario.estado}" />
 								</h:selectOneMenu> 
 									<!-- <ui:repeat class="dropdown-menu col-md-7 col-lg-7" var="item" value="#{gestaoProdutosBean_Aula2.produtos}">
 										<li>#{item.nome}</li>
 									</ui:repeat>  -->								
 						  </span>						  	
-							
-						  <p><h:commandButton value="Cadastrar" action="#{cadastroManagedBean.incluiUsuario()}" styleClass="btn btn-default" style="float: right" /></p>
+						  <h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />	
+						  <p><h:commandButton value="Cadastrar" id="cadastroBtn" 
+						  					  action="#{cadastroManagedBean.incluiUsuario}" 
+						  					  update=":successMsg"
+						  					  styleClass="btn btn-default" style="float: right" /></p>
 						</h:form>
 					</div>
 				</div>
