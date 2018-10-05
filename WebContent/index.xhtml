@@ -64,7 +64,7 @@
 									
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 action :: envia para a pagina cadastro.xhtml --> 
-						<h:commandLink value="Cadastre-se" action="cadastro" 
+						<h:commandLink value="Cadastre-se" action="cadastro_jsf?faces-redirect=true" 
 							styleClass="navbar-brand disabled"
 							style="float: left; color: white; width:25; line-height:1;"
 						/>
@@ -96,9 +96,15 @@
 	<div class="d-none d-sm-block">
 		<div class="fluid-continer">				
 			<ul>
-				<ui:repeat var="categoria" value="#{categoriasBean.categorias}" >
+				<ui:repeat var="categoria" value="#{produtoManagedBean.categorias}" >
 					<li class="inline-items d-inline line-height: 1;">
-						| #{categoriaManagedBean.getCategoria()}
+						| 
+						<h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
+							<h:column>
+								#{categoria.categoria}
+							</h:column>
+						</h:dataTable>
+					
 					</li>					
 					<div class="btn-group">
 					<h:form id="categoria">						
@@ -212,13 +218,14 @@
 	<!-- Modal fim -->
 	
 <!-- Javascript das dependências do Bootstrap -->
-<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-<h:outputScript name="popper.min.js" library="js" />
-<h:outputScript name="bootstrap.min.js" library="js" />					
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+
 <!-- 
-<script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
+	<h:outputScript name="jquery.min.js" library="bootstrap/js" />
+	<h:outputScript name="popper.min.js" library="js" />
+	<h:outputScript name="bootstrap.min.js" library="js" />					
  -->
 </h:body>
 </html>

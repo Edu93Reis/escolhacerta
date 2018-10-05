@@ -63,7 +63,7 @@
 									
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 action :: envia para a pagina cadastro.xhtml --> 
-						<h:commandLink value="Cadastre-se" action="cadastro" 
+						<h:commandLink value="Cadastre-se" action="cadastro_jsf?faces-redirect=true" 
 							styleClass="navbar-brand disabled"
 							style="float: left; color: white; width:25; line-height:1;"
 						/>
@@ -139,7 +139,10 @@
 										 width: 95%; 
 										 padding: 15px;
 										 margin-top: 5px;
-										 margin-bottom: 2px;">
+										 margin-bottom: 2px;
+										 	box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
+										 	-moz-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
+										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">
 				<f:facet name="header">						 
 					<h2 style="color:blue; font-size: 21px; font-weight: heavy; padding: 2px;">
 						"Nome do Produto irá aqui"

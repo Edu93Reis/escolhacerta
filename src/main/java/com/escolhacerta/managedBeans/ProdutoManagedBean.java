@@ -1,6 +1,8 @@
 package com.escolhacerta.managedBeans;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,8 @@ import com.escolhacerta.control.Categoria;
 //import org.hibernate.criterion.Order;
 
 import com.escolhacerta.control.Produto;
+import com.escolhacerta.model.CategoriaDAO;
+import com.escolhacerta.model.ProdutoDAO;
 import com.escolhacerta.util.HibernateUtil;
 
 
@@ -26,20 +30,20 @@ public class ProdutoManagedBean {
 	//dentro do Arraylist para futura listagem
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	//private List<String> categorias = new ArrayList<String>();
+	
 	@PostConstruct
 	public void inicializar(){
-		/*new HibernateUtil();
-		Session session = HibernateUtil.getSession();
-		
-		this.produtos = session.createCriteria(Produto.class)
-				.addOrder(Order.asc("dtCadastro"))
-				.list();
-		
-		session.close();*/
+		/*new CategoriaDAO();
+		new Categoria();*/
 	}
 	
-	public Categoria listaCategorias(){
+	public List<Categoria> getCategorias() throws SQLException {
+		CategoriaDAO cd = new CategoriaDAO();
 		
+		List<Categoria> listaCategoria = cd.listarCategoria();
+		
+		return listaCategoria;
 	}
 	
 	public List<Produto> getProdutos(){

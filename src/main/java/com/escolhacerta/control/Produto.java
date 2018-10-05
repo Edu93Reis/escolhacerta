@@ -24,12 +24,14 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	//@Id
 	//@GeneratedValue
 	private Integer idProduto;
-	private String marca;
+	private String nmProduto;
 	private Integer idModelo;
 	private String modelo;
 	private String comentario;
 	private BigDecimal preco;
 	private Date dtCadastro;
+	private int idCategoria;
+	
 	public static List<Produto> produtos;
 	
 	public Produto(){
@@ -54,27 +56,16 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 		this.idProduto = idProduto;
 	}
 	
-	public String getMarca() {
-		return marca;
+	public String getNome() {
+		return nmProduto;
 	}
 	
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-	
-	//varios produtos mesmo modelo
-	//@ManyToOne
-	@JoinColumn(name="idModelo")
-	public Integer getIdModelo() {
-		return idModelo;
-	}
-	
-	public void setIdModelo(Integer idModelo) {
-		this.idModelo = idModelo;
+	public void setNome(String nmProduto) {
+		this.nmProduto = nmProduto;
 	}
 	
 	//@ManyToOne
-	@JoinColumn(name="nmModelo")
+	//@JoinColumn(name="nmModelo")
 	public String getModelo() {
 		return modelo;
 	}
@@ -83,7 +74,7 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	}
 	
 	//@ManyToMany
-	@JoinColumn(name="comentario")
+	//@JoinColumn(name="comentario")
 	public String getComent(){
 		return comentario;
 	}
@@ -93,7 +84,7 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	}
 	
 	//@ManyToMany
-	@JoinColumn(name="cdPreco")
+	//@JoinColumn(name="cdPreco")
 	public BigDecimal getPreco() {
 		return preco;
 	}
@@ -109,6 +100,16 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	public void setDtCadastro(Date dtCadastro) {
 		this.dtCadastro = dtCadastro;
 	}
+	
+	public int getIdCategoria(){
+		return this.idCategoria;
+	}
+	
+	public void setIdCategoria(int idCategoria){
+		this.idCategoria = idCategoria;
+	}
+	
+	
 
 	@Override
 	public void pesquisa() {

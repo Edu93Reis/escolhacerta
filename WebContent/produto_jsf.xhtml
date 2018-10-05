@@ -63,7 +63,7 @@
 									
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 action :: envia para a pagina cadastro.xhtml --> 
-						<h:commandLink value="Cadastre-se" action="cadastro" 
+						<h:commandLink value="Cadastre-se" action="cadastro_jsf?faces-redirect=true" 
 							styleClass="navbar-brand disabled"
 							style="float: left; color: white; width:25; line-height:1;"
 						/>
@@ -125,11 +125,17 @@
 	
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="fluid-container">
-	<div  class="container">
-		<h2 style="color:blue; font-size: 30px; font-weight: heavy; padding: 5px;"><h:outputText value="Nome" /></h2>
+	<div>
+	
+	<div class="mt-4 ml-3" >
 		<h:panelGrid column="2" 
-					 class="float-left"
-					 styleClass="" >
+					 styleClass=""
+					 style="width: 60%; float:left;" >
+			
+			<h2 class="color:blue; font-size: 30px; font-weight: heavy; padding-bottom: 7px;">
+				<h:outputText value="Nome" />
+			</h2>
+			
 			<div id="prodImg" 
 				 style="width: 220px; height: 220px; 
 				 background: blue; 
@@ -209,6 +215,9 @@
 				</div>
 			</div>
 		</h:panelGrid>	
+	</div>
+	
+	<!-- Aqui começa o Aside -->
 	
 	<div id="asideRanking" 
 		 style="background: orange; float: right; width: 30%; 

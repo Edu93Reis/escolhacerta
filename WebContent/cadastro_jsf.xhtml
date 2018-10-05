@@ -293,7 +293,7 @@
 								 styleClass="form-control"
 								 jsf:type="date" 
 								 value="#{cadastroManagedBean.usuario.nasc}" >
-							<f:convertDateTime pattern="dd/MM/yyyy"/>
+							<f:convertDateTime pattern="yyyy/MM/dd"/>
 					</h:inputText>
 					<span class="input-group-addon">
 						<span class="fa fa-calendar"></span>
@@ -366,7 +366,10 @@
 											 id="nome"
 											 styleClass="form-control col-md-7 col-lg-7" 
 									     	 jsf:aria-describedby="sizing-addon3" 
-									     	 value="#{cadastroManagedBean.usuario.nome}" />									
+									     	 value="#{cadastroManagedBean.usuario.nome}" />
+								<h:message for="nome" 
+										   showSummary="True"
+										   showDetail="True" />									
 						  </span>
 						  						  
 						  <span style="width:100%">
@@ -379,7 +382,10 @@
 											 id="email"
 											 styleClass="form-control col-md-7 col-lg-7" 
 									     	 jsf:aria-describedby="sizing-addon3" 
-									     	 value="#{cadastroManagedBean.usuario.email}" />									
+									     	 value="#{cadastroManagedBean.usuario.email}" />
+								<h:message for="email" 
+										   showSummary="True"
+										   showDetail="True" />									
 						  </span>
 						  
 						  <span style="width:40%">		
@@ -391,7 +397,10 @@
 											   id="senha"									  		   
 											   styleClass="form-control col-md-7 col-lg-7" 
 											   jsf:aria-describedby="sizing-addon3" 
-											   value="#{cadastroManagedBean.usuario.senha}"/>								
+											   value="#{cadastroManagedBean.usuario.senha}"/>
+								<h:message for="senha" 
+										   showSummary="True"
+										   showDetail="True" />			   								
 						  </span>
 						  
 						  <span style="width:100%">											
@@ -406,11 +415,14 @@
 												 styleClass="form-control col-md-7 col-lg-7"												 
 												 value="#{cadastroManagedBean.usuario.nasc}" 
 												 style="width:90% !important;">
-										<f:convertDateTime pattern="dd/MM/yyyy" id="Data de Nascimento" />
+										<f:convertDateTime pattern="dd/MM/yyyy" id="data-de-nascimento" />
 									</h:inputText>
 									<span class="input-group-addon">
 					                	<span class="glyphicon glyphicon-calendar"></span>
 					                </span>
+					                <h:message for="data-de-nascimento" 
+										   showSummary="True"
+										   showDetail="True" />
 								</span>								
 							</p>
 						  </span>
@@ -424,17 +436,23 @@
 										 id="CPF" 
 										 styleClass="form-control col-md-7 col-lg-7" 
 										 jsf:aria-describedby="sizing-addon3"  
-										 value="#{cadastroManagedBean.usuario.CPF}" />							
+										 value="#{cadastroManagedBean.usuario.CPF}" />
+							<h:message for="CPF" 
+									   showSummary="True"
+									   showDetail="True" />							
 						  </span>
 						  
 						  <span style="width:50%">
 						  	<!-- col-md-2 col-lg-2 -->	
 							<div class="d-inline-block"> <h:outputText value="Cidade:" style="font-weight: bold;" /> </div> 
 								<h:inputText jsf:placeholder="Digite seu Cidade ..."
-											 id="Cidade" 
+											 id="cidade" 
 											 styleClass="form-control col-md-7 col-lg-7" 
 											 aria-describedby="sizing-addon3" 
-											 value="#{cadastroManagedBean.usuario.cidade}" />															
+											 value="#{cadastroManagedBean.usuario.cidade}" />
+								<h:message for="cidade" 
+										   showSummary="True"
+										   showDetail="True" />															
 						  </span>
 						  
 						  <span style="width:70%">		
@@ -444,11 +462,14 @@
 							</div>
 								<!-- dropdown-menu col-md-7 col-lg-7 -->
 								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> -->
-								<h:selectOneMenu id="Estadp"
+								<h:selectOneMenu id="estado"
 												 styleClass="" 
 												 value="#{cadastroManagedBean.usuario.estado}">
 										<f:selectItems value="#{cadastroManagedBean.usuario.estado}" />
 								</h:selectOneMenu> 
+								<h:message for="estado" 
+										   showSummary="True"
+										   showDetail="True" />
 									<!-- <ui:repeat class="dropdown-menu col-md-7 col-lg-7" var="item" value="#{gestaoProdutosBean_Aula2.produtos}">
 										<li>#{item.nome}</li>
 									</ui:repeat>  -->								
