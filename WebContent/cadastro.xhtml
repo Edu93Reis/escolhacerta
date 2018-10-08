@@ -241,10 +241,14 @@
 <div class="container d-block d-sm-none d-lg-none clearfix">
 	<div class="row">
 		<div class="logo-header col-xs-3 col-offset-xs-3">
-			<h:graphicImage id="img" 
-					value="/resources/img/logo-escolha-certa-mini.png" 
-					alt="Logotipo EsolhaCerta" 
-					styleClass="mobile-img" />				
+		<h:form id="index-Cadastro">
+			<h:commandLink action="index?faces-redirect=true">
+				<h:graphicImage id="img" 
+						value="/resources/img/logo-escolha-certa-mini.png" 
+						alt="Logotipo EsolhaCerta" 
+						styleClass="mobile-img" />
+			</h:commandLink>
+		</h:form>				
 		</div>
 	</div>
 </div>
@@ -359,7 +363,7 @@
 						  <span style="width:100%">
 						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
 							<div class="d-inline-block">
-								<h:outputText value="Nome: " style="font-weight: bold;" /> 
+								<h:outputText value="Nome: " style="font-weight: bold; width: 60px" /> 
 							</div> 
 								<h:inputText jsf:placeholder="Digite seu nome ..." 
 											 jsf:type="text"
@@ -375,7 +379,7 @@
 						  <span style="width:100%">
 						  	<!-- da classe abaixo col-md-2 col-lg-2 -->
 							<div class="d-inline-block">
-								<h:outputText value="E-mail: " style="font-weight: bold;" /> 
+								<h:outputText value="E-mail: " style="font-weight: bold; width: 60px" /> 
 							</div> 
 								<h:inputText jsf:placeholder="Digite seu email ..." 
 											 jsf:type="email"
@@ -391,7 +395,7 @@
 						  <span style="width:40%">		
 						  	<!-- col-md-2 col-lg-2 -->					
 							<div class="d-inline-block">
-								<h:outputText value="Senha: " style="font-weight: bold;" />
+								<h:outputText value="Senha: " style="font-weight: bold; width: 60px" />
 							</div>
 								<h:inputSecret jsf:placeholder="Digite sua senha ..."
 											   id="senha"									  		   
@@ -404,10 +408,9 @@
 						  </span>
 						  
 						  <span style="width:100%">											
-							<p class="form-group">
 								<!-- col-md-2 col-lg-2 -->
 								<div class="d-inline-block">
-									<h:outputText value="Nasc.: " style="font-weight: bold;" />
+									<h:outputText value="Nasc.: " style="font-weight: bold; width: 60px" />
 								</div>
 								<span class='input-group date' id='datetimepicker1' style="width: 350px;">				
 									<h:inputText jsf:placeholder="Digite seu nasc. ..." 
@@ -424,13 +427,12 @@
 										   showSummary="True"
 										   showDetail="True" />
 								</span>								
-							</p>
 						  </span>
 						  
 						  <span style="width:60%">	
 						  	<!-- col-md-2 col-lg-2 -->
 							<div class="d-inline-block">
-								<h:outputText value="CPF: " style="font-weight: bold;" />
+								<h:outputText value="CPF: " style="font-weight: bold; width: 60px" />
 							</div>							
 							<h:inputText jsf:placeholder="Digite seu CPF ..."
 										 id="CPF" 
@@ -444,7 +446,9 @@
 						  
 						  <span style="width:50%">
 						  	<!-- col-md-2 col-lg-2 -->	
-							<div class="d-inline-block"> <h:outputText value="Cidade:" style="font-weight: bold;" /> </div> 
+							<div class="d-inline-block"> 
+								<h:outputText value="Cidade:" style="font-weight: bold; width: 60px" /> 
+							</div> 
 								<h:inputText jsf:placeholder="Digite seu Cidade ..."
 											 id="cidade" 
 											 styleClass="form-control col-md-7 col-lg-7" 
@@ -458,14 +462,46 @@
 						  <span style="width:70%">		
 						  	<!-- col-md-2 col-lg-2 -->			
 							<div class="d-inline-block">
-								<h:outputText value="Estado: " style="font-weight: bold;" />
+								<h:outputText value="Estado: " style="font-weight: bold; width: 60px" />
 							</div>
 								<!-- dropdown-menu col-md-7 col-lg-7 -->
 								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> -->
 								<h:selectOneMenu id="estado"
-												 styleClass="" 
-												 value="#{cadastroManagedBean.usuario.estado}">
-										<f:selectItems value="#{cadastroManagedBean.usuario.estado}" />
+												 styleClass="form-control col-md-4 col-lg-4"
+												 style="border: 1px solid blue;"
+												 required="true"
+												 requiredMessage="Selecione sua opção" 
+												 value="#{cadastroManagedBean.estados}">
+										<!-- #{cadastroManagedBean.usuario.estado} -->
+										<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
+										<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
+										<f:selectItem itemValue="Acre" itemLabel="Acre" />
+										<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
+										<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
+										<f:selectItem itemValue="Amazonas" itemLabel="Amazonas" />
+										<f:selectItem itemValue="Bahia" itemLabel="Bahia" />
+										<f:selectItem itemValue="Ceará" itemLabel="Ceará" />
+										<f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal" />
+										<f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo" />
+										<f:selectItem itemValue="Goiás" itemLabel="Goiás" />
+										<f:selectItem itemValue="Maranhão" itemLabel="Maranhão" />
+										<f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso" />
+										<f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul" />
+										<f:selectItem itemValue="Minas Gerais" itemLabel="Minas Gerais" />
+										<f:selectItem itemValue="Pará" itemLabel="Pará" />
+										<f:selectItem itemValue="Paraíba" itemLabel="Paraíba" />
+										<f:selectItem itemValue="Paraná" itemLabel="Paraná" />
+										<f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco" />
+										<f:selectItem itemValue="Piauí" itemLabel="Piauí" />
+										<f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro" />
+										<f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte" />
+										<f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul" />
+										<f:selectItem itemValue="Rondônia" itemLabel="Rondônia" />
+										<f:selectItem itemValue="Roraima" itemLabel="Roraima" />
+										<f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina" />
+										<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
+										<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
+										<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
 								</h:selectOneMenu> 
 								<h:message for="estado" 
 										   showSummary="True"
@@ -508,9 +544,9 @@
             });
         </script>
 		
-		<!-- Javascript das dependências do Bootstrap -->					
-		<script src="resources/bootstrap/js/jquery.min.js"></script>
-	  	<script src="resources/bootstrap/js/popper.min.js"></script>
-	  	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+		<!-- Javascript das dependências do Bootstrap -->
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 </h:body>
 </html>

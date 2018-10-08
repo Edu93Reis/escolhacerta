@@ -28,7 +28,7 @@ h:body{
 				text-decoration: none;
 			}
 			a.alteraDados:hover{				
-				color:orange;
+				color:orange !important;
 				text-decoration: none;
 			}
 			aside.form{

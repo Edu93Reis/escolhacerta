@@ -17,7 +17,13 @@
 		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
 		<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
 		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" /> 
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
+		
+<script>
+	$('#myModal').on('shown.bs.modal', function () {
+	  $('#myInput').trigger('focus')
+	})
+</script> 
 </h:head>
 <h:body>
 	<div id="nav" class="d-block d-sm-none d-lg-none">
@@ -29,10 +35,10 @@
 	
 	<div id="header" class="d-none d-sm-block nav-container">
 		<div class="px-5 py-3" style="background-color:orange;">
-			<div class="page-title logo-header">
+			<!-- <div class="page-title logo-header">
 				<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
 						 alt="Logotipo EsolhaCerta" />
-			</div>
+			</div>  -->
 			<div class="navbar-header float-right">
 			<!-- Resolver problema de renderização ui:repeat, testar jsfc do facelets, estudar facelets -->
 			<!-- <ul jsfc="ui:repeat" 
@@ -40,7 +46,7 @@
 				var="categoria" > -->
 			<!-- <ul class="nav navbar-nav float-right be-user-nav" style="display: block; color: white;">  -->
 			<ul class="nav navbar-nav float-left be-user-nav" style="display: block; color: white;">			
-					<li style="float: left; width:5;">|</li>
+					<li style="float: left; width:5; margin-right: 2px;">|</li>
 			</ul>
 				 
 			<!-- centralizar verticalmente -->
@@ -64,15 +70,15 @@
 									
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 action :: envia para a pagina cadastro.xhtml --> 
-						<h:commandLink value="Cadastre-se" action="cadastro_jsf?faces-redirect=true" 
+						<h:commandLink value="Cadastre-se" action="cadastro?faces-redirect=true" 
 							styleClass="navbar-brand disabled"
 							style="float: left; color: white; width:25; line-height:1;"
 						/>
 					
 						<h:commandButton value="Login"
 							styleClass="navbar-brand" 
-							jsf:data-toggle="modal" 
-							jsf:data-target="#loginModal"
+							data-toggle="modal" 
+							data-target="#loginModal"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 						/>
@@ -96,14 +102,14 @@
 	<div class="d-none d-sm-block">
 		<div class="fluid-continer">				
 			<ul>
-				<ui:repeat var="categoria" value="#{produtoManagedBean.categorias}" >
+				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}" >  -->
 					<li class="inline-items d-inline line-height: 1;">
 						| 
-						<h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
+						<!-- <h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
 							<h:column>
 								#{categoria.categoria}
 							</h:column>
-						</h:dataTable>
+						</h:dataTable>  -->
 					
 					</li>					
 					<div class="btn-group">
@@ -125,7 +131,7 @@
 						</ul>
 					</h:form>
 					</div>					
-				</ui:repeat>
+				<!-- </ui:repeat>  -->
 			</ul>
 		</div>
 	</div>

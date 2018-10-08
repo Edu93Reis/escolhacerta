@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="Produto clicado - EscolhaCerta"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>#{produto.Nome} - Escolha Certa</title>
+<title>Erro 404 - Escolha Certa</title>
 <h:outputStylesheet library="css" name="produto.css" />
 <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
   
@@ -63,7 +63,7 @@
 									
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 action :: envia para a pagina cadastro.xhtml --> 
-						<h:commandLink value="Cadastre-se" action="cadastro_jsf?faces-redirect=true" 
+						<h:commandLink value="Cadastre-se" action="cadastro?faces-redirect=true" 
 							styleClass="navbar-brand disabled"
 							style="float: left; color: white; width:25; line-height:1;"
 						/>
@@ -125,132 +125,18 @@
 	
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="fluid-container">
-	<div>
-	
-	<div class="mt-4 ml-3" >
-		<h:panelGrid column="2" 
-					 styleClass=""
-					 style="width: 60%; float:left;" >
-			
-			<h2 class="color:blue; font-size: 30px; font-weight: heavy; padding-bottom: 7px;">
-				<h:outputText value="Nome" />
-			</h2>
-			
-			<div id="prodImg" 
-				 style="width: 220px; height: 220px; 
-				 background: blue; 
-				 border-radius: 45px; float:left;"
-				 class="pb-4">
-				<!-- <h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
-							 alt="#{produto.nome}" /> -->
-			</div>
-			<div class="float-right pl-4" style="height: 220px">
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 21px; padding: 3px; 
-					 margin-top: 5px; width: 100%;">Marca: </div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">Modelo:</div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">Preço médio: </div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">
-					 Faixa de preço: 
-				</div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 width: 90%;"> 
-					 Preço: R$6,90
-					 <!-- <h:outputText value="R$6,90"/> Não fica na linha '¬¬ --> 
-				</div>
-			</div>
-			
-			<div style="width: 80%; margin-top: 10px;">
-				<div id="comentarios" 
-					 style="font-weight: heavy; display: inline-block;
-					 	    color: blue; border: 1px solid blue; 
-					 		padding: 5px; margin-top: 10px;
-					 		width: 70%;">
-					<span>Comentários: </span>
-					<h:dataTable 
-							style="font-weight: heavy;
-					 	    color: blue; border: 1px solid blue;
-					 	    width: 56%; padding: 5px; float:left;">
-						<h:column style="width: 50%; border: 1px solid blue; background: #339;">
-							<f:facet name="header"> + Relevantes</f:facet>
-							<h:outputText value="Aqui serão iterados os mais relevantes" />
-						</h:column>
-						<h:column style="width: 50%; border: 1px solid white; background: blue;">
-							<f:facet name="header"> - Relevantes</f:facet>
-							<h:outputText value="Aqui serão iterados os menos relevantes" />
-						</h:column>
-					</h:dataTable>
-				</div>
-				<div id="avaliacao"
-					 style="font-weight: heavy; display: inline-block;
-					 	    color: blue; border: 1px solid blue; 
-					 		padding: 5px; margin-top: 10px;
-					 		width: 30%; float:right;">
-					<span>
-						<h3 style="font-size: 16px;">Avaliação média:</h3>
-					</span>
-					<div class="stars"
-						 style="font-weight: heavy;
-					 	    color: yellow; border: 1px solid blue; 
-					 		padding: 2px;">
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star-half"></i>
-					 			
-						</div>			
-				</div>
-			</div>
-		</h:panelGrid>	
-	</div>
-	
-	<!-- Aqui começa o Aside -->
-	
-	<div id="asideRanking" 
-		 style="background: orange; float: right; width: 30%; 
-		 		height: 75vh;">
-			<form id="ranking">
-				<h:dataTable style="color: white; background: orange;">
-					<h:column>
-						<f:facet name="header">
-							<p style="color: blue; 
-									  background: white;
-									  display: inline-block;
-									  padding: 4px;
-									  width: 100%;">5 melhores da categoria</p>
-						</f:facet>
-						<h:outputText value="Nomes dos mais relevantes" />
-						<h:outputText value="Marca dos mais relevantes" />
-						
-						<f:facet name="header">
-								 <p style="color: blue; 
-									  background: white;
-									  display: inline-block;
-									  padding: 4px;
-									  width: 100%;">5 piores da categoria</p>
-						</f:facet>
-						<h:outputText value="Nomes dos menos relevantes" />
-						<h:outputText value="Marca dos menos relevantes" />
-					</h:column>
-				</h:dataTable>
-			</form>
-	</div>
-</div>
-</div>
+	<div class="container">
+		<h2 style="color: blue; font-size: 26px; text-align: center; margin-top: 85px;"> ERRO 404! </h2>
 		
+		<h:graphicImage id="imgErro" 
+					value="/resources/img/404/errar-alvo.jpg" 
+					alt="Erro página não encontrada"
+					styleClass="col-md-4 offset-md-4 col-lg-4 offset-lg-4" />
+		
+		<h3 style="color: blue; font-size: 22px; text-align: center"> Opss... parece que algo deu errado! </h3>
+	</div>
+</div>
+	
 	<!-- footer -->
 	<div id="footer" class="nav-container">
 		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
@@ -263,51 +149,21 @@
 		 jsf:tabindex="-1" 
 		 jsf:aria-labelledby="exampleModalLabel" 
 		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandButton styleClass="close" data-dismiss="modal">
-							<i class="fas fa-times"></i>
-						</h:commandButton>							
-				</div>
-			
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Login:</label>
-						<h:inputText name="username" 
-									 styleClass="form-control" 
-									 ui:placeholder="Nome do Usuário..."
-									 value="#{loginManagedBean.usuario.nome}"/>
-									 <!-- #{loginManagedBean.usuario.emailUsuario} -->									 
-					</div>
-					<div class="form-group">
-						<label>Senha:</label>
-						<h:inputSecret name="passowrd" 
-									 styleClass="form-control" 
-									 ui:placeholder="Digite senha..."
-									 value="#{loginManagedBean.usuario.senha}"/>
-						<!-- #{loginManagedBean.usuario.senha} -->									 
-					</div>
-				</div>
-						
-				<div class="modal-footer">
-				   <h:commandButton value="Logar"
-				   					styleClass="btn btn-sucess"
-				   					action="#{loginManagedbean.envia}"							   					
-				   />				   		
-				   <!--  -->		   
-				</div>
-			</div>
-		</div>	
+	    
 	</div> 
 	<!-- Modal fim -->
 	
-<!-- Javascript das dependências do Bootstrap -->					
+<!-- Javascript das dependências do Bootstrap -->			
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>		
+			
+<!--
+
 <h:outputScript name="jquery.min.js" library="bootstrap/js" />
 <h:outputScript name="popper.min.js" library="js" />
-<h:outputScript name="bootstrap.min.js" library="js" />					
-<!-- 
+<h:outputScript name="bootstrap.min.js" library="js" />		
+ 
 <script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Área do Usuário - EscolhaCerta"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Área do Usuário</title>				
+		
+<!-- CSS do Bootstrap -->
+<h:outputStylesheet library="css" name="areadousuario.css" />
+<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
+
+</h:head>
+<h:body> 
+<nav class="d-block d-sm-none d-lg-none row clearfix">
+	<div class="logo-header col-xs-4 col-offset-xs-4 pl-5 pt-3">
+		<img src="./resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" class="mobile-img" />
+	</div>
+	<div class="link float-right pr-2"><a href="#" class="navbar-brand" action="areadousuario?faces-redirect=true" style="color: white;">Sair</a></div>
+</nav>
+<div class="row">
+	<!-- Cadastro mobile -->
+	<div class="d-block d-sm-none">
+		<h1 class="display-5 ml-5 mt-3">Cadastre-se</h1>
+		<div class="container ml-4">
+			<span role="presentation" class="active"><a href="#">Dados Cadastrados</a></span>
+			
+			<div class="list-group">
+				<h:form>
+				<p class="list-group-item">
+					Email: <h:inputText jsf:placeholder="Digite seu email ..."
+										jsf:type="email" 
+										styleClass="form-control"
+							  			jsf:aria-describedby="sizing-addon3" 
+							  			value="#{userArea.email}" />
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
+				<p class="list-group-item">
+					Senha: <h:inputSecret jsf:placeholder="Digite sua senha ..."
+										  jsf:type="password" 
+										  styleClass="form-control" 
+										  jsf:aria-describedby="sizing-addon3" 
+										  value="#{userArea.senha}" />
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
+				<p class="form-group">
+					<p class="list-group-item">Nasc.:</p>
+					<span class='input-group date' id='datetimepicker1'>				
+						<h:inputText jsf:placeholder="Digite seu nasc. ..."
+									 jsf:type="date" 
+									 styleClass="form-control" 
+									 value="#{userArea.nasc}" >
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:inputText>
+						<span class="input-group-addon">
+							<span class="fa fa-calendar"></span>
+						</span>
+					</span>
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
+				<p class="list-group-item">	
+					CPF: <h:inputText jsf:placeholder="Digite seu CPF ..." 
+									  styleClass="form-control" 
+									  jsf:aria-describedby="sizing-addon3"  
+									  value="#{userArea.cpf}" />
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
+				<p class="list-group-item">	Cidade: 
+					<h:inputText jsf:placeholder="Digite seu Cidade ..." 
+								 styleClass="form-control" 
+								 jsf:aria-describedby="sizing-addon3" 
+								 value="#{userArea.cidade}" />
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>								
+				<p class="list-group-item">
+					Estado:	
+					<h:selectOneMenu id="estado"
+												 styleClass="form-control col-md-4 col-lg-4"
+												 style="border: 1px solid blue;"
+												 required="true"
+												 requiredMessage="Selecione sua opção" 
+												 value="#{cadastroManagedBean.estados}">
+										<!-- #{cadastroManagedBean.usuario.estado} -->
+										<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
+										<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
+										<f:selectItem itemValue="Acre" itemLabel="Acre" />
+										<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
+										<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
+										<f:selectItem itemValue="Amazonas" itemLabel="Amazonas" />
+										<f:selectItem itemValue="Bahia" itemLabel="Bahia" />
+										<f:selectItem itemValue="Ceará" itemLabel="Ceará" />
+										<f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal" />
+										<f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo" />
+										<f:selectItem itemValue="Goiás" itemLabel="Goiás" />
+										<f:selectItem itemValue="Maranhão" itemLabel="Maranhão" />
+										<f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso" />
+										<f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul" />
+										<f:selectItem itemValue="Minas Gerais" itemLabel="Minas Gerais" />
+										<f:selectItem itemValue="Pará" itemLabel="Pará" />
+										<f:selectItem itemValue="Paraíba" itemLabel="Paraíba" />
+										<f:selectItem itemValue="Paraná" itemLabel="Paraná" />
+										<f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco" />
+										<f:selectItem itemValue="Piauí" itemLabel="Piauí" />
+										<f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro" />
+										<f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte" />
+										<f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul" />
+										<f:selectItem itemValue="Rondônia" itemLabel="Rondônia" />
+										<f:selectItem itemValue="Roraima" itemLabel="Roraima" />
+										<f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina" />
+										<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
+										<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
+										<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
+						</h:selectOneMenu> 								
+						<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
+				<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" class="btn btn-default" />
+			</h:form>
+		</div>
+		</div>
+		<div class="col-xs-4 col-offset-xs-4" aria-label="...">
+		  <ul class="pager">
+		    <li><a href="#"><span icon="far fa-circle"></span></a></li>
+		    <li><a href="#"><span icon="far fa-circle"></span></a></li>
+		  </ul>
+		</div>		
+	</div>
+	
+	<!-- Cadastro tablet and up -->
+	<aside class="form d-none d-sm-block col-xs-12 col-sm-8 col-md-8 col-lg-8 pb-5">			
+		<div role="main" class="">
+		<div class="d-none d-sm-block pl-5 pt-3"><img src="./resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" /></div>
+			<div id="container text-right">		
+				<!-- Display: determina tamanho do texto (mais alto menor), m-5 margem -->
+				<h1 class="display-5 ml-5 mt-3">Área do Usuário</h1>
+				
+				<div class="ml-5 mt-4">
+				<!-- Menu Cadastro -->
+				<!-- nav-justified -->
+				<ul class="nav nav-tabs">
+				  <!-- role="presentation" -->
+				  <li class="active"><h:link action="#">Dados Cadastrados</h:link></li>
+				  <li><h:link action="#">Cadastrar produto</h:link></li>
+				  <li><h:link action="#">Produtos Cadastrados</h:link></li>
+				</ul>
+				
+					<div class="input-group">
+						<h:form>
+						<h:panelGrid columns="2">
+							<f:facet name="header"></f:facet>
+								<h:outputLabel value="E-mail:" style="color: blue; font-weight: 700;"/> 
+								<h:panelGroup>
+								<h:inputText jsf:placeholder="Digite seu email ..."
+												   jsf:type="email" 
+												   styleClass="form-control" 
+												   style="width: 350px; border: 1px solid blue;"
+									     		   jsf:aria-describedby="sizing-addon3" 
+									     		   value="#{userArea.email}" />
+								<h:link value="alterar" 
+									outcome=""
+									styleClass="alteradados"
+									style="color: orange; font-weight: 700;" />
+								</h:panelGroup>			
+							
+								<h:outputLabel value="Senha:" style="color: blue; font-weight: 700;" />
+								<h:panelGroup> 
+									<h:inputSecret jsf:placeholder="Digite sua senha ..."
+														 jsf:type="password" 
+														 styleClass="form-control"
+														 style="width: 220px; border: 1px solid blue;" 
+														 jsf:aria-describedby="sizing-addon3" 
+														 value="#{userArea.senha}" />
+									<h:link value="alterar" 
+										outcome=""
+										styleClass="alteradados" 
+										style="color: orange; font-weight: 700;" />
+								</h:panelGroup>
+											
+							<h:outputLabel value="Nasc.: " style="color: blue; font-weight: 700;"/>
+							
+							<h:panelGroup>
+								<span class='input-group date' id='datetimepicker1' style="width: 220px">				
+									<h:inputText jsf:placeholder="Digite seu nasc. ..."
+												 jsf:type="date" 
+												 styleClass="form-control" 
+												 value="#{userArea.nasc}"
+												 style="border: 1px solid blue;" >
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:inputText>
+									<span class="input-group-addon">
+					                	<span class="glyphicon glyphicon-calendar"></span>
+					                </span>
+								</span>
+								<h:link value="alterar" 
+									outcome=""
+									styleClass="alteradados" 
+									style="color: orange; font-weight: 700;" />
+							</h:panelGroup>
+							
+							<h:outputLabel value="CPF:" style="color: blue; font-weight: 700;" />
+								
+							<h:panelGroup>
+								<h:inputText jsf:placeholder="Digite seu CPF ..." 
+												      styleClass="form-control" 
+												      style="width: 190px; border: 1px solid blue;"
+												      jsf:aria-describedby="sizing-addon3"  
+												      value="#{userArea.cpf}" />
+									<h:link value="alterar" 
+										outcome=""
+										styleClass="alteradados" 
+										style="color: orange; font-weight: 700;" />
+							</h:panelGroup>
+							
+							<h:outputLabel value="Cidade:" style="color: blue; font-weight: 700;" />
+								<h:panelGroup> 
+									<h:inputText jsf:placeholder="Digite seu Cidade ..." 
+												 styleClass="form-control"
+												 style="width: 190px; border: 1px solid blue;" 
+												 jsf:aria-describedby="sizing-addon3" 
+												 value="#{userArea.cidade}" />
+									<h:link value="alterar" 
+										outcome=""
+										styleClass="alteradados" 
+										style="color: orange; font-weight: 700;"/>
+								</h:panelGroup>
+							
+							<h:outputLabel value="Estado: " style="color: blue; font-weight: 700;" />	
+								<h:panelGroup>
+									<h:selectOneMenu id="estado"
+													 styleClass="form-control col-md-4 col-lg-4"
+													 style="border: 1px solid blue; width: 190px"
+													 required="true"
+													 requiredMessage="Selecione sua opção" 
+													 value="#{cadastroManagedBean.estados}">
+											<!-- #{cadastroManagedBean.usuario.estado} -->
+											<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
+											<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
+											<f:selectItem itemValue="Acre" itemLabel="Acre" />
+											<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
+											<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
+											<f:selectItem itemValue="Amazonas" itemLabel="Amazonas" />
+											<f:selectItem itemValue="Bahia" itemLabel="Bahia" />
+											<f:selectItem itemValue="Ceará" itemLabel="Ceará" />
+											<f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal" />
+											<f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo" />
+											<f:selectItem itemValue="Goiás" itemLabel="Goiás" />
+											<f:selectItem itemValue="Maranhão" itemLabel="Maranhão" />
+											<f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso" />
+											<f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul" />
+											<f:selectItem itemValue="Minas Gerais" itemLabel="Minas Gerais" />
+											<f:selectItem itemValue="Pará" itemLabel="Pará" />
+											<f:selectItem itemValue="Paraíba" itemLabel="Paraíba" />
+											<f:selectItem itemValue="Paraná" itemLabel="Paraná" />
+											<f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco" />
+											<f:selectItem itemValue="Piauí" itemLabel="Piauí" />
+											<f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro" />
+											<f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte" />
+											<f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul" />
+											<f:selectItem itemValue="Rondônia" itemLabel="Rondônia" />
+											<f:selectItem itemValue="Roraima" itemLabel="Roraima" />
+											<f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina" />
+											<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
+											<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
+											<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
+									</h:selectOneMenu> 
+									<h:link value="alterar" 
+										outcome=""
+										styleClass="alteradados" 
+										style="color: orange; font-weight: 700;" />
+								</h:panelGroup>
+							<p>
+								<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" 
+												styleClass="btn btn-default" style="float:right"/>
+							</p>
+							</h:panelGrid>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<!-- Informação lateral, apresentação do site -->				
+	<aside id="aside" role="complementary" class="d-none d-sm-block presentation col-xs-0 col-sm-4 col-md-4 col-lg-4">								
+		<div class="page-header px-3 py-3">
+			<h3 class="user">Bem Vindo, #{userArea.nome}!</h3>
+		</div>
+		<img src="resources/img/lamp.png" alt="Lampada"/>
+		<p>A <b>EscolhaCerta</b> de um produto nunca foi tão fácil</p>
+		<p class="text-box">Você busca produtos de acordo com a experiência de outros consumidores.</p>		
+	</aside>
+</div>
+<!-- footer -->
+<footer class="nav-container">
+	<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+</footer>		
+		
+		<!-- Calendar code -->
+		<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+		
+		<!-- Javascript das dependências do Bootstrap -->							
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+		<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+</h:body>
+</html>

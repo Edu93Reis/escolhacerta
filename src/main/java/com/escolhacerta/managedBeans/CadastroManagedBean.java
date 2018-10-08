@@ -21,6 +21,17 @@ public class CadastroManagedBean implements Serializable {
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	//instância da classe de Usuário
 	private Usuario usuario = new Usuario();
+	private List<String> estados = new ArrayList<String>(){
+		{
+		 add("Acre"); add("Alagoas"); add("Amapá"); add("Amazonas"); add("Bahia");
+		 add("Ceará"); add("Distrito Federal"); add("Espírito Santo"); add("Goiás"); add("Maranhão");
+		 add("Mato Grosso"); add("Mato Grosso do Sul"); add("Minas Gerais"); add("Pará"); add("Paraíba");
+		 add("Paraná"); add("Pernambuco"); add("Piauí"); add("Rio de Janeiro"); add("Rio Grande do Norte");
+		 add("Rio Grande do Sul"); add("Rondônia"); add("Roraima"); add("Santa Catarina");
+		 add("São Paulo"); add("Sergipe"); add("Tocantins");
+		 }
+	};
+	
 	
 	//@PostConstruct
 	public void incluiUsuario() {
@@ -42,4 +53,17 @@ public class CadastroManagedBean implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public void setEstados(String estado) {
+		if(estado.equals(null)) {
+			System.out.println("Insira valor no campo estado!");
+		}else{
+			this.estados.add(estado);
+		}
+	}
+	
+	public List<String> getEstados(){
+		return this.estados;
+	}
+
 }

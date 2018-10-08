@@ -21,16 +21,6 @@ import javax.persistence.TemporalType;
 ** e, por conta disso, este bean deve implementar a interface Serializable */
 public class Usuario implements Serializable {	
 	private static final long serialVersionUID = 3445560597837908750L;
-	private List<String> list_estados = new ArrayList<String>(){
-		{
-		 add("Acre"); add("Alagoas"); add("Amapá"); add("Amazonas"); add("Bahia");
-		 add("Ceará"); add("Distrito Federal"); add("Espírito Santo"); add("Goiás"); add("Maranhão");
-		 add("Mato Grosso"); add("Mato Grosso do Sul"); add("Minas Gerais"); add("Pará"); add("Paraíba");
-		 add("Paraná"); add("Pernambuco"); add("Piauí"); add("Rio de Janeiro"); add("Rio Grande do Norte");
-		 add("Rio Grande do Sul"); add("Rondônia"); add("Roraima"); add("Santa Catarina");
-		 add("São Paulo"); add("Sergipe"); add("Tocantins");
-		 }
-	};
 	private Integer idUsuario;
 	private String email;
 	private String nome;
@@ -135,19 +125,12 @@ public class Usuario implements Serializable {
 	}
 	
 	//|| estado.equals("  ") || estado.getClass().toString() != "String"
-	public void setEstado(String estado) {
-		if(estado.equals(null)) {
-			System.out.println("Insira valor no campo estado!");
-		}else{
-			this.estado = estado;
-		}
-	}
 	
-	public void setEstados(){
+	/* public void setEstados(){
 		for(String estado : list_estados){
 			this.estados = estado;
 		}
-	}
+	} */
 	
 	public Integer getCep() {
 		return cep;
