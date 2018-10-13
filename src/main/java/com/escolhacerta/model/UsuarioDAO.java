@@ -19,7 +19,7 @@ public class UsuarioDAO {
 		//construtor abre a conexão
 		try{
 			this.conn = new ConnectionFactory().getConnection();
-		} catch(ClassNotFoundException cn){
+		} catch(Exception cn){
 			System.out.println(cn);
 		}
 	}

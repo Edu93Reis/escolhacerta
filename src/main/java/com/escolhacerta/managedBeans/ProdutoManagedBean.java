@@ -1,6 +1,8 @@
 package com.escolhacerta.managedBeans;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 import com.escolhacerta.control.Categoria;
+import com.escolhacerta.util.FacesUtil;
 
 //import org.hibernate.Session;
 //import org.hibernate.criterion.Order;
@@ -30,7 +33,8 @@ public class ProdutoManagedBean {
 	//dentro do Arraylist para futura listagem
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
-	//private List<String> categorias = new ArrayList<String>();
+	//private List<String> listaCategoria = new ArrayList<String>();
+	private List<String> categorias = new ArrayList<String>();
 	
 	@PostConstruct
 	public void inicializar(){
@@ -38,12 +42,26 @@ public class ProdutoManagedBean {
 		new Categoria();*/
 	}
 	
-	public List<Categoria> getCategorias() throws SQLException {
+	public List<String> getCategorias() throws SQLException {
 		CategoriaDAO cd = new CategoriaDAO();
 		
-		List<Categoria> listaCategoria = cd.listarCategoria();
+		//List<String> listaCategoria = cd.listarCategoria();
+
+		/*for(String categoria : cd.listarCategoria()){
+			listaCategoria.add(categoria);
+		}
 		
-		return listaCategoria;
+		
+			
+		return listaCategoria;*/
+		try{
+			categorias = cd.listarCategoria();
+			return categorias;
+		} catch(Exception ex){
+			FacesUtil.failure("Erro ao cadastrar!" + ex);
+			return categorias;
+		}
+		
 	}
 	
 	public List<Produto> getProdutos(){

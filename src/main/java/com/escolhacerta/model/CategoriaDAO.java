@@ -14,7 +14,7 @@ import com.escolhacerta.util.ConnectionFactory;
 public class CategoriaDAO {
 	private Connection conn;
 	//private String categorias;
-	private List<Categoria> categorias = new ArrayList<Categoria>();
+	private List<String> categorias = new ArrayList<String>();
 	private Categoria c = new Categoria();
 	
 	public CategoriaDAO() {
@@ -38,8 +38,7 @@ public class CategoriaDAO {
 		
 	}
 	
-	public List<Categoria> listarCategoria() throws SQLException{
-		
+	public List<String> listarCategoria() throws SQLException{
 			String ctg = "SELECT * FROM categoria;";
 			PreparedStatement ps = conn.prepareStatement(ctg);
 			//Executa o comando de consulta aonde guarda os dados retornados dentro do ResultSet.
@@ -49,8 +48,8 @@ public class CategoriaDAO {
 			while(rs.next()){				
 				Categoria c = new Categoria();
 				//c.setCategoria(rs.getString(1));
-				c.setCategoria(rs.getString("nomeCategoria"));
-				categorias.add(c);
+				c.setCategoria(rs.getString("nmCategoria"));
+				categorias.add(c.getCategoria().toString());
 			}
 			ps.execute();
 			rs.close();

@@ -40,10 +40,6 @@
 						 alt="Logotipo EsolhaCerta" />
 			</div>  -->
 			<div class="navbar-header float-right">
-			<!-- Resolver problema de renderização ui:repeat, testar jsfc do facelets, estudar facelets -->
-			<!-- <ul jsfc="ui:repeat" 
-				value="#{categoriaManagedBean.categoria}"
-				var="categoria" > -->
 			<!-- <ul class="nav navbar-nav float-right be-user-nav" style="display: block; color: white;">  -->
 			<ul class="nav navbar-nav float-left be-user-nav" style="display: block; color: white;">			
 					<li style="float: left; width:5; margin-right: 2px;">|</li>
@@ -98,20 +94,23 @@
 		   </div>
 		</div>
 	</div>
+
+
+
 	<!-- Menu de categorias -->
 	<div class="d-none d-sm-block">
 		<div class="fluid-continer">				
 			<ul>
-				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}" >  -->
+				<ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">
 					<li class="inline-items d-inline line-height: 1;">
-						| 
-						<!-- <h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
+						| Produto 1
+						<h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
 							<h:column>
 								#{categoria.categoria}
 							</h:column>
-						</h:dataTable>  -->
-					
-					</li>					
+						</h:dataTable>
+					</li>		
+								
 					<div class="btn-group">
 					<h:form id="categoria">						
 						<h:commandButton value="Mais Categorias"
@@ -123,7 +122,7 @@
 																	
 						<ul class="dropdown-menu dropdown-menu-right">
 						   <li>
-						   		<h:commandLink value="#{categoriasBean.categoria}"
+						   		<h:commandLink value="#{produtoManagedBean.categorias}"
 									action="index_jsf"
 									styleClass="dropdown-item"
 								/>
@@ -131,10 +130,13 @@
 						</ul>
 					</h:form>
 					</div>					
-				<!-- </ui:repeat>  -->
+				</ui:repeat>
 			</ul>
 		</div>
 	</div>
+
+
+
 	<!-- Área das pesquisas --> 
 
 	<div id="section" class="background"> 

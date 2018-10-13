@@ -35,8 +35,8 @@ public class Testa {
 		
 		//u.adiciona(usuario);
 		
-		produto.setNome("Notebook Acer");
-		produto.setComent("Pior notebook que comprei. Não recomendo!");
+		produto.setNome("Notebook Fatec");
+		produto.setComent("Branco Fatec");
 		//produto.setDtCadastro('2018-02-08');
 		produto.setModelo("AC1234");
 		produto.setPreco(new BigDecimal(2200.50));

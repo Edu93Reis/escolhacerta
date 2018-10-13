@@ -1,0 +1,105 @@
+@font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot');
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('glyphicons-halflings-regular.woff') format('woff'), url('glyphicons-halflings-regular.ttf') format('truetype'), url('glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+body{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.logo-header{
+	width: 190px;
+	display: inline-block;
+}		
+#header{
+	height: 10vh;
+	background-color:orange;
+}
+#nav {
+	height: 7vh;
+}
+li.inline-items {
+	display: block;
+}
+#section{
+	height: 100vh;
+}
+
+#aside {
+	background-color: orange;
+	color: white;
+	height: 100vh;
+}
+div #produt{
+	height: 70vh;
+}
+.imgProdBig{
+	background-image: url(#{request.contextPath}/resources/img/background/bg.png);
+	background-color: grey;
+	border-color: #333;
+	float: left;
+	width: 400px;
+	height: 400px;
+}
+
+.prodDesc{
+	display:inline-block;
+	background-color: blue;
+	color: white;
+}
+
+.descAlign{
+	float:right
+}
+
+div #coments{
+	
+}
+
+div #points{
+
+}
+
+.far .fa-star{ 
+	border-color: yellow;
+	color: yellow;
+}
+
+.far .fa-star-half-alt{
+	border-color:yellow;
+	color: grey;
+}
+
+#footer{
+	height: 7vh;
+}
+			
+@media only screen and (min-width: 640px){
+	
+}
+			
+@media only screen and (max-width: 576px){
+	#nav{
+		height: 10vh;
+		background: orange;				
+	}
+	div #section{
+		height: 80vh;
+	}
+	div.logo-header {
+		width: 90%;
+		display: inline;
+	}
+	div.link{
+		text-align: right;
+	}
+	img.mobile-img{
+		display: block;
+	}
+	div.row.justify-content-center{
+		width: 90%;
+	}
+	div #footer {
+		height: 10vh;
+	}
+}	

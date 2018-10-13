@@ -158,7 +158,7 @@
 					<div class="input-group">
 						<h:form>
 						<h:panelGrid columns="2">
-							<f:facet name="header">Seus Dados</f:facet>
+							<f:facet name="header"><p style="color: blue;">Seus Dados</p></f:facet>
 								<h:outputLabel value="E-mail:" style="color: blue; font-weight: 700;"/> 
 								<h:panelGroup>
 								<h:inputText jsf:placeholder="Digite seu email ..."
@@ -290,17 +290,33 @@
 			</div>
 		</div>
 		
-		<!-- Deve liberar cadastro form de cadastro de produto -->
+		
 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 pb-5">
 	<div class="fluid-container">
-		<h:form id="cadastroProduto">
+	
+
+
+	<!-- Aqui começa o formulário que vocês devem editar -->
+
+	<h:form id="cadastroProduto" >
 			<hr style="width:90%" />
+			
+			<!-- Botão que deve liberar o formulário de cadastro -->
+			<!-- Talvez seja uma edição da classe display do css... Procurar como esconder e mostrar 
+			elemento html usando Javascript -->
 			<h:commandButton value="Cadastrar Produto" action="#" 
 							 styleClass="btn btn-default ml-5" style="float:left;" />
 	<div style="margin-top: 15px;">		
-		<!-- class="d-none" -->
+		<!-- class="d-none" :: d-none é display none do Bootstrap -->
+		<!-- alinhar formulário, esse panelGrid é um elemento do JSF, 
+			collumns="2" faz com que cada a 2 elementos do formulário ele jogue os elementos para a linha de baixo 
+			exemplo:: Nome + caixa de texto :: pula linha email+caixa de texto
+			caso haja um h:panelGroup ele conta tudo que estiver nessa tag como um único elemento. -->
 		<h:panelGrid columns="2" style="width=100%;">
 			<h:outputLabel value="Nome: " style="font-weight: bold; color:blue;" />
+			<!-- Aqui começa o formulário de cadastro do produto -->
+			<!-- deve receber algum css para ficar oculto que será 
+				 manipulado por javascript para aparecer ao ser clicado -->
 			<h:panelGroup> 
 				<h:inputText jsf:placeholder="Digite nome do produto ..." 
 							 jsf:type="text"
@@ -394,7 +410,8 @@
 						   showDetail="True" />							
 			</h:panelGroup>
 										  
-			<h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />	
+			<h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />
+			<!-- Esse botão irá cadastrar -->	
 			<h:commandButton value="Cadastrar" id="cadastroBtn" 
 							 action="#{cadastroManagedBean.incluiUsuario}" 
 							 update=":successMsg"
@@ -402,6 +419,9 @@
 		</h:panelGrid>
 		</div>
 	</h:form>
+		
+		<!-- Aqui encerra o formulário que vocês devem editar -->
+		
 		
 		<div class="produtos-cadastrados mt-3 mb-3 ml-5"
 		     style="background: #999; width: 80%; height:auto; padding: 5px;">
@@ -421,9 +441,9 @@
 	</aside>
 </div>
 <!-- footer -->
-<footer class="nav-container">
+<!-- <footer class="nav-container">
 	<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-</footer>		
+</footer> -->		
 		
 		<!-- Calendar code -->
 		<script type="text/javascript">
