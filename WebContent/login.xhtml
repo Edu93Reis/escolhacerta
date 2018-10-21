@@ -35,13 +35,15 @@
 	
 	<div id="header" class="d-none d-sm-block nav-container">
 		<div class="px-5 py-3" style="background-color:orange;">
-			<!-- <div class="page-title logo-header">
-				<h:commandLink action="index?faces-redirect=true"
-							   styleClass="navbar-brand" />
-					<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
-							 alt="Logotipo EsolhaCerta" />
-				</h:commandLink>
-			</div> -->
+			<div class="page-title logo-header">
+				<h:form id="index-login">
+					<h:commandLink action="index?faces-redirect=true"
+								   styleClass="navbar-brand">
+						<h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
+								 alt="Logotipo EsolhaCerta" />
+					</h:commandLink>
+				</h:form>
+			</div>
 			<div class="navbar-header float-right">
 			<!-- <ul class="nav navbar-nav float-right be-user-nav" style="display: block; color: white;">  -->
 			<ul class="nav navbar-nav float-left be-user-nav" style="display: block; color: white;">			
@@ -75,7 +77,6 @@
 						/>
 					
 						<h:commandButton value="Login"
-							action="login?faces-redirect=true"
 							styleClass="navbar-brand" 
 							data-toggle="modal" 
 							data-target="#loginModal"
@@ -106,35 +107,11 @@
 		<div class="fluid-continer">				
 			<ul>
 				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
-				<h:form id="categoria">
 					<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">	
 						<li class="inline-items d-inline line-height: 1;" style="width: 190">
 						| #{categoria}
-						</li>						
+						</li>
 					</ui:repeat>
-					<!-- <h:commandButton value="Mais Categorias"
-								styleClass="btn dropdown-toggle" 
-								jsf:data-toggle="dropdown" 
-								jsf:aria-haspopup="true" 
-								jsf:aria-expanded="false">  -->
-																									
-					<li class="dropdown">
-						<!-- value="Mais Categorias"
-							 jsf:data-toggle="dropdown" 
-							 jsf:aria-haspopup="true" 
-							 jsf:aria-expanded="false" -->
-						<h:commandLink styleClass="dropdown-toggle"
-									   jsf:data-toggle="dropdown">
-							Mais categorias <span class="caret"></span>		
-						</h:commandLink>
-						<ul class="dropdown-menu">
-						 	<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">
-								<li>#{categoria}</li>
-							</ui:repeat>
-						</ul>
-					</li>				   
-							
-				</h:form>
 					<!-- produtoManagedBean.categorias.forEach() -->
 					<!-- <h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
 							<h:column>
@@ -144,8 +121,8 @@
 					 -->
 					
 								
-					<!-- <div class="btn-group">
-						<h:form id="categoria">						
+					<div class="btn-group">
+						<!-- <h:form id="categoria">						
 							<h:commandButton value="Mais Categorias"
 								styleClass="btn dropdown-toggle" 
 								jsf:data-toggle="dropdown" 
@@ -154,95 +131,37 @@
 							/>
 																		
 							<ul class="dropdown-menu dropdown-menu-right">
-								<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">
-								   <li>
-								   		<h:commandLink value="#{produtoManagedBean.categorias}"
-											action="index_jsf"
-											styleClass="dropdown-item"
-										/>
-										#{categoria}
-								   	</li>				   
-								 </ui:repeat>
+							   <li>
+							   		<h:commandLink value="#{produtoManagedBean.categorias}"
+										action="index_jsf"
+										styleClass="dropdown-item"
+									/>
+							   	</li>				   
 							</ul>
-						</h:form>
-					</div>  -->					
+						</h:form>  -->
+					</div>					
 				<!-- </ui:repeat>  -->
 			</ul>
 		</div>
 	</div>
 
-
-
-	<!-- Área das pesquisas --> 
-
-	<div id="section" class="background"> 
-		<!-- fluid-container -->
-		<div class="pt-5 fluid-container">  
-		<!-- align-self-center -->			
-			<!-- justify-content-center align-self-center -->
-			  <div class="d-none d-sm-block row">			  				  	
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-					<h:graphicImage value="/resources/img/logo-escolha-certa-big.png" 
-										alt="Logotipo EsolhaCerta" 
-										styleClass="img-responsive" />
-				</div>				
-			  </div>
-			  <div class="row justify-content-center">			  					
-		    	<div class=" col-xs-6 col-offset-xs-3 col-sm-6 col-md-6 col-lg-6 align-self-center">
-		            <h:form action="" method="get">
-		              <div class="input-group">		         
-		              	 <h:inputText styleClass="form-control"
-		              	 			  id="system-search" 
-		              	 			  jsf:placeholder="Digite sua pesquisa..."
-		              	 			  value="" 
-		              	 			  jsf:name="q"/>		              	             
-		                 <span class="input-group-btn">
-		                   <h:commandLink 
-		                   				  styleClass="btn btn-default search" 
-		                   				  style="background: #e8eaed; border-bottom-left-radius: 0px; border-top-left-radius: 0px;">
-		                   		<i class="fas fa-search"></i>
-		                   </h:commandLink>
-		                 </span>		              
-					  </div>
-		            </h:form>		            
-        		</div>        		
-        	  </div>        	 
-        <!-- encerra fluid-container -->
-       </div>	         
-	</div>
-	
-	<!-- footer -->
-	<div id="footer" class="nav-container">
-		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-	</div>		
-	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
+	<!-- Login --> 
+	<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandLink styleClass="close" jsf:data-dismiss="modal"
-									   style="background: #e8eaed; border-bottom-left-radius: 0px; border-top-left-radius: 0px;">
-						 	<i class="fas fa-times"></i>
-						</h:commandLink>			
+					<h3 class="modal-title">Efetue Login</h3>			
 				</div>
 			
 				<div class="modal-body">
 					<div class="form-group">
-						<label>E-mail:</label>
+						<label style="color:blue;">E-mail:</label>
 						<h:inputText name="email" 
 									 styleClass="form-control" 
 									 jsf:placeholder="Email do Usuário..."
 									 value="#{LoginManagedBean.usuario.emailUsuario}"/>									 
 					</div>
 					<div class="form-group">
-						<label>Senha:</label>
+						<label style="color:blue;">Senha:</label>
 						<h:inputSecret name="passowrd" 
 									 styleClass="form-control" 
 									 jsf:placeholder="Digite senha..."
@@ -258,13 +177,16 @@
 				</div>
 			</div>
 		</div>	
-	</div> 
-	<!-- Modal fim -->
 	
-<!-- Javascript das dependências do Bootstrap -->
-<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
-<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+	<!-- footer -->
+	<div id="footer" class="nav-container">
+		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+	</div>		
+	
+	<!-- Javascript das dependências do Bootstrap -->
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- 
 	<h:outputScript name="jquery.min.js" library="bootstrap/js" />

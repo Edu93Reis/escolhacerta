@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import com.escolhacerta.control.Categoria;
 import com.escolhacerta.util.ConnectionFactory;
 
 public class CategoriaDAO {
-	private Connection conn;
+	private Connection conn = null;
 	//private String categorias;
 	private List<String> categorias = new ArrayList<String>();
 	private Categoria c = new Categoria();
@@ -20,8 +19,8 @@ public class CategoriaDAO {
 	public CategoriaDAO() {
 		try{
 			this.conn = new ConnectionFactory().getConnection();
-		}catch(ClassNotFoundException cn){
-			System.out.println(cn);
+		}catch(Exception cn){
+			System.out.println("Erro de conexão na página ProdutoDAO! "+cn);
 		}
 	}
 	
@@ -35,10 +34,9 @@ public class CategoriaDAO {
 		}catch(SQLException ex){
 			throw new RuntimeException(ex);
 		}
-		
 	}
 	
-	public List<String> listarCategoria() throws SQLException{
+	public List<String> listarCategoria() throws SQLException {
 			String ctg = "SELECT * FROM categoria;";
 			PreparedStatement ps = conn.prepareStatement(ctg);
 			//Executa o comando de consulta aonde guarda os dados retornados dentro do ResultSet.
@@ -49,16 +47,40 @@ public class CategoriaDAO {
 				Categoria c = new Categoria();
 				//c.setCategoria(rs.getString(1));
 				c.setCategoria(rs.getString("nmCategoria"));
-				categorias.add(c.getCategoria().toString());
+				categorias.add(c.getCategoria());
 			}
 			ps.execute();
 			rs.close();
 			ps.close();
+			conn.close();
 			
 			return categorias;
 			
 			//link ref
 			// https://www.devmedia.com.br/java-primefaces-criando-uma-tela-de-cadastro/31796
+	}
+	
+	public String getCategoria() {
+		String ctg = "SELECT nmCategoria FROM categoria"
+						+ "WHERE idCategoria = 1";
+		String categoria;
+		Categoria c = new Categoria();
+		try{
+			PreparedStatement ps = conn.prepareStatement(ctg);
+			ResultSet rs = ps.executeQuery();
+			c.setCategoria(rs.getString("nmCategoria"));
+			categoria  = c.getCategoria().toString();
+		
+			ps.execute();
+			rs.close();
+			ps.close();
+			conn.close();
+			
+			return categoria;
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}
+		
 	}
 	
 	//public Categoria getCategoria(String nmCategoria) {

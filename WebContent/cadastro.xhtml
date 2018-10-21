@@ -297,7 +297,8 @@
 								 styleClass="form-control"
 								 jsf:type="date" 
 								 value="#{cadastroManagedBean.usuario.nasc}" >
-							<f:convertDateTime pattern="yyyy/MM/dd"/>
+							<!-- dd/MM/yyyy -->	 
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
 					</h:inputText>
 					<span class="input-group-addon">
 						<span class="fa fa-calendar"></span>

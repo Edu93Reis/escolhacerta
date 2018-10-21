@@ -166,11 +166,15 @@
 												   styleClass="form-control" 
 												   style="width: 350px; border: 1px solid blue;"
 									     		   jsf:aria-describedby="sizing-addon3" 
-									     		   value="#{userArea.email}" />
-								<h:link value="alterar" 
-									outcome=""
+									     		   binding="#{cadastroBean.email}"
+									     		   disabled="true" />
+									     		   <!-- value="#{userArea.email}" -->
+								<h:commandLink value="alterar" 
 									styleClass="alteradados"
-									style="color: orange; font-weight: 700;" />
+									style="color: orange; font-weight: 700;"
+									binding="#{cadastroBean.linkEmail}"
+									action="#{cadastroBean.desativaEmail}" />
+									<!-- outcome="" -->
 								</h:panelGroup>			
 							
 								<h:outputLabel value="Senha:" style="color: blue; font-weight: 700;" />
@@ -180,32 +184,43 @@
 														 styleClass="form-control"
 														 style="width: 220px; border: 1px solid blue;" 
 														 jsf:aria-describedby="sizing-addon3" 
-														 value="#{userArea.senha}" />
-									<h:link value="alterar" 
-										outcome=""
+														 binding="#{cadastroBean.senha}"
+														 disabled="true" />
+														 <!-- 
+														 value="#{userArea.senha}"
+														 binding="#{cadastroBean.senha}"
+														 disabled="true" -->
+									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
-										style="color: orange; font-weight: 700;" />
+										style="color: orange; font-weight: 700;"
+										binding="#{cadastroBean.linkSenha}"
+										action="#{cadastroBean.desativaSenha}" />
+										<!-- outcome="" -->
 								</h:panelGroup>
 											
 							<h:outputLabel value="Nasc.: " style="color: blue; font-weight: 700;"/>
-							
 							<h:panelGroup>
 								<span class='input-group date' id='datetimepicker1' style="width: 220px">				
 									<h:inputText jsf:placeholder="Digite seu nasc. ..."
 												 jsf:type="date" 
 												 styleClass="form-control" 
-												 value="#{userArea.nasc}"
-												 style="border: 1px solid blue;" >
-									<f:convertDateTime pattern="dd/MM/yyyy"/>
+												 style="border: 1px solid blue;"
+												 binding="#{cadastroBean.data}"
+												 disabled="true" >
+												 <!--  
+												 value="#{userArea.nasc}" -->
+										<f:convertDateTime pattern="dd/MM/yyyy"/>
 									</h:inputText>
 									<span class="input-group-addon">
 					                	<span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 								</span>
-								<h:link value="alterar" 
-									outcome=""
+								<h:commandLink value="alterar" 
 									styleClass="alteradados" 
-									style="color: orange; font-weight: 700;" />
+									style="color: orange; font-weight: 700;"
+									binding="#{cadastroBean.linkData}"
+									action="#{cadastroBean.desativaData}" />
+									<!-- outcome="" -->
 							</h:panelGroup>
 							
 							<h:outputLabel value="CPF:" style="color: blue; font-weight: 700;" />
@@ -214,12 +229,18 @@
 								<h:inputText jsf:placeholder="Digite seu CPF ..." 
 												      styleClass="form-control" 
 												      style="width: 190px; border: 1px solid blue;"
-												      jsf:aria-describedby="sizing-addon3"  
-												      value="#{userArea.cpf}" />
-									<h:link value="alterar" 
-										outcome=""
+												      jsf:aria-describedby="sizing-addon3"
+												      binding="#{cadastroBean.cpf}"
+												      disabled="true" />
+												      <!-- 
+												      value="#{userArea.cpf}"
+												       -->
+									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
-										style="color: orange; font-weight: 700;" />
+										style="color: orange; font-weight: 700;"
+										binding="#{cadastroBean.linkCPF}"
+										action="#{cadastroBean.desativaCPF}" />
+										<!-- outcome="" -->
 							</h:panelGroup>
 							
 							<h:outputLabel value="Cidade:" style="color: blue; font-weight: 700;" />
@@ -227,12 +248,17 @@
 									<h:inputText jsf:placeholder="Digite seu Cidade ..." 
 												 styleClass="form-control"
 												 style="width: 190px; border: 1px solid blue;" 
-												 jsf:aria-describedby="sizing-addon3" 
-												 value="#{userArea.cidade}" />
-									<h:link value="alterar" 
-										outcome=""
+												 jsf:aria-describedby="sizing-addon3"
+												 binding="#{cadastroBean.cidade}"
+												 disabled="true" />
+												 <!-- 
+												 value="#{userArea.cidade}" -->
+									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
-										style="color: orange; font-weight: 700;"/>
+										style="color: orange; font-weight: 700;"
+										binding="#{cadastroBean.linkCidade}"
+										action="#{cadastroBean.desativaCidade}"/>
+										<!-- outcome="" -->
 								</h:panelGroup>
 							
 							<h:outputLabel value="Estado: " style="color: blue; font-weight: 700;" />	
@@ -241,8 +267,11 @@
 													 styleClass="form-control col-md-4 col-lg-4"
 													 style="border: 1px solid blue; width: 190px"
 													 required="true"
-													 requiredMessage="Selecione sua opção" 
-													 value="#{cadastroManagedBean.estados}">
+													 requiredMessage="Selecione sua opção"
+													 binding="#{cadastroBean.estado}"
+													 disabled="true" >
+													 <!-- 
+													 value="#{cadastroManagedBean.estados}" -->
 											<!-- #{cadastroManagedBean.usuario.estado} -->
 											<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
 											<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
@@ -274,10 +303,12 @@
 											<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
 											<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
 									</h:selectOneMenu> 
-									<h:link value="alterar" 
-										outcome=""
+									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
-										style="color: orange; font-weight: 700;" />
+										style="color: orange; font-weight: 700;"
+										binding="#{cadastroBean.linkEstado}"
+										action="#{cadastroBean.desativaEstado}" />
+										<!-- outcome="" -->
 								</h:panelGroup>
 							<p>
 								<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" 
@@ -298,15 +329,20 @@
 
 	<!-- Aqui começa o formulário que vocês devem editar -->
 
-	<h:form id="cadastroProduto" >
-			<hr style="width:90%" />
-			
+	<h:form id="ativaCadastro">
 			<!-- Botão que deve liberar o formulário de cadastro -->
 			<!-- Talvez seja uma edição da classe display do css... Procurar como esconder e mostrar 
 			elemento html usando Javascript -->
-			<h:commandButton value="Cadastrar Produto" action="#" 
-							 styleClass="btn btn-default ml-5" style="float:left;" />
-	<div style="margin-top: 15px;">		
+			<h:commandButton value="Cadastrar Produto" 
+							 styleClass="btn btn-default ml-5" style="float:left;"
+							 binding="#{cadastroBean.btnCadastro}"
+							 action="#{cadastroBean.ativaCadastro}"
+							  />
+	<!-- </h:form>  -->
+	
+	<div style="margin-top: 15px;">
+	<hr style="width:90%" />		
+	<!-- <h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" style="display:none;">  -->
 		<!-- class="d-none" :: d-none é display none do Bootstrap -->
 		<!-- alinhar formulário, esse panelGrid é um elemento do JSF, 
 			collumns="2" faz com que cada a 2 elementos do formulário ele jogue os elementos para a linha de baixo 
@@ -376,7 +412,9 @@
 							 style="width: 240px;" 
 							 jsf:aria-describedby="sizing-addon3"  
 							 value="#{cadastroManagedBean.usuario.CPF}"
-							 required="true" />
+							 required="true">
+							 <f:convertNumber minFractionDigits="2" locale="pt_BR" />
+				</h:inputText>
 				<h:message for="preco" 
 						   showSummary="True"
 						   showDetail="True" />

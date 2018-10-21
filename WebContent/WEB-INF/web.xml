@@ -17,15 +17,14 @@
   	<servlet-name>Faces Servlet</servlet-name>
   	<url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
+  <!--<servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
   <session-config>
         <session-timeout>15</session-timeout> <!-- Invalida a sessao em 15 minutos -->
         <tracking-mode>COOKIE</tracking-mode>
   </session-config>
-  
   <welcome-file-list>
         <welcome-file>/index.xhtml</welcome-file>
   </welcome-file-list>

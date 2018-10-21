@@ -18,8 +18,8 @@ public class ProdutoDAO {
 		//construtor abre a conexão
 		try{
 			this.conn = new ConnectionFactory().getConnection();
-		} catch(ClassNotFoundException cn){
-			System.out.println(cn);
+		} catch(Exception cn){
+			System.out.println("Erro de conexão na página ProdutoDAO! "+cn);
 		}
 	}
 	

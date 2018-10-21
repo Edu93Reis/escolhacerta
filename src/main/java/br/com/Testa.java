@@ -16,7 +16,7 @@ public class Testa {
 
 	public static void main(String[] args) throws SQLException {
 		UsuarioDAO u = new UsuarioDAO();
-		//CategoriaDAO cD = new CategoriaDAO();
+		CategoriaDAO cD = new CategoriaDAO();
 		//Categoria c = new Categoria();
 		Usuario usuario = new Usuario();
 		Produto produto = new Produto();
@@ -35,21 +35,22 @@ public class Testa {
 		
 		//u.adiciona(usuario);
 		
-		produto.setNome("Notebook Fatec");
-		produto.setComent("Branco Fatec");
+		//produto.setNome("Notebook Fatec");
+		//produto.setComent("Branco Fatec");
 		//produto.setDtCadastro('2018-02-08');
-		produto.setModelo("AC1234");
+		/*produto.setModelo("AC1234");
 		produto.setPreco(new BigDecimal(2200.50));
 		produto.setPontuacao(4);
 		produto.setIdCategoria(1);
 		
-		pd.adiciona(produto);
+		pd.adiciona(produto); */
 		//u.adiciona(usuario);
 		//try{
 			//System.out.println(
 			//cD.listarCategoria();
 			//System.out.println(cD.getCategorias());
 			//p.inicializar();
+			//System.out.println(cD.getCategoria());
 			System.out.println(p.getCategorias());
 		/*}catch (Exception e){
 			System.out.println("Erro: ");

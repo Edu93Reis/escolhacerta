@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+//import javax.annotation.ManagedBean;
 import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
@@ -31,34 +33,39 @@ import com.escolhacerta.util.HibernateUtil;
 public class ProdutoManagedBean {
 	//salva a listagem de produtos do banco de dados
 	//dentro do Arraylist para futura listagem
-	private List<Produto> produtos = new ArrayList<Produto>();
-	
+	private List<Produto> produtos;
+	private CategoriaDAO cd;
 	//private List<String> listaCategoria = new ArrayList<String>();
-	private List<String> categorias = new ArrayList<String>();
+	//@ManagedProperty(value = "#{categorias}")
+	private List<String> categorias;
+	private Categoria categoria;
 	
-	@PostConstruct
-	public void inicializar(){
-		/*new CategoriaDAO();
-		new Categoria();*/
+	public ProdutoManagedBean(){
+		this.produtos = new ArrayList<Produto>();
+		this.categorias = new ArrayList<String>();
+		this.categoria = new Categoria();
+		cd = new CategoriaDAO();
 	}
 	
+	/*@PostConstruct
+	public void inicializar(){
+		new CategoriaDAO();
+		//new Categoria();
+	}*/
+	
 	public List<String> getCategorias() throws SQLException {
-		CategoriaDAO cd = new CategoriaDAO();
-		
 		//List<String> listaCategoria = cd.listarCategoria();
 
 		/*for(String categoria : cd.listarCategoria()){
 			listaCategoria.add(categoria);
-		}
-		
-		
+		}*/		
 			
-		return listaCategoria;*/
+		//return listaCategoria;
 		try{
-			categorias = cd.listarCategoria();
+			this.categorias = cd.listarCategoria();
 			return categorias;
 		} catch(Exception ex){
-			FacesUtil.failure("Erro ao cadastrar!" + ex);
+			FacesUtil.failure("Erro ao listar: " + ex);
 			return categorias;
 		}
 		
@@ -67,4 +74,9 @@ public class ProdutoManagedBean {
 	public List<Produto> getProdutos(){
 		return produtos;
 	}
+	
+	public Categoria getCategoria(){
+		return this.categoria;
+	}
+	
 }
