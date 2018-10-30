@@ -315,6 +315,12 @@
 				<h:inputText  jsf:placeholder="Digite seu Cidade ..." 
 							  styleClass="form-control" jsf:aria-describedby="sizing-addon3"
 							  value="#{cadastroManagedBean.usuario.cidade}" />
+			</p>
+			<p class="list-group-item">	
+			<h:outputText>CEP: </h:outputText> 
+				<h:inputText  jsf:placeholder="Digite seu CEP ..." 
+							  styleClass="form-control" jsf:aria-describedby="sizing-addon3"
+							  value="#{cadastroManagedBean.usuario.cep}" />
 			</p>								
 			<!-- <p class="list-group-item">	
 				<h:outputText>Estado:	</h:outputText>
@@ -418,8 +424,9 @@
 												 jsf:type="date"
 												 styleClass="form-control col-md-7 col-lg-7"												 
 												 value="#{cadastroManagedBean.usuario.nasc}" 
-												 style="width:90% !important;">
-										<f:convertDateTime pattern="dd/MM/yyyy" id="data-de-nascimento" />
+												 style="width:90% !important;"
+												 converter="javax.faces.DateTime">
+										<f:convertDateTime pattern="yyyy-MM-dd" id="data-de-nascimento" />
 									</h:inputText>
 									<span class="input-group-addon">
 					                	<span class="glyphicon glyphicon-calendar"></span>
@@ -472,7 +479,8 @@
 												 style="border: 1px solid blue;"
 												 required="true"
 												 requiredMessage="Selecione sua opção" 
-												 value="#{cadastroManagedBean.estados}">
+												 value="#{cadastroManagedBean.estados}"
+												 converter="javax.faces.Character">
 										<!-- #{cadastroManagedBean.usuario.estado} -->
 										<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
 										<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
@@ -510,8 +518,26 @@
 									<!-- <ui:repeat class="dropdown-menu col-md-7 col-lg-7" var="item" value="#{gestaoProdutosBean_Aula2.produtos}">
 										<li>#{item.nome}</li>
 									</ui:repeat>  -->								
-						  </span>						  	
-						  <h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />	
+						  </span>
+						  <!-- <h:messages id="Estado-successMsg" sticky="true" style="color: red; font-weight: bold" />  -->
+						  
+						  <span style="width:60%">	
+						  	<!-- col-md-2 col-lg-2 -->
+							<div class="d-inline-block">
+								<h:outputText value="CEP: " style="font-weight: bold; width: 60px" />
+							</div>							
+							<h:inputText jsf:placeholder="Digite seu CEP ..."
+										 id="CEP" 
+										 styleClass="form-control col-md-7 col-lg-7" 
+										 jsf:aria-describedby="sizing-addon3"  
+										 value="#{cadastroManagedBean.usuario.cep}" />
+							<h:message for="CEP" 
+									   showSummary="True"
+									   showDetail="True" />							
+						  </span>
+						  <!-- <h:messages id="CEPsuccessMsg" sticky="true" style="color: red; font-weight: bold" />  -->
+						  
+						  <h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />
 						  <p><h:commandButton value="Cadastrar" id="cadastroBtn" 
 						  					  action="#{cadastroManagedBean.incluiUsuario}" 
 						  					  update=":successMsg"

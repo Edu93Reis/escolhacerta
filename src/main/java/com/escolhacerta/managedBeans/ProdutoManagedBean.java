@@ -78,5 +78,4 @@ public class ProdutoManagedBean {
 	public Categoria getCategoria(){
 		return this.categoria;
 	}
-	
 }

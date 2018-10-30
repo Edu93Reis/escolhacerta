@@ -60,28 +60,7 @@ public class CategoriaDAO {
 			// https://www.devmedia.com.br/java-primefaces-criando-uma-tela-de-cadastro/31796
 	}
 	
-	public String getCategoria() {
-		String ctg = "SELECT nmCategoria FROM categoria"
-						+ "WHERE idCategoria = 1";
-		String categoria;
-		Categoria c = new Categoria();
-		try{
-			PreparedStatement ps = conn.prepareStatement(ctg);
-			ResultSet rs = ps.executeQuery();
-			c.setCategoria(rs.getString("nmCategoria"));
-			categoria  = c.getCategoria().toString();
-		
-			ps.execute();
-			rs.close();
-			ps.close();
-			conn.close();
-			
-			return categoria;
-		}catch(Exception ex){
-			throw new RuntimeException(ex);
-		}
-		
-	}
+	
 	
 	//public Categoria getCategoria(String nmCategoria) {
 		/*

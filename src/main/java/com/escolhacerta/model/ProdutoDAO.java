@@ -5,7 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.faces.component.html.HtmlCommandLink;
+
+import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.control.Usuario;
 import com.escolhacerta.util.ConnectionFactory;
@@ -13,6 +18,8 @@ import com.escolhacerta.util.ConnectionFactory;
 public class ProdutoDAO {
 	private Connection conn;
 	private Produto produto = new Produto();
+	private List<Produto> produtos = new ArrayList<Produto>();
+	private HtmlCommandLink categoria;
 	
 	public ProdutoDAO()  {
 		//construtor abre a conexão

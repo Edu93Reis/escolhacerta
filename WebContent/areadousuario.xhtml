@@ -134,6 +134,16 @@
 							outcome=""
 							styleClass="alteradados" />
 				</p>
+				<p class="list-group-item"> CEP:							
+					<h:inputText jsf:placeholder="Digite seu CEP ..."
+								 id="cep" 
+								 styleClass="form-control col-md-7 col-lg-7" 
+								 jsf:aria-describedby="sizing-addon3"  
+								 value="#{userArea.cep}" />
+					<h:link value="alterar" 
+							outcome=""
+							styleClass="alteradados" />
+				</p>
 				<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" class="btn btn-default" />
 			</h:form>
 		</div>
@@ -310,6 +320,24 @@
 										action="#{cadastroBean.desativaEstado}" />
 										<!-- outcome="" -->
 								</h:panelGroup>
+								<h:outputLabel value="CEP:" style="color: blue; font-weight: 700;" />
+								<h:panelGroup> 
+									<h:inputText jsf:placeholder="Digite seu CEP ..." 
+												 styleClass="form-control"
+												 style="width: 190px; border: 1px solid blue;" 
+												 jsf:aria-describedby="sizing-addon3"
+												 binding="#{cadastroBean.cep}"
+												 disabled="true" />
+												 <!-- 
+												 value="#{userArea.cidade}" -->
+									<h:commandLink value="alterar" 
+										styleClass="alteradados" 
+										style="color: orange; font-weight: 700;"
+										binding="#{cadastroBean.linkCep}"
+										action="#{cadastroBean.desativaCep}"/>
+										<!-- outcome="" -->
+								</h:panelGroup>
+							
 							<p>
 								<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" 
 												styleClass="btn btn-default" style="float:right"/>
@@ -436,13 +464,44 @@
 			
 			<h:outputLabel value="Pontuacao: " style="font-weight: bold; color:blue;" />
 			<h:panelGroup>
-				<h:inputText jsf:type="number"
-							 id="pontuacao" 
+				<div class="stars"
+					 id="pontuacao" 
+					 style="font-weight: heavy;
+					 color: yellow; border: 1px solid blue; 
+					 padding: 2px; width: 115px">
+					 			<i class="far fa-star"></i>
+					 			<i class="far fa-star"></i>
+					 			<i class="far fa-star"></i>
+					 			<i class="far fa-star"></i>
+					 			<i class="far fa-star"></i>
+					 			<!-- <h:commandLink action=""
+					 						   binding="">
+					 				<i class="far fa-star"></i>
+					 			</h:commandLink>
+					 			<h:commandLink action=""
+					 						   binding="">
+					 				<i class="far fa-star"></i>
+					 			</h:commandLink>
+					 			<h:commandLink action=""
+					 						   binding="">
+					 				<i class="far fa-star"></i>
+					 			</h:commandLink>
+					 			<h:commandLink action=""
+					 						   binding="">
+					 				<i class="far fa-star"></i>
+					 			</h:commandLink>
+					 			<h:commandLink action=""
+					 						   binding="">
+					 				<i class="far fa-star"></i>
+					 			</h:commandLink>  -->
+				</div>
+				<!-- <h:inputText jsf:type="number"
+							 id="pontuacao"		 
 							 styleClass="form-control"
 							 style="width: 85px;" 
 							 jsf:aria-describedby="sizing-addon3"  
 							 value="#{cadastroManagedBean.usuario.CPF}"
-							 required="true" />
+							 required="true" />  -->
 				<h:message for="pontuacao" 
 						   showSummary="True"
 						   showDetail="True" />							

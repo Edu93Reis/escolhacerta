@@ -37,17 +37,6 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	public Produto(){
 	}
 	
-	/*public Produto(Integer pontuacao, Integer idProduto, String marca, Integer idModelo,
-			String modelo, BigDecimal preco, Date dtCadastro){			
-		super(pontuacao);
-		this.idProduto = idProduto;
-		this.marca = marca;
-		this.idModelo = idModelo;
-		this.modelo = modelo;
-		this.preco = preco;
-		this.dtCadastro = dtCadastro;
-	}*/
-	
 	public Integer getIdProduto() {
 		return idProduto;
 	}

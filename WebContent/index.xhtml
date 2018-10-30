@@ -135,38 +135,9 @@
 					</li>				   
 							
 				</h:form>
-					<!-- produtoManagedBean.categorias.forEach() -->
-					<!-- <h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
-							<h:column>
-								#{categoria}
-							</h:column>
-					</h:dataTable>  
-					 -->
+
 					
 								
-					<!-- <div class="btn-group">
-						<h:form id="categoria">						
-							<h:commandButton value="Mais Categorias"
-								styleClass="btn dropdown-toggle" 
-								jsf:data-toggle="dropdown" 
-								jsf:aria-haspopup="true" 
-								jsf:aria-expanded="false"							
-							/>
-																		
-							<ul class="dropdown-menu dropdown-menu-right">
-								<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">
-								   <li>
-								   		<h:commandLink value="#{produtoManagedBean.categorias}"
-											action="index_jsf"
-											styleClass="dropdown-item"
-										/>
-										#{categoria}
-								   	</li>				   
-								 </ui:repeat>
-							</ul>
-						</h:form>
-					</div>  -->					
-				<!-- </ui:repeat>  -->
 			</ul>
 		</div>
 	</div>
@@ -180,16 +151,18 @@
 		<div class="pt-5 fluid-container">  
 		<!-- align-self-center -->			
 			<!-- justify-content-center align-self-center -->
-			  <div class="d-none d-sm-block row">			  				  	
+			<!-- "d-none d-sm-block -->
+			  <div class="row">			  				  	
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 					<h:graphicImage value="/resources/img/logo-escolha-certa-big.png" 
 										alt="Logotipo EsolhaCerta" 
 										styleClass="img-responsive" />
 				</div>				
 			  </div>
-			  <div class="row justify-content-center">			  					
-		    	<div class=" col-xs-6 col-offset-xs-3 col-sm-6 col-md-6 col-lg-6 align-self-center">
-		            <h:form action="" method="get">
+			  <div class="row justify-content-center centered">			  					
+		    	<div class="col-xl-6 col-sm-6 col-md-6 col-lg-6 align-self-center">
+		    		<!-- action="" -->
+		            <h:form method="get">
 		              <div class="input-group">		         
 		              	 <h:inputText styleClass="form-control"
 		              	 			  id="system-search" 

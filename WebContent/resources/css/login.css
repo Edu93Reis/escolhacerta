@@ -5,7 +5,7 @@
 }
 body{
 	overflow-x: hidden;
-	/*overflow-y: hidden;*/
+	overflow-y: hidden;
 }
 .logo-header{
 	width: 190px;
@@ -26,6 +26,14 @@ li.inline-items {
 }
 #section{
 	height: 75vh;
+}
+.btn-color{
+	color: white;
+	background: blue;	
+}
+.btn-color:hover{
+	color: white;
+	background: #348;
 }
 			
 @media only screen and (min-width: 640px){
@@ -87,11 +95,6 @@ button.close, h3.modal-title {
 }			
 			
 @media only screen and (max-width: 576px){
-	body{
-		margin: 0;
-		padding: 0;
-		border: 0;	
-	}
 	#nav{
 		height: 10vh;
 		background: orange;				
@@ -108,20 +111,6 @@ button.close, h3.modal-title {
 	}
 	img.mobile-img{
 		display: block;
-	}
-	.img-responsive{
-		width: 75%;
-		margin: 0 auto;
-	}
-	div.teste{
-		display: flex;
-           flex-direction: row;
-	       justify-content: center;
-	}
-	
-	.centered{
-		margin: 0 auto !important;
-		float: none !important;
 	}
 	div.row.justify-content-center{
 		width: 90%;

@@ -10,14 +10,15 @@ import javax.faces.component.html.HtmlSelectOneMenu;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="cadastroBean")
-public class areaDoUsuarioBackingBean {
+public class AreaDoUsuarioBackingBean {
 	private HtmlInputText email;
 	private HtmlInputSecret senha;
 	private HtmlInputText data;
 	private HtmlInputText cpf;
 	private HtmlInputText cidade;
+	private HtmlInputText cep;
 	private HtmlSelectOneMenu estado;
-	private HtmlCommandLink linkEmail, linkSenha, linkData, linkCPF, linkCidade, linkEstado;
+	private HtmlCommandLink linkEmail, linkSenha, linkData, linkCPF, linkCidade, linkEstado, linkCep;
 	private HtmlCommandButton btnCadastro;
 	private HtmlForm cadastroProduto;
 	
@@ -63,6 +64,13 @@ public class areaDoUsuarioBackingBean {
 		}
 	}
 	
+	public void desativaCep(){
+		if(this.cep.isDisabled()){
+			this.cep.setDisabled(false);
+			this.cep.setStyle("background: white; width: 190px; border: 1px solid orange;");
+		}
+	}
+	
 	public void ativaCadastro(){
 		if(this.cadastroProduto.getStyle().equals("display:none;")){
 			this.cadastroProduto.setStyle("display: block");
@@ -104,6 +112,12 @@ public class areaDoUsuarioBackingBean {
 	}
 	public void setEstado(HtmlSelectOneMenu estado) {
 		this.estado = estado;
+	}
+	public HtmlInputText getCep() {
+		return cep;
+	}
+	public void setCep(HtmlInputText cep) {
+		this.cep = cep;
 	}
 	public HtmlCommandLink getLinkEmail() {
 		return linkEmail;
@@ -160,12 +174,20 @@ public class areaDoUsuarioBackingBean {
 	public void setBtnCadastro(HtmlCommandButton btnCadastro) {
 		this.btnCadastro = btnCadastro;
 	}
+	
+	public HtmlCommandLink getLinkCep() {
+		return linkCep;
+	}
 
+	public void setLinkCep(HtmlCommandLink linkCep) {
+		this.linkCep = linkCep;
+	}
+	
 	public HtmlForm getCadastroProduto() {
 		return cadastroProduto;
 	}
 	public void setCadastroProduto(HtmlForm cadastroProduto) {
 		this.cadastroProduto = cadastroProduto;
 	}
-
+	
 }
