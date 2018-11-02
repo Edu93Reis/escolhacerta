@@ -2,12 +2,6 @@ package com.escolhacerta.control;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /* indica��o de que esta � uma entidade da JPA (persistencia Java) */
 //@Entity
 /* Indica��o do Hibernate de qual ser� a tabela em que ser�o persistidos os dados */

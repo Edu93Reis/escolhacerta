@@ -1,12 +1,9 @@
 package br.com;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
-import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.control.Usuario;
-import com.escolhacerta.managedBeans.CadastroManagedBean;
 import com.escolhacerta.managedBeans.ProdutoManagedBean;
 import com.escolhacerta.model.CategoriaDAO;
 import com.escolhacerta.model.ProdutoDAO;

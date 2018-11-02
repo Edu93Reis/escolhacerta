@@ -1,17 +1,7 @@
 package com.escolhacerta.control;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /* indica��o de que esta � uma entidade da JPA (persistencia Java) */
 //@Entity
@@ -124,13 +114,15 @@ public class Usuario implements Serializable {
 		return estado;
 	}
 	
-	//|| estado.equals("  ") || estado.getClass().toString() != "String"
-	
-	/* public void setEstados(){
-		for(String estado : list_estados){
-			this.estados = estado;
+	public void setEstado(String estado) {
+		if(cidade.equals(null)){
+			System.out.println("Insira valor no campo cidade!");
+		}else{		
+			this.estado = estado;
 		}
-	} */
+	}
+	
+	//|| estado.equals("  ") || estado.getClass().toString() != "String"
 	
 	public Integer getCep() {
 		return cep;

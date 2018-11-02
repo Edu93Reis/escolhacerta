@@ -1,15 +1,58 @@
 package com.escolhacerta.validation;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 
 public class CadastroValidation {
-	private Date data;
+	private java.sql.Date data;
 	private String estado;
 	
 	public Date converteData(String data){
+		//DateFormat read = new SimpleDateFormat("EEE MMM dd yyyy hh:mm aaa");
+		SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+		String dia = data.substring(8, 9);
+		String mes = data.substring(4, 6);
+		String ano = data.substring(24, 28);
+		
+		if(mes.equals("jan")){
+			mes = "1";
+		}else if(mes.equals("feb")){
+			mes = "02";
+		}else if(mes.equals("mar")){
+			mes = "03";
+		}else if(mes.equals("apr")){
+			mes = "04";
+		}else if(mes.equals("may")){
+			mes = "05";
+		}else if(mes.equals("jun")){
+			mes = "06";
+		}else if(mes.equals("jul")){
+			mes = "07";
+		}else if(mes.equals("aug")){
+			mes = "08";
+		}else if(mes.equals("set")){
+			mes = "09";
+		}else if(mes.equals("oct")){
+			mes = "10";
+		}else if(mes.equals("nov")){
+			mes = "11";
+		}else{
+			mes = "12";
+		}
+		
+		data = ano+"-"+mes+"-"+dia;
+		
 		try{
-			SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+			//SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+			//java.util.Date dataFinal = read.parse(data);
+			//dataFinal = parser.format(dataFinal);
+			//java.util.Date dataFinal = parser.parse(data);
+			//java.util.Date dataFinal = DateFormat.getDateInstance().parse(data);
+			//java.util.Date dataFinal = parser.parse(data);
+			//String dataFinal = parser.format(data);
+			//this.data = java.sql.Date.valueOf(dataFinal);
 			java.util.Date dataFinal = parser.parse(data);
 			this.data = new java.sql.Date(dataFinal.getTime());
 			

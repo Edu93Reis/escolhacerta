@@ -1,20 +1,13 @@
 package com.escolhacerta.managedBeans;
 
-import java.sql.Connection;
-
-
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 //import javax.annotation.ManagedBean;
 import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
-
 import com.escolhacerta.control.Categoria;
 import com.escolhacerta.util.FacesUtil;
 
@@ -23,8 +16,6 @@ import com.escolhacerta.util.FacesUtil;
 
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.model.CategoriaDAO;
-import com.escolhacerta.model.ProdutoDAO;
-import com.escolhacerta.util.HibernateUtil;
 
 
 @SuppressWarnings("deprecation")

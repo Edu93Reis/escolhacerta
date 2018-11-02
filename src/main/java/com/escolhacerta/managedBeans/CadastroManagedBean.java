@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -25,6 +24,7 @@ public class CadastroManagedBean implements Serializable {
 	private Usuario usuario;
 	private List<String> estados;
 	
+	@SuppressWarnings("serial")
 	public CadastroManagedBean(){
 		this.usuarioDAO = new UsuarioDAO();
 		this.usuario = new Usuario();

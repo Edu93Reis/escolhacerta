@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
-<!--
+<!-- 
 <script type="text/javascript">
                 $(function(e) {
                     $('#cpf').hide();
@@ -40,12 +40,12 @@
                 };
             
                 function nameValidation(){
-                    var nome = $("#name").val();
+                    var nome = $("#nome").val();
                     if(nome == " " || nome == null || nome.length < 3){
                         this.nameError()
                     }
                     else {
-                        $("#name").css('border-color','black');
+                        $("#nome").css('border-color','black');
                         $("#div_name").hide();
                         return true;
                     }
@@ -233,8 +233,9 @@
                     var $seuCampoCpf = $("#cpf");
                     $seuCampoCpf.mask('000.000.000-00', {reverse: true});
                 });
-            
-</script>  -->
+       
+</script>
+-->     
 </h:head>
 <h:body>
 <!-- Header cadastro mobile -->
@@ -422,10 +423,11 @@
 								<span class='input-group date' id='datetimepicker1' style="width: 350px;">				
 									<h:inputText jsf:placeholder="Digite seu nasc. ..." 
 												 jsf:type="date"
+												 id="data"
 												 styleClass="form-control col-md-7 col-lg-7"												 
 												 value="#{cadastroManagedBean.usuario.nasc}" 
 												 style="width:90% !important;"
-												 converter="javax.faces.DateTime">
+												 locale="true">
 										<f:convertDateTime pattern="yyyy-MM-dd" id="data-de-nascimento" />
 									</h:inputText>
 									<span class="input-group-addon">
@@ -472,18 +474,25 @@
 							<div class="d-inline-block">
 								<h:outputText value="Estado: " style="font-weight: bold; width: 60px" />
 							</div>
+							<h:inputText jsf:placeholder="Digite seu estado ..."
+										 id="estado" 
+										 styleClass="form-control col-md-6 col-lg-6 col-xl-6" 
+										 jsf:aria-describedby="sizing-addon3"  
+										 value="#{cadastroManagedBean.usuario.estado}"
+										 required="true" />
 								<!-- dropdown-menu col-md-7 col-lg-7 -->
-								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> -->
-								<h:selectOneMenu id="estado"
+								<!-- <f:selectItems value="#{cadastroManagedBean.usuario.estado}" /> 
+										converter="javax.faces.Character" -->
+								<!-- <h:selectOneMenu id="estado"
 												 styleClass="form-control col-md-4 col-lg-4"
 												 style="border: 1px solid blue;"
 												 required="true"
 												 requiredMessage="Selecione sua opção" 
 												 value="#{cadastroManagedBean.estados}"
-												 converter="javax.faces.Character">
+												 converter="selectConverter"> -->
 										<!-- #{cadastroManagedBean.usuario.estado} -->
 										<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
-										<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
+									<!--	<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
 										<f:selectItem itemValue="Acre" itemLabel="Acre" />
 										<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
 										<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
@@ -511,7 +520,7 @@
 										<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
 										<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
 										<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
-								</h:selectOneMenu> 
+								</h:selectOneMenu>  -->
 								<h:message for="estado" 
 										   showSummary="True"
 										   showDetail="True" />
