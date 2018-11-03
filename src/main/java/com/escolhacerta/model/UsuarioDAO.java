@@ -15,6 +15,10 @@ public class UsuarioDAO {
 	private Connection conn;
 	private Usuario usuario = new Usuario();
 	private CadastroValidation cv = new CadastroValidation();
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	/*private List<String> ids = new ArrayList<String>();
+	private List<String> emails = new ArrayList<String>();
+	private List<String> senhas = new ArrayList<String>();*/
 	
 	public UsuarioDAO()  {
 		//construtor abre a conexão
@@ -47,7 +51,7 @@ public class UsuarioDAO {
 			stmt.setString(4, usuario.getCPF());
 			stmt.setString(5, usuario.getCidade());
 			stmt.setString(6, usuario.getEstado());
-			stmt.setInt(7, usuario.getCep());
+			stmt.setString(7, usuario.getCep());
 			stmt.execute();
 			stmt.close();
 			
@@ -61,36 +65,30 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public boolean loginUsuario(Usuario usuario){
-		List<String> emails = new ArrayList<String>();
-		List<String> senhas = new ArrayList<String>();
-		boolean log = false;
+	public void loginUsuario(){
 		try{
 			PreparedStatement stmt = conn.prepareStatement("select * FROM usuario");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				emails.add(rs.getString("emailUsuario"));
-				senhas.add(rs.getString("idPassword"));
+				//construir usuarios
+				usuario.setIdUser(rs.getInt("idUsuario"));
+				usuario.setEmail(rs.getString("emailUsuario"));
+				usuario.setNome(rs.getString("nmUsuario"));
+				usuario.setSenha(rs.getString("idPassword"));
+				usuario.setNasc(rs.getDate("dtNasc"));
+				usuario.setCPF(rs.getString("cdCPF"));
+				usuario.setCidade(rs.getString("nmCidade"));
+				usuario.setEstado(rs.getString("nmEstado"));
+				usuario.setCep(rs.getString("cdCep"));
+				usuarios.add(usuario);
 			}
-
-				for(String email : emails){
-					if(email.equals(usuario.getEmail())){
-						for(String senha : senhas){
-							if(senha.equals(usuario.getSenha())){
-								log = true;
-							}else{
-								log = false;
-							}
-						}
-					}
-				}
-			
-			//retorno true, managedBean, redireciona para index ou userArea e libera conteúdo desabilitado
-			//retorno false, managedBean dispara mensagem de tentativa inválida de login 
-			return log;
 		}catch (SQLException ex){
 			throw new RuntimeException(ex);
 		}
+	}
+
+	public List<Usuario> getUser(){
+		return this.usuarios;
 	}
 
 }

@@ -15,7 +15,7 @@
 <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
 
 <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
-<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
 
@@ -23,7 +23,7 @@
 <h:body> 
 <nav class="d-block d-sm-none d-lg-none row clearfix">
 	<div class="logo-header col-xs-4 col-offset-xs-4 pl-5 pt-3">
-		<img src="./resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" class="mobile-img" />
+		<img src="/escolhacerta/resources/img/logo-escolha-certa-mini.png" alt="Logotipo EsolhaCerta" class="mobile-img" />
 	</div>
 	<div class="link float-right pr-2"><a href="#" class="navbar-brand" action="areadousuario?faces-redirect=true" style="color: white;">Sair</a></div>
 </nav>
@@ -530,9 +530,9 @@
 	<!-- Informação lateral, apresentação do site -->				
 	<aside id="aside" role="complementary" class="d-none d-sm-block presentation col-xs-0 col-sm-4 col-md-4 col-lg-4">								
 		<div class="page-header px-3 py-3">
-			<h3 class="user">Bem Vindo, #{userArea.nome}!</h3>
+			<h3 class="user">Bem Vindo, #{loginManagedBean.usuario.nome}!</h3>
 		</div>
-		<img src="resources/img/lamp.png" alt="Lampada"/>
+		<img src="./resources/img/lamp.png" alt="Lampada"/>
 		<p>A <b>EscolhaCerta</b> de um produto nunca foi tão fácil</p>
 		<p class="text-box">Você busca produtos de acordo com a experiência de outros consumidores.</p>		
 	</aside>

@@ -88,8 +88,9 @@
 						 action :: redireciona a página
 					-->
 					
+						<!-- action="login.xhtml?faces-redirect=true" -->
 						<h:commandLink value="Sair"
-							action="areadousuario?faces-redirect=true"
+							action="#{loginManagedBean.logout()}"
 							styleClass="navbar-brand"  
 							style="float: left; color: white; width:25; line-height:1;"
 						/> 
@@ -148,31 +149,38 @@
 				<div class="modal-header">
 					<h3 class="modal-title">Efetue Login</h3>			
 				</div>
-			
+			<h:form id="login">
 				<div class="modal-body">
 					<div class="form-group">
 						<label style="color:blue;">E-mail:</label>
 						<h:inputText name="email" 
 									 styleClass="form-control" 
 									 jsf:placeholder="Email do Usuário..."
-									 value="#{LoginManagedBean.usuario.emailUsuario}"/>									 
+									 value="#{loginManagedBean.email}"
+									 required="true"
+									 requiredMessage="E-mail inválido!"/>									 
 					</div>
 					<div class="form-group">
 						<label style="color:blue;">Senha:</label>
 						<h:inputSecret name="passowrd" 
 									 styleClass="form-control" 
 									 jsf:placeholder="Digite senha..."
-									 value="#{LoginManagedBean.usuario.senha}"/>									 
+									 value="#{loginManagedBean.senha}"
+									 required="true"
+									 requiredMessage="Senha inválida!" />									 
 					</div>
 				</div>
 						
 				<div class="modal-footer">
 				   <h:commandButton value="Logar"
 				   					styleClass="btn btn-sucess btn-color" 
-				   					action="#{LoginManagedbean.inserirUsuario}"
+				   					action="#{loginManagedBean.autentica}"
+				   					update=":successLog"
 				   />
 				   <!-- Aqui irá a mensagem de sucesso ou falha -->
+				   <!-- <h:messages id="successLog" sticky="true" style="color: blue; font-weight: bold" /> -->	
 				</div>
+			</h:form>
 			</div>
 		</div>	
 	

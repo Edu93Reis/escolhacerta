@@ -381,7 +381,7 @@
 			<h:messages id="successMsgMobile" sticky="true" style="color: blue; font-weight: bold" />							
 			<h:commandButton value="Cadastrar" 
 							 update=":successMsgMobile"
-							 action="#{cadastroManagedBean.incluiUsuario()}" 
+							 action="#{cadastroManagedBean.debugaUsuario()}" 
 							 class="btn btn-default mobile" />
 		</h:form>
 	</div>
@@ -599,6 +599,7 @@
 						  					  action="#{cadastroManagedBean.incluiUsuario}" 
 						  					  update=":successMsg"
 						  					  styleClass="btn btn-default" style="float: right" /></p>
+						  <h:outputText value="#{cadastroManagedBean.usuario.nasc}" />
 						</h:form>
 					</div>
 				</div>

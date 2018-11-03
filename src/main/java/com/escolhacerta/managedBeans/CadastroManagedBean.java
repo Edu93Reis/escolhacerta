@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,6 +15,7 @@ import com.escolhacerta.util.FacesUtil;
 @SuppressWarnings("deprecation")
 @ManagedBean
 @ViewScoped
+//@ApplicationScoped
 public class CadastroManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//instância do DAO (Classe de persistência de Dados do usuário para ser manipulada pelo ManagedBean)
@@ -23,6 +25,7 @@ public class CadastroManagedBean implements Serializable {
 	//private Usuario usuario = new Usuario();
 	private Usuario usuario;
 	private List<String> estados;
+	private List<Usuario> debuga;
 	
 	@SuppressWarnings("serial")
 	public CadastroManagedBean(){
@@ -40,6 +43,21 @@ public class CadastroManagedBean implements Serializable {
 		};
 	}
 	
+	public void debugaUsuario(){
+		if(usuario != null){
+			debuga.add(usuario);
+		
+			FacesUtil.success("Parabéns, você está cadastrado!");
+			//usuario = new Usuario();
+		} else {
+			FacesUtil.failure("Erro ao cadastrar!");
+			usuario = new Usuario();
+		}
+	}
+	
+	public List<Usuario> getDebuga(){
+		return this.debuga;
+	}
 	
 	//@PostConstruct
 	public void incluiUsuario() {
@@ -47,10 +65,10 @@ public class CadastroManagedBean implements Serializable {
 			usuarioDAO.adiciona(usuario);
 		
 			FacesUtil.success("Parabéns, você está cadastrado!");
-			usuario = new Usuario();
+			//usuario = new Usuario();
 		} else {
 			FacesUtil.failure("Erro ao cadastrar!");
-			usuario = new Usuario();
+			//usuario = new Usuario();
 		}
 	}
 	

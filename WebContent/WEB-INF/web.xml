@@ -29,6 +29,16 @@
         <welcome-file>/index.xhtml</welcome-file>
   </welcome-file-list>
   
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<filter-class>com.escolhacerta.filters.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/restricted/*</url-pattern>
+  </filter-mapping>
+  
   <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/404.xhtml</location>

@@ -11,9 +11,14 @@ public class CadastroValidation {
 	
 	public Date converteData(String data){
 		//DateFormat read = new SimpleDateFormat("EEE MMM dd yyyy hh:mm aaa");
+		//Thu Dec 03 22:00:00 BRST 1987
 		SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-		String dia = data.substring(8, 9);
+		/*String dia = data.substring(8, 9);
 		String mes = data.substring(4, 6);
+		String ano = data.substring(24, 28);*/
+		String dia = data.substring(9, 11);
+		String mes = data.substring(5, 8);
+		//aqui está certo, último elemento é o 28
 		String ano = data.substring(24, 28);
 		
 		if(mes.equals("jan")){

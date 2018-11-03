@@ -21,7 +21,7 @@ public class Usuario implements Serializable {
 	private String cidade;
 	private String estado;
 	private String estados;
-	private Integer cep;
+	private String cep;
 	
 	//indica��o do Hibernate por annotations de 
 	//@Id --> chave prim�ria, @GeneratedValue --> valor gerado automaticamente, e nome e caracter�sticas 
@@ -124,11 +124,11 @@ public class Usuario implements Serializable {
 	
 	//|| estado.equals("  ") || estado.getClass().toString() != "String"
 	
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 }

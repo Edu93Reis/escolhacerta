@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.control.Usuario;
+import com.escolhacerta.managedBeans.CadastroManagedBean;
+import com.escolhacerta.managedBeans.LoginManagedBean;
 import com.escolhacerta.managedBeans.ProdutoManagedBean;
 import com.escolhacerta.model.CategoriaDAO;
 import com.escolhacerta.model.ProdutoDAO;
@@ -18,8 +20,16 @@ public class Testa {
 		Usuario usuario = new Usuario();
 		Produto produto = new Produto();
 		ProdutoManagedBean p = new ProdutoManagedBean();
-		//CadastroManagedBean c = new CadastroManagedBean();
+		CadastroManagedBean c = new CadastroManagedBean();
 		ProdutoDAO pd = new ProdutoDAO();
+		LoginManagedBean l = new LoginManagedBean();
+		
+		//System.out.println(c.getDebuga());
+		
+		u.loginUsuario();
+		//System.out.println(u.getUser());
+		l.autentica();
+		System.out.println(l.getUsuario().getNome() + l.getUsuario().getEmail());
 		
 		/*usuario.setNome("Oiasass");
 		usuario.setEmail("a@bc.com");
@@ -48,7 +58,7 @@ public class Testa {
 			//System.out.println(cD.getCategorias());
 			//p.inicializar();
 			//System.out.println(cD.getCategoria());
-			System.out.println(p.getCategorias());
+			//System.out.println(p.getCategorias());
 		/*}catch (Exception e){
 			System.out.println("Erro: ");
 			System.out.println(e.getMessage());
