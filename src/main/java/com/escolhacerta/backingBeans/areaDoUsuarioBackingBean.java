@@ -6,6 +6,7 @@ import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.component.html.HtmlForm;
 import javax.faces.component.html.HtmlInputSecret;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.component.html.HtmlSelectOneMenu;
 
 @SuppressWarnings("deprecation")
@@ -20,7 +21,19 @@ public class AreaDoUsuarioBackingBean {
 	private HtmlSelectOneMenu estado;
 	private HtmlCommandLink linkEmail, linkSenha, linkData, linkCPF, linkCidade, linkEstado, linkCep;
 	private HtmlCommandButton btnCadastro;
+	private HtmlPanelGrid prodCadastro;
 	private HtmlForm cadastroProduto;
+	
+	public void desativaCadastroProduto(){
+		if(this.prodCadastro.getId().equals("cadastroProduto")){
+			if(this.prodCadastro.getStyleClass().equals("disabled")){
+				this.prodCadastro.setStyleClass("");
+			}else{
+				this.prodCadastro.setStyleClass("disabled");
+			}
+		}
+	}
+	
 	
 	public void desativaEmail(){
 		if(this.email.isDisabled()){
@@ -186,8 +199,17 @@ public class AreaDoUsuarioBackingBean {
 	public HtmlForm getCadastroProduto() {
 		return cadastroProduto;
 	}
+	
 	public void setCadastroProduto(HtmlForm cadastroProduto) {
 		this.cadastroProduto = cadastroProduto;
 	}
 	
+	public HtmlPanelGrid getProdCadastro() {
+		return prodCadastro;
+	}
+
+	public void setProdCadastro(HtmlPanelGrid prodCadastro) {
+		this.prodCadastro = prodCadastro;
+	}
+
 }

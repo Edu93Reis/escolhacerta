@@ -1,0 +1,45 @@
+@font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot');
+   src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('glyphicons-halflings-regular.woff') format('woff'), url('glyphicons-halflings-regular.ttf') format('truetype'), url('glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+body{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.menu{
+	list-style: none;
+}
+.menu li{
+	position: relative;
+}
+
+li.drop{
+	padding: 2px;
+	text-decoration:none;
+	color: #000;		
+}
+ul.itens{
+	list-style:none;
+	border: 1px solid #099;
+	padding-right: 65px;
+	padding-bottom: 5px;
+}
+
+.menu li ul{
+	position: absolute;
+	top: 25px;
+	left: 0px;
+	background-color: #fff;
+	display: none;
+}
+
+.dropdown-toggle, .dropdown-toggle:hover{
+	color: #000;
+	padding: 10px;
+	text-decoration:none;
+}
+
+.menu li:hover ul, menu li.over ul {
+	display: block;
+}

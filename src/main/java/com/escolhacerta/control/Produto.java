@@ -6,23 +6,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/* indica��o de que esta � uma entidade da JPA (persistencia Java) */
-//@Entity
-/* Indica��o do Hibernate de qual ser� a tabela em que ser�o persistidos os dados */
-//@Table(name="produto")
 public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	private static final long serialVersionUID = -3295609497396391454L;
-	//add comentario
-	//@Id
-	//@GeneratedValue
 	private Integer idProduto;
+	private byte imagemProduto;
 	private String nmProduto;
 	private Integer idModelo;
 	private String modelo;
 	private String comentario;
 	private BigDecimal preco;
 	private Date dtCadastro;
-	private int idCategoria;
+	private Integer idCategoria;
 	
 	public static List<Produto> produtos;
 	
@@ -37,11 +31,20 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 		this.idProduto = idProduto;
 	}
 	
-	public String getNome() {
+	
+	public byte getImagemProduto() {
+		return imagemProduto;
+	}
+
+	public void setImagemProduto(byte imagemProduto) {
+		this.imagemProduto = imagemProduto;
+	}
+
+	public String getNmProduto() {
 		return nmProduto;
 	}
 	
-	public void setNome(String nmProduto) {
+	public void setNmProduto(String nmProduto) {
 		this.nmProduto = nmProduto;
 	}
 	
@@ -82,11 +85,11 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	public int getIdCategoria(){
+	public Integer getIdCategoria(){
 		return this.idCategoria;
 	}
 	
-	public void setIdCategoria(int idCategoria){
+	public void setIdCategoria(Integer idCategoria){
 		this.idCategoria = idCategoria;
 	}
 	

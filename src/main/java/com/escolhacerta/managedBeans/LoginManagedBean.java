@@ -1,6 +1,10 @@
 package com.escolhacerta.managedBeans;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -20,28 +24,35 @@ public class LoginManagedBean implements Serializable {
 	private static Usuario usuario;
 	private String email;
 	private String senha;
+	//private List<Usuario> listUser;
 	private UsuarioDAO u;
+	private Connection conn;
+	public static boolean log = false;
 	
+	//https://www.devmedia.com.br/jsf-session-criando-um-modulo-de-login/30975
 	public String autentica(){
+		//listUser = u.loginUsuario();
+		String url="";
+		boolean teste = u.loginUsuario(email, senha); 
 		try{
-			if(email.equals("edu") && senha.equals("123")){
+			//if(email.equalsIgnoreCase("edu") && senha.equalsIgnoreCase("123")){
+			if(teste == true){
 				usuario = new Usuario();
 				
-				usuario.setNome("Edu");
-				usuario.setEmail("Edu");
-				usuario.setSenha("123");
+				//usuario = u.getLoggedUser(email);
 				
-				return "/restricted/areadousuario.xhtml?faces-redirect=true";
-				//return "/areadousuario.xhtml?faces-redirect=true";
+				//return "/restricted/areadousuario.xhtml?faces-redirect=true";
+				url = "/restricted/areadousuario.xhtml?faces-redirect=true";
 			}
 			FacesContext context = FacesContext.getCurrentInstance();
-			if(!(email.equals("edu"))){
+			//if(!(email.equals("Edu"))){
+			/*if(!(email.equals())){
 				FacesUtil.failure("Email incorreto!");
 			}else if(!(senha.equals("123"))){
 				FacesUtil.failure("Senha incorreta!");
-			}
+			}*/
 			
-			return null;
+			return url;
 		}catch(Exception e){
 			throw new RuntimeException("Erro ao logar: ", e);
 		}

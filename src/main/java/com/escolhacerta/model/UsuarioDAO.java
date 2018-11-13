@@ -16,6 +16,8 @@ public class UsuarioDAO {
 	private Usuario usuario = new Usuario();
 	private CadastroValidation cv = new CadastroValidation();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private int id = 0;
+	private String nome, email, senha;
 	/*private List<String> ids = new ArrayList<String>();
 	private List<String> emails = new ArrayList<String>();
 	private List<String> senhas = new ArrayList<String>();*/
@@ -65,28 +67,81 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void loginUsuario(){
+	public boolean loginUsuario(String email, String senha){
+		boolean res = false;
 		try{
-			PreparedStatement stmt = conn.prepareStatement("select * FROM usuario");
+			PreparedStatement stmt = conn.prepareStatement("select emailUsuario, idPassword FROM usuario "
+					+ "where emailUsuario =? and idPassword =?");
+			
+			stmt.setString(1, email);
+			stmt.setString(2, senha);
+			
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
-				//construir usuarios
-				usuario.setIdUser(rs.getInt("idUsuario"));
-				usuario.setEmail(rs.getString("emailUsuario"));
-				usuario.setNome(rs.getString("nmUsuario"));
-				usuario.setSenha(rs.getString("idPassword"));
-				usuario.setNasc(rs.getDate("dtNasc"));
-				usuario.setCPF(rs.getString("cdCPF"));
-				usuario.setCidade(rs.getString("nmCidade"));
-				usuario.setEstado(rs.getString("nmEstado"));
-				usuario.setCep(rs.getString("cdCep"));
-				usuarios.add(usuario);
+			
+			if(rs.next()){				
+				res = true;
 			}
+			
+			stmt.close();
+			rs.close();
 		}catch (SQLException ex){
 			throw new RuntimeException(ex);
+		} 
+		return res;
+	}
+	
+	public Usuario getLoggedUser(String email){
+		Usuario loggedUser = null;
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM usuario WHERE emailUsuario = ?");
+			
+			stmt.setString(1, email);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				int idU = rs.getInt(1);
+				loggedUser.setIdUser(idU);
+				String emailU = rs.getString(2); 
+				loggedUser.setEmail(emailU);
+				String nomeU = rs.getString(3); 
+				loggedUser.setNome(nomeU);
+				String senhaU = rs.getString(4); 
+				loggedUser.setSenha(senhaU);
+				String cpfU = rs.getString(5); 
+				loggedUser.setCPF(cpfU);
+				Date nascU = rs.getDate(6); 
+				loggedUser.setNasc(nascU);
+				String cidadeU = rs.getString(8); 
+				loggedUser.setCidade(cidadeU);
+				String estadoU = rs.getString(7); 
+				loggedUser.setEstado(estadoU);
+				String cepU = rs.getString(9); 
+				loggedUser.setCep(cepU);
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch(SQLException ex){
+			throw new RuntimeException(ex);
 		}
+		return loggedUser;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void deleta(String login) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("delete from usuario where login=?");
+			stmt.setString(1, login);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public List<Usuario> getUser(){
 		return this.usuarios;
 	}

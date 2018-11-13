@@ -99,30 +99,50 @@
 		</div>
 	</div>
 
-
-
 	<!-- Menu de categorias -->
-	<div class="d-none d-sm-block">
+	<div class="d-none d-sm-block" id="nav">
 		<div class="fluid-continer">				
-			<ul>
+			<ul class="menu">
 				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
 				<h:form id="categoria">
-					<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">	
-						<li class="inline-items d-inline line-height: 1;" style="width: 190">
-						| #{categoria}
-						</li>						
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<a href="produtos.xhtml?q=#{fstcategoria}" style="text-decoration: none; color: black;">
+							<li class="inline-items d-inline line-height: 1;" style="width: 190; float:left; padding: 2px;">
+								| #{fstcategoria}
+							</li>
+						</a>
 					</ui:repeat>
-					<!-- <h:commandButton value="Mais Categorias"
-								styleClass="btn dropdown-toggle" 
-								jsf:data-toggle="dropdown" 
-								jsf:aria-haspopup="true" 
-								jsf:aria-expanded="false">  -->
+					<li class="drop" style="float:left;">
+						<h:commandLink styleClass="dropdown-toggle"
+									   jsf:data-toggle="dropdown">
+							Mais categorias <span class="caret"></span>		
+						</h:commandLink>
+						<ul class="itens">
+							 <ui:repeat value="#{produtoManagedBean.sndCategories}" var="sndcategoria">
+								<a href="produtos.xhtml?q=#{sndcategoria}" style="text-decoration: none; color: black;">
+									<li>#{sndcategoria}</li>
+								</a>
+							</ui:repeat>
+						</ul>
+					</li>				   
+							
+				</h:form>
+			</ul>
+		</div>
+	</div>
+	<!--
+	Versão antiga menu
+	 <div class="d-none d-sm-block">
+		<div class="fluid-continer">				
+			<ul>
+				<h:form id="categoria">
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<li class="inline-items d-inline line-height: 1;" style="width: 190">
+							| #{fstcategoria}
+						</li>
+					</ui:repeat>
 																									
 					<li class="dropdown">
-						<!-- value="Mais Categorias"
-							 jsf:data-toggle="dropdown" 
-							 jsf:aria-haspopup="true" 
-							 jsf:aria-expanded="false" -->
 						<h:commandLink styleClass="dropdown-toggle"
 									   jsf:data-toggle="dropdown">
 							Mais categorias <span class="caret"></span>		
@@ -135,13 +155,9 @@
 					</li>				   
 							
 				</h:form>
-
-					
-								
 			</ul>
 		</div>
-	</div>
-
+	</div>-->
 
 
 	<!-- Área das pesquisas --> 

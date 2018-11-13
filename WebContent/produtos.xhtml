@@ -92,14 +92,48 @@
 		</div>
 	</div>
 	<!-- Menu de categorias -->
-	<div class="d-none d-sm-block">
+	<!-- Menu de categorias -->
+	<div class="d-none d-sm-block" id="nav">
+		<div class="fluid-continer">				
+			<ul class="menu">
+				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
+				<h:form id="categoria">
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<a href="produtos.xhtml?q=#{fstcategoria}" style="text-decoration: none; color: black;">
+							<li class="inline-items d-inline line-height: 1;" style="width: 190; float:left; padding: 2px;">
+								| #{fstcategoria}
+							</li>
+						</a>
+					</ui:repeat>
+					<li class="drop" style="float:left;">
+						<h:commandLink styleClass="dropdown-toggle"
+									   jsf:data-toggle="dropdown">
+							Mais categorias <span class="caret"></span>		
+						</h:commandLink>
+						<ul class="itens">
+							 <ui:repeat value="#{produtoManagedBean.sndCategories}" var="sndcategoria">
+							 	<a href="produtos.xhtml?q=#{sndcategoria}" style="text-decoration: none; color: black;">
+									<li>#{sndcategoria}</li>
+								</a>
+							</ui:repeat>
+						</ul>
+					</li>				   
+							
+				</h:form>
+			</ul>
+		</div>
+	</div>
+	
+	<!--<div class="d-none d-sm-block">
 		<div class="fluid-continer">				
 			<ul>
-				<ui:repeat var="categoria" value="#{categoriasBean.categorias}" >
-					<li class="inline-items d-inline line-height: 1;">
-						| #{produtoManagedBean.getCategoria()}
-					</li>					
-					<div class="btn-group">
+				<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<li class="inline-items d-inline line-height: 1;" style="width: 190">
+							| #{fstcategoria}
+						</li>
+				</ui:repeat>
+				
+				<div class="btn-group">
 					<h:form id="categoria">						
 						<h:commandButton value="Mais Categorias"
 							styleClass="btn dropdown-toggle" 
@@ -118,10 +152,9 @@
 						</ul>
 					</h:form>
 					</div>					
-				</ui:repeat>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 	
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="container" style="overflow: auto;">
@@ -131,6 +164,36 @@
 	</h2>		
 	
 		<h:form id="produto">
+		
+		<!-- Teste visual novo do produto -->
+			<div class="row" style="width: 285px; 
+									border: 1px solid #B4CDCD; 
+									padding: 15px 5px; 
+									border-collapse:separate;
+											   -webkit-border-radius: 25px;
+										       -moz-border-radius: 25px;
+										            border-radius: 25px;
+									margin-bottom: 2px;
+										 	box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
+										 	-moz-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
+										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <div style="width: 242px; height: 200px; background: blue; 
+							 border-radius: 5px; float:left;
+							 padding-right: 5px;">
+							<h:graphicImage value="/resources/" />
+				  </div>
+			      <div class="caption">
+			        <h3>Nome Produto</h3>
+			        <p>Modelo</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+		
+		<!-- fim -->
 			<h:dataTable rows="1" style="border: 1px solid blue;
 										 border-collapse:separate;
 											   -webkit-border-radius: 25px;

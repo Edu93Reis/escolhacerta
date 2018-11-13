@@ -42,7 +42,26 @@ h:body{
 			aside b {
 				color: blue;		
 				font-weight: normal;		
-			}			
+			}		
+			
+			.disabled{
+				color: #999;
+				padding: 2px;
+			}
+			
+			.enable{
+				color: yellow;
+				padding: 2px;
+			}
+			
+			.one:hover{
+				color:yellow;
+			}
+			
+			.one, .two:hover{
+				color:yellow;
+			}
+				
 			footer{
 				height: 10vh;
 			}

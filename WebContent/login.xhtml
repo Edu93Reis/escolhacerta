@@ -103,24 +103,46 @@
 	<!-- Menu de categorias -->
 	<div class="d-none d-sm-block" id="nav">
 		<div class="fluid-continer">				
-			<ul>
+			<ul class="menu">
 				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
-					<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">	
+				<h:form id="categoria">
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<a href="produtos.xhtml?q=#{fstcategoria}" style="text-decoration: none; color: black;">
+							<li class="inline-items d-inline line-height: 1;" style="width: 190; float:left; padding: 2px;">
+								| #{fstcategoria}
+							</li>
+						</a>
+					</ui:repeat>
+					<li class="drop" style="float:left;">
+						<h:commandLink styleClass="dropdown-toggle"
+									   jsf:data-toggle="dropdown">
+							Mais categorias <span class="caret"></span>		
+						</h:commandLink>
+						<ul class="itens">
+							<ui:repeat value="#{produtoManagedBean.sndCategories}" var="sndcategoria">
+								<a href="produtos.xhtml?q=#{sndcategoria}" style="text-decoration: none; color: black;">
+										<li>#{sndcategoria}</li>
+								</a>
+							</ui:repeat>
+						</ul>
+					</li>				   
+							
+				</h:form>
+			</ul>
+		</div>
+	</div>
+	
+	<!--  <div class="d-none d-sm-block" id="nav">
+		<div class="fluid-continer">				
+			<ul>
+				<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
 						<li class="inline-items d-inline line-height: 1;" style="width: 190">
-						| #{categoria}
+							| #{fstcategoria}
 						</li>
 					</ui:repeat>
-					<!-- produtoManagedBean.categorias.forEach() -->
-					<!-- <h:dataTable value="#{produtoManagedBean.categorias}" var="categoria">
-							<h:column>
-								#{categoria}
-							</h:column>
-					</h:dataTable>  
-					 -->
-					
 								
 					<div class="btn-group">
-						<!-- <h:form id="categoria">						
+						<h:form id="categoria">						
 							<h:commandButton value="Mais Categorias"
 								styleClass="btn dropdown-toggle" 
 								jsf:data-toggle="dropdown" 
@@ -136,12 +158,11 @@
 									/>
 							   	</li>				   
 							</ul>
-						</h:form>  -->
+						</h:form>
 					</div>					
-				<!-- </ui:repeat>  -->
 			</ul>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Login --> 
 	<div class="modal-dialog" id="section">

@@ -17,11 +17,11 @@
   	<servlet-name>Faces Servlet</servlet-name>
   	<url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-  <!--<servlet-mapping>
+  <!-- <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>-->
-  <session-config>
+  </servlet-mapping>  -->
+  <session-config> 
         <session-timeout>15</session-timeout> <!-- Invalida a sessao em 15 minutos -->
         <tracking-mode>COOKIE</tracking-mode>
   </session-config>
@@ -29,7 +29,7 @@
         <welcome-file>/index.xhtml</welcome-file>
   </welcome-file-list>
   
-  <filter>
+  <!-- <filter>
   	<filter-name>LoginFilter</filter-name>
   	<filter-class>com.escolhacerta.filters.LoginFilter</filter-class>
   </filter>
@@ -37,12 +37,12 @@
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
   	<url-pattern>/restricted/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>  -->
   
   <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/404.xhtml</location>
-  </error-page>
+  </error-page> 
     
   <mime-mapping>
      <extension>ttf</extension>

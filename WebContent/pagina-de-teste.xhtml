@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Produto clicado - EscolhaCerta"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Teste - Escolha Certa</title>
+<h:outputStylesheet library="css" name="teste.css" />
+<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+  
+<!-- CSS do Bootstrap -->			  
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
+</h:head>
+<h:body>
+	
+	<!-- Menu de categorias -->
+	<div class="d-none d-sm-block">
+		<div class="fluid-continer">				
+			<ul class="menu">
+				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
+				<h:form id="categoria">
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<li class="inline-items d-inline line-height: 1;" style="width: 190; float:left; padding: 2px;">
+							| #{fstcategoria}
+						</li>
+					</ui:repeat>
+					<li class="drop" style="float:left;">
+						<h:commandLink styleClass="dropdown-toggle"
+									   jsf:data-toggle="dropdown">
+							Mais categorias <span class="caret"></span>		
+						</h:commandLink>
+						<ul class="itens">
+							 <ui:repeat value="#{produtoManagedBean.sndCategories}" var="sndcategoria">
+									<li>#{sndcategoria}</li>
+							</ui:repeat>
+						</ul>
+					</li>				   
+							
+				</h:form>
+			</ul>
+		</div>
+</div>
+		
+<!-- Javascript das dependências do Bootstrap -->			
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
+<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>		
+			
+<!-- <h:outputScript name="jquery.min.js" library="bootstrap/js" />
+<h:outputScript name="popper.min.js" library="js" />
+<h:outputScript name="bootstrap.min.js" library="js" />	 -->
+</h:body>
+</html>
