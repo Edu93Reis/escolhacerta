@@ -22,6 +22,10 @@ h:body{
 			aside.form input {
 				/*display: inline;*/
 			}
+			input.form-control{
+				display: inline-block;
+			}
+			
 			a.alteraDados{				
 				color:orange;
 				text-decoration: none;
@@ -77,6 +81,24 @@ h:body{
 				background-color: blue;				
 				display: inline;
 			}	
+			
+			/** Editando estrelas  **/
+			.disabled {
+				display: none;
+			}
+			
+			.stars label i:before {	
+				float: left;
+				display: inline;
+				content: '\f005';
+				color: yellow;
+			}
+			
+			
+			.disabled ~ .stars label i:before{
+				color: #999;
+			}
+			/** Editando estrelas  **/
 			
 			@media only screen and (max-width: 576px){
 				nav{

@@ -84,8 +84,8 @@ public class ProdutoDAO {
 			*/
 			
 			
-			String query = "insert into Produto (nmProduto, dsDescricao, idCategoria) values (?,?,?)" +
-					"insert into Modelo (nmModelo, cdPreco, pontuacao) values (?,?,?)";
+			String query = "insert into Produto (nmProduto, dsDescricao, idCategoria) values (?,?,?)";// +
+					//"insert into Modelo (nmModelo, cdPreco, pontuacao) values (?,?,?)";
 			
 			PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -93,9 +93,9 @@ public class ProdutoDAO {
 				pstmt.setString(1, produto.getNmProduto());
 				pstmt.setString(2, produto.getComent());
 				pstmt.setInt(3, produto.getIdCategoria());
-				pstmt.setString(4, produto.getModelo());
+				/*pstmt.setString(4, produto.getModelo());
 				pstmt.setBigDecimal(5, produto.getPreco());
-				pstmt.setInt(6, produto.getPontuacao());
+				pstmt.setInt(6, produto.getPontuacao());*/
 				
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -110,6 +110,26 @@ public class ProdutoDAO {
 		
 		//this.relacionaModelo(produto.getIdProduto(), idModelo);
 		//this.relacionaUsuario(idUsuario, idModelo);
+	}
+	
+	// grava no banco de dados toda a instancia de um objeto Usuario
+	public void adicionaModelo(Produto produto) {
+		try {
+			String query = "insert into Modelo (nmModelo, cdPreco, pontuacao) values (?,?,?)";
+			
+			PreparedStatement pstmt = conn.prepareStatement(query);
+
+			
+				pstmt.setString(1, produto.getModelo());
+				pstmt.setBigDecimal(2, produto.getPreco());
+				pstmt.setInt(3, produto.getPontuacao());
+				
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public void relacionaModelo(String idProduto, String idModelo){

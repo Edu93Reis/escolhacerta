@@ -1,7 +1,10 @@
 package br.com;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Produto;
@@ -30,16 +33,18 @@ public class Testa {
 		String valor = "600,00";
 		
 		//cat.setCategoria("Informática");
-		/*produto.setNmProduto("Celular Windws");
+		/*produto.setNmProduto("Celular Windows");
 		produto.setComent("Preço acessível, bastante memória. Defeitos: pouco suporte, muitos aplicativos não rodam.");
 		produto.setIdCategoria(2);
 		produto.setModelo("Windows Phone 450");
-		produto.setPreco(new BigDecimal(valor.replaceAll("\\.", "").replace(",", ".")));
-		produto.setPontuacao(3);*/
+		produto.setPreco(new BigDecimal("600.00"));
+		//produto.setPreco(new BigDecimal(valor.replaceAll("\\.", "").replace(",", ".")));
+		produto.setPontuacao(3);
 		
-		//pd.adiciona(produto);
+		pd.adiciona(produto);
+		pd.adicionaModelo(produto);*/
 		
-		System.out.println(p.getMediaPontuacao());
+		//System.out.println(p.getMediaPontuacao());
 		//System.out.println(pd.listarProdutoCategoria("Eletrônicos"));
 		//System.out.println(pd.getPrecos("Testinho"));
 		
@@ -50,16 +55,23 @@ public class Testa {
 		/*for(Usuario teste : u.loginUsuario()){
 			System.out.println(teste.getCPF());
 		}*/
-		/*usuario.setNome("Oiasass");
-		usuario.setEmail("a@bc.com");
-		usuario.setSenha("hajhaj");
-		//usuario.setNasc(1222/09/09);
-		usuario.setCep(00344050);
-		usuario.setCPF("091020192-20");
-		usuario.setCidade("opaoo");
-		usuario.setEstado("apaas");*/		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
-		//u.adiciona(usuario);
+		usuario.setNome("Son Goku");
+		usuario.setEmail("goku@bc.com");
+		usuario.setSenha("123");
+		try {
+			usuario.setNasc(formatter.parse("1987-12-02"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		usuario.setCep("00354150");
+		usuario.setCPF("081030192-20");
+		usuario.setCidade("Santos");
+		usuario.setEstado("São Paulo");		
+		
+		System.out.println(u.adiciona(usuario));
 		
 		//produto.setNome("Notebook Fatec");
 		//produto.setComent("Branco Fatec");
