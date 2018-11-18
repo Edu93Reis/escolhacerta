@@ -210,8 +210,8 @@ public class ProdutoDAO {
 	public List<Produto> listarProdutoCategoria(String nmCategoria) throws SQLException {
 		String sql = "SELECT Modelo.idModelo, Produto.nmProduto, Produto.dsDescricao, Produto.dtCadastro, Produto.idCategoria, "
 				+ "Categoria.nmCategoria, Modelo.nmModelo, Modelo.cdPreco, Modelo.pontuacao"+
-					 "FROM Produto join Categoria join Modelo WHERE Categoria.nmCategoria = ?" +
-				     "and Produto.idCategoria = Categoria.idCategoria";
+					 "FROM Produto inner join Categoria inner join Modelo ON Categoria.nmCategoria = ?" +
+				     "WHERE Produto.idCategoria = Categoria.idCategoria";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		Produto p;

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 //import javax.annotation.ManagedBean;
 import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ManagedProperty;
@@ -46,7 +47,7 @@ public class ProdutoManagedBean {
 	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
 	private List<Produto> fstProdutos = new ArrayList<Produto>();
 	private List<Produto> lstProdutos = new ArrayList<Produto>();
-	private BigDecimal mediaPrecos;
+	private BigDecimal mediaPrecos = new BigDecimal("0.0");
 	private int mediaPontuacao = 0;
 	private Categoria categoria;
 	//vindos de cadastroMB
@@ -192,14 +193,15 @@ public class ProdutoManagedBean {
 	public BigDecimal getMediaPrecos(){
 		try{
 			//getPrecos() recebe nomeDoProduto 
-			this.precos = produtoDAO.getPrecos("Teste"); 
-			//this.precos.addAll(produtoDAO.getPrecos("Teste"));
+			//this.precos = produtoDAO.getPrecos("Teste"); 
+			this.precos.addAll(produtoDAO.getPrecos("Teste"));
 			
 			for(BigDecimal preco: this.precos){
-				mediaPrecos.add(preco);
+				//mediaPrecos.add(valor) nao funciona, é preciso usar atribuição
+				mediaPrecos = mediaPrecos.add(preco);
 			}
 			
-			//mediaPrecos = mediaPrecos.divide(new BigDecimal(String.valueOf(this.precos.size())), 2, RoundingMode.HALF_EVEN);
+			mediaPrecos = mediaPrecos.divide(new BigDecimal(String.valueOf(this.precos.size())), 2, RoundingMode.HALF_EVEN);
 			//pontuacao perdendo precisao
 			
 			return mediaPrecos;
