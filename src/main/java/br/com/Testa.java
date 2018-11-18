@@ -55,7 +55,7 @@ public class Testa {
 		/*for(Usuario teste : u.loginUsuario()){
 			System.out.println(teste.getCPF());
 		}*/
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 		usuario.setNome("Son Goku");
 		usuario.setEmail("goku@bc.com");
@@ -71,7 +71,16 @@ public class Testa {
 		usuario.setCidade("Santos");
 		usuario.setEstado("São Paulo");		
 		
-		System.out.println(u.adiciona(usuario));
+		System.out.println(u.adiciona(usuario)); */
+		
+		//System.out.println(p.getProdutosCategoria("Celulares"));
+		
+		System.out.println(p.getMediaPrecos());
+		//System.out.println(p.getMediaPontuacao());
+		//System.out.println(pd.getPontuacao("Teste"));
+		//System.out.println(pd.getPrecos("Teste"));
+		
+		//System.out.println(pd.listarProdutoCategoria("Celulares"));
 		
 		//produto.setNome("Notebook Fatec");
 		//produto.setComent("Branco Fatec");

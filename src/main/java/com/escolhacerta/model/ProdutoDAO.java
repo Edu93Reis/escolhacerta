@@ -21,7 +21,8 @@ public class ProdutoDAO {
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private List<Produto> produtoCategoria = new ArrayList<Produto>();
 	private HtmlCommandLink btnCategoria;
-	private List<BigDecimal> precos;
+	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
+	private List<Integer> pontuacao = new ArrayList<Integer>();
 	
 	public ProdutoDAO()  {
 		//construtor abre a conexão
@@ -162,16 +163,16 @@ public class ProdutoDAO {
 		}
 	}
 	
-	public List<BigDecimal> getPrecos(String nmModelo){
-		String sql = "SELECT cdPreco FROM modelo WHERE nmModelo = ?";
+	public List<BigDecimal> getPrecos(String nmProduto){
+		String sql = "SELECT cdPreco FROM modelo as m join Produto as p WHERE nmProduto = ?";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, nmModelo);
+			stmt.setString(1, nmProduto);
 			ResultSet rs = stmt.executeQuery();
 			
-			Produto p = new Produto();
 			while(rs.next()){
+				Produto p = new Produto();
 				p.setPreco(rs.getBigDecimal("cdPreco"));
 				precos.add(p.getPreco());
 			}
@@ -184,17 +185,42 @@ public class ProdutoDAO {
 		return precos;
 	}
 	
-	public List<Produto> listarProdutoCategoria(String nmCategoria) throws SQLException {
-		String sql = "SELECT p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, c.nmCategoria, m.nmModelo, m.cdPreco, m.pontuacao"+
-					 "FROM Produto as p join Categoria as c join Modelo as m WHERE c.nmProduto = ?";
+	public List<Integer> getPontuacao(String nmProduto){
+		String sql = "SELECT pontuacao FROM modelo as m join Produto as p WHERE nmProduto = ?";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, nmProduto);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				Produto p = new Produto();
+				p.setPontuacao(rs.getInt("pontuacao"));
+				pontuacao.add(p.getPontuacao());
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}
+		return pontuacao;
+	}	
+	
+	public List<Produto> listarProdutoCategoria(String nmCategoria) throws SQLException {
+		String sql = "SELECT Modelo.idModelo, Produto.nmProduto, Produto.dsDescricao, Produto.dtCadastro, Produto.idCategoria, "
+				+ "Categoria.nmCategoria, Modelo.nmModelo, Modelo.cdPreco, Modelo.pontuacao"+
+					 "FROM Produto join Categoria join Modelo WHERE Categoria.nmCategoria = ?" +
+				     "and Produto.idCategoria = Categoria.idCategoria";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		Produto p;
+		try{
 			stmt.setString(1, nmCategoria);
 			ResultSet rs = stmt.executeQuery();
 			
-			Produto p = new Produto();
 			while(rs.next()){
+				p = new Produto();
 				p.setNmProduto(rs.getString("nmProduto"));
 				p.setComent(rs.getString("dsDescricao"));
 				p.setDtCadastro(rs.getDate("dtCadastro"));
@@ -209,10 +235,12 @@ public class ProdutoDAO {
 			rs.close();
 			stmt.close();
 			conn.close();
-		}catch(Exception ex){
-			throw new RuntimeException(ex);
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+			//throw new RuntimeException(ex);
 		}
 		
 		return produtoCategoria;
 	}
+	
 }

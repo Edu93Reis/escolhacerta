@@ -48,23 +48,27 @@ h:body{
 				font-weight: normal;		
 			}		
 			
-			.disabled{
-				color: #999;
-				padding: 2px;
+			/*** Edita pontuacao ***/
+			.stars input[type=radio]{
+				display: none;
 			}
 			
-			.enable{
+			.stars label i.fa-star:before{
+				content: '\f005';
+				color:yellow;
+			}
+			
+			.stars label i.fas:before{
+				/* \f005 é o código de identificacao das estrela no font-awesome */
+				content: '\f005';
 				color: yellow;
-				padding: 2px;
+				transition: all .15s;
 			}
 			
-			.one:hover{
-				color:yellow;
+			.stars input[type=radio]:checked ~ label i.fas:before{
+				color: #ccc;
 			}
-			
-			.one, .two:hover{
-				color:yellow;
-			}
+			/*** Edita pontuacao ***/
 				
 			footer{
 				height: 10vh;

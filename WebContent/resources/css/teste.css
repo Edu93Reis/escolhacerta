@@ -7,39 +7,17 @@ body{
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
-.menu{
-	list-style: none;
-}
-.menu li{
-	position: relative;
-}
-
-li.drop{
-	padding: 2px;
-	text-decoration:none;
-	color: #000;		
-}
-ul.itens{
-	list-style:none;
-	border: 1px solid #099;
-	padding-right: 65px;
-	padding-bottom: 5px;
-}
-
-.menu li ul{
-	position: absolute;
-	top: 25px;
-	left: 0px;
-	background-color: #fff;
+/*** Edita pontuacao ***/
+.stars input[type=radio]{
 	display: none;
 }
 
-.dropdown-toggle, .dropdown-toggle:hover{
-	color: #000;
-	padding: 10px;
-	text-decoration:none;
+.stars label i.fas:before{
+	content: '\f005';
+	color: yellow;
 }
 
-.menu li:hover ul, menu li.over ul {
-	display: block;
+.stars input[type=radio]:checked ~ label i.fas:before{
+	color: #ccc;
 }
+/*** Edita pontuacao ***/

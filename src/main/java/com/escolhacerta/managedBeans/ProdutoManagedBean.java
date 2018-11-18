@@ -2,6 +2,8 @@ package com.escolhacerta.managedBeans;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,8 @@ import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlCommandLink;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import com.escolhacerta.control.Categoria;
@@ -39,8 +43,10 @@ public class ProdutoManagedBean {
 	private List<String> fstcategorias = new ArrayList<String>();
 	private List<String> sndcategorias = new ArrayList<String>();
 	private List<Integer> avaliacoes = new ArrayList<Integer>();
+	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
 	private List<Produto> fstProdutos = new ArrayList<Produto>();
 	private List<Produto> lstProdutos = new ArrayList<Produto>();
+	private BigDecimal mediaPrecos;
 	private int mediaPontuacao = 0;
 	private Categoria categoria;
 	//vindos de cadastroMB
@@ -51,7 +57,7 @@ public class ProdutoManagedBean {
 	private String nomeProduto;
 	private Part imagemProduto;
 	private static int codProduto = 1;
-	private static int point = 0;
+	private int point = 0;
 	private HtmlCommandLink star;
 	
 	
@@ -60,6 +66,7 @@ public class ProdutoManagedBean {
 		this.produtos = new ArrayList<Produto>();
 		this.categorias = new ArrayList<String>();
 		this.categoria = new Categoria();
+		this.produtoDAO = new ProdutoDAO();
 		cd = new CategoriaDAO();
 	}
 	
@@ -149,6 +156,7 @@ public class ProdutoManagedBean {
 		}
 		
 		int idCategoria = 0; 
+		//point = valor recebido das estrelas 
 		
 		if(usuario != null){
 			produto.setIdCategoria(idCategoria);
@@ -164,21 +172,43 @@ public class ProdutoManagedBean {
 	
 	//recebe todas as pontuações de um produtoModelo e retorna sua média (médias são calculadas por modelo do produto)
 	public Integer getMediaPontuacao(){
-		this.avaliacoes.add(1); 
-		this.avaliacoes.add(2); 
-		this.avaliacoes.add(1); 
-		this.avaliacoes.add(4);
-		this.avaliacoes.add(5); 
-		this.avaliacoes.add(4);
+		try{
+			//this.avaliacoes = produtoDAO.getPontuacao("Teste");
+			this.avaliacoes.addAll(produtoDAO.getPontuacao("Teste")) ;
+			
+			for(Integer num: this.avaliacoes){
+				mediaPontuacao += num;
+			}
 		
-		for(Integer num: this.avaliacoes){
-			mediaPontuacao += num;
+			//mediaPontuacao = Math.round(mediaPontuacao/this.avaliacoes.size());
+			//pontuacao perdendo precisao
+			return mediaPontuacao/this.avaliacoes.size();
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+			return 0;
 		}
-		
-		//mediaPontuacao = Math.round(mediaPontuacao/this.avaliacoes.size());
-		//pontuacao perdendo precisao
-		return mediaPontuacao/this.avaliacoes.size();
 	}
+	
+	public BigDecimal getMediaPrecos(){
+		try{
+			//getPrecos() recebe nomeDoProduto 
+			this.precos = produtoDAO.getPrecos("Teste"); 
+			//this.precos.addAll(produtoDAO.getPrecos("Teste"));
+			
+			for(BigDecimal preco: this.precos){
+				mediaPrecos.add(preco);
+			}
+			
+			//mediaPrecos = mediaPrecos.divide(new BigDecimal(String.valueOf(this.precos.size())), 2, RoundingMode.HALF_EVEN);
+			//pontuacao perdendo precisao
+			
+			return mediaPrecos;
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+			return null;
+		}
+	}
+
 	
 	public List<Produto> getFstProduto(){
 		//lista que recebe todos os produtos cadastrados de uma categoria

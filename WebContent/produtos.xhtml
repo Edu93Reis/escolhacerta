@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="Retorno de pesquisa - produtos - EscolhaCerta"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>#{pesquisa.Input} - EscolhaCerta</title>
+<title>#{pesquisaManagedBean.identificador} - EscolhaCerta</title>
 <h:outputStylesheet library="css" name="produtos.css" />
 <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
   
@@ -155,29 +155,31 @@
 			</ul>
 		</div>
 	</div> -->
-	
+
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="container" style="overflow: auto;">
 	
-	<h2 style="color:blue; font-size: 30px; font-weight: heavy; padding: 5px;"> 
-		Sua busca retornou <h:outputText value=" ... quantidade vai aqui ... " /> resultados: 
+	<h2 style="color: #333; font-size: 22px; font-weight: heavy; padding: 2px; margin-top: 40;"> 
+		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultados: 
 	</h2>		
 	
 		<h:form id="produto">
 		
 		<!-- Teste visual novo do produto -->
 			<div class="row" style="width: 285px; 
-									border: 1px solid #B4CDCD; 
+									border: 1px solid #B4CDCD;
 									padding: 15px 5px; 
 									border-collapse:separate;
 											   -webkit-border-radius: 25px;
 										       -moz-border-radius: 25px;
 										            border-radius: 25px;
+								    margin-top: 40px;	            
 									margin-bottom: 2px;
 										 	box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
 										 	-moz-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
-										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">
+										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">			  					 	
 			  <div class="col-sm-6 col-md-4">
+			    <h3 style="color: blue; font-size: 22px; width: 240px;">Nome Produto</h3>		
 			    <div class="thumbnail">
 			      <div style="width: 242px; height: 200px; background: blue; 
 							 border-radius: 5px; float:left;
@@ -185,14 +187,11 @@
 							<h:graphicImage value="/resources/" />
 				  </div>
 			      <div class="caption">
-			        <h3>Nome Produto</h3>
-			        <p>Modelo</p>
+			        <p style="font-size: 18px; paddint-top: 4px;">Modelo</p>
 			      </div>
 			    </div>
 			  </div>
 			</div>
-		
-		
 		<!-- fim -->
 			<h:dataTable rows="1" style="border: 1px solid blue;
 										 border-collapse:separate;

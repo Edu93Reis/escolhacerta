@@ -20,15 +20,26 @@
 </h:head>
 <h:body>
 
-	<label for="um"><i class="fas fa-star"></i></label>
-	<input type="radio" id="um" name="um" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
-	<!-- <h:inputText jsf:type="number"
-							 id="pontuacao"		 
-							 styleClass="form-control"
-							 style="width: 85px;" 
-							 jsf:aria-describedby="sizing-addon3"  
-							 value="#{cadastroManagedBean.usuario.CPF}"
-							 required="true" />  -->
+<h:form enctype="multipart/form-data">
+	<div class="stars">
+		<input type="radio" id="empty" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+		<label for="one"><i class="fas fa-star"></i></label>
+		<input type="radio" id="one" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+		<label for="two"><i class="fas fa-star"></i></label>
+		<input type="radio" id="two" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+		<label for="three"><i class="fas fa-star"></i></label>
+		<input type="radio" id="three" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+		<label for="four"><i class="fas fa-star"></i></label>
+		<input type="radio" id="four" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+		<label for="five"><i class="fas fa-star"></i></label>
+		<input type="radio" id="five" name="star" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+	</div>
+</h:form>
+
+<p>Sua pesquisa retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s).</p>
+
+#{pesquisaManagedBean.identificador}
+
 <!-- Javascript das dependências do Bootstrap -->			
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>

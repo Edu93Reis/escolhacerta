@@ -364,7 +364,7 @@
 			<h:commandButton value="Liberar Cadastro" 
 							 styleClass="btn btn-default ml-5" style="float:left;"
 							 binding="#{cadastroBean.btnCadastro}"
-							 action="#{cadastroBean.desativaCadastroProduto}"/>
+							 actionListener="#{cadastroBean.desativaCadastroProduto}"/>
 	</div>
 	
 	<div style="margin-top: 15px;">
@@ -436,7 +436,7 @@
 						 value="#{produtoManagedBean.produto.idCategoria}"
 						 required="true"
 						 requiredMessage="Campo categoria é obrigatório!" />
-				<h:selectOneMenu id="categoria"									  		   
+				<!-- <h:selectOneMenu id="categoria"									  		   
 						 		 styleClass="form-control"
 						 		 style="width: 240px;" 
 						 		 jsf:aria-describedby="sizing-addon3" 
@@ -447,7 +447,7 @@
 								   var="categoria" 
 								   itemValue="#{categoria}" 
 								   itemLabel="#{categoria}" />
-				</h:selectOneMenu>
+				</h:selectOneMenu>  -->
 				<h:message for="categoria" 
 					   showSummary="True"
 					   showDetail="True" />
@@ -487,43 +487,34 @@
 			
 			<h:outputLabel value="Pontuacao: " style="font-weight: bold; color:blue;" />
 			<h:panelGroup>
+			<!-- 
+				<h:selectOneMenu value="#{produtoManagedBean.produto.pontuacao}">
+					<f:selectItem itemValue="0" itemLabel="empty" id="empty" name="star" styleClass="fas fa-star" />
+					<f:selectItem itemValue="1" itemLabel="one" id="one" name="star" styleClass="fas fa-star" />
+					<f:selectItem itemValue="2" itemLabel="two" id="two" name="star" styleClass="fas fa-star" />
+					<f:selectItem itemValue="3" itemLabel="three" id="three" name="star" styleClass="fas fa-star" />
+					<f:selectItem itemValue="4" itemLabel="four" id="four" name="star" styleClass="fas fa-star" />
+					<f:selectItem itemValue="5" itemLabel="five" id="five" name="star" styleClass="fas fa-star" />
+				</h:selectOneMenu>
+			 -->
+			
 				<div class="stars"
 					 id="pontuacao" 
 					 style="font-weight: heavy; 
 					 padding: 2px; width: 117px;
 					 border: 1px solid blue;">
-					 <!-- alguma coisa criando tabela aqui no meio (emoji pensante :/) -->
-					 			<h:selectOneRadio id="vazio"
-					 						   	  action="#{produtoManagedBean.produto.pontuacao}" 
-					 						      styleClass="fas fa-star disabled" 
-					 							  value="" 
-					 							  checked="true" />
-					 			<label for="one"><i class="fas fa-star"></i></label>				  
-					 			<h:selectOneRadio id="one"
-					 						   	  action="#{produtoManagedBean.produto.pontuacao}"
-					 						   	  styleClass="far fa-star disabled" 
-					 							  value="1" />
-					 			<label for="two"><i class="fas fa-star"></i></label>					  
-					 			<h:selectOneRadio id="two"
-					 						   action="#{produtoManagedBean.produto.pontuacao}" 
-					 						   styleClass="far fa-star disabled"
-					 						   value="2" />
-					 			<label for="three"><i class="fas fa-star"></i></label>				   
-					 			<h:selectOneRadio id="three" 
-					 						   action="#{produtoManagedBean.produto.pontuacao}"
-					 						   styleClass="far fa-star disabled"
-					 						   value="3" />
-					 			<label for="four"><i class="fas fa-star"></i></label>				   
-					 			<h:selectOneRadio id="four"
-					 					       action="#{produtoManagedBean.produto.pontuacao}" 
-					 						   styleClass="far fa-star disabled"
-					 						   value="4" />
-					 			<label for="five"><i class="fas fa-star"></i></label>	
-					 			<h:selectOneRadio id="five" 
-					 						   action="#{produtoManagedBean.produto.pontuacao}"
-					 						   styleClass="far fa-star disabled"
-					 						   value="5" />
-					 							</div>
+					 	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+						<label for="one"><i class="fas fa-star"></i></label>
+						<input type="radio" id="one" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="two"><i class="fas fa-star"></i></label>
+						<input type="radio" id="two" name="star" jsf:itemValue="2" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="three"><i class="fas fa-star"></i></label>
+						<input type="radio" id="three" name="star" jsf:itemValue="3" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="four"><i class="fas fa-star"></i></label>
+						<input type="radio" id="four" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="five"><i class="fas fa-star"></i></label>
+						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+				</div>
 				<h:message for="pontuacao" 
 						   showSummary="True"
 						   showDetail="True" />							
