@@ -5,12 +5,14 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Produto;
 import com.escolhacerta.control.Usuario;
 import com.escolhacerta.managedBeans.CadastroManagedBean;
 import com.escolhacerta.managedBeans.LoginManagedBean;
+import com.escolhacerta.managedBeans.PesquisaManagedBean;
 import com.escolhacerta.managedBeans.ProdutoManagedBean;
 import com.escolhacerta.model.CategoriaDAO;
 import com.escolhacerta.model.ProdutoDAO;
@@ -26,6 +28,7 @@ public class Testa {
 		Produto produto = new Produto();
 		ProdutoManagedBean p = new ProdutoManagedBean();
 		CadastroManagedBean c = new CadastroManagedBean();
+		PesquisaManagedBean pes = new PesquisaManagedBean();
 		ProdutoDAO pd = new ProdutoDAO();
 		LoginManagedBean l = new LoginManagedBean();
 		
@@ -73,15 +76,30 @@ public class Testa {
 		
 		System.out.println(u.adiciona(usuario)); */
 		
-		//System.out.println(p.getProdutosCategoria("Celulares"));
+		//System.out.println(pes.getProdutosCategoria("Celulares"));
 		
-		System.out.println(p.getMediaPrecos());
+		//System.out.println(p.getMediaPrecos());
 		//System.out.println(p.getMediaPontuacao());
 		//System.out.println(pd.getPontuacao("Teste"));
 		//System.out.println(pd.getPrecos("Teste"));
 		
-		//System.out.println(pd.listarProdutoCategoria("Celulares"));
-		
+		try{
+		/*	List<Produto> prod = pd.listarProdutoCategoria("Celulares");
+			
+			if("".equals(prod) || !(prod.isEmpty()) ){
+				for(Produto pdt : prod){
+					System.out.println(pdt.getNmProduto());
+					System.out.println(pdt.getComent());
+					System.out.println(pdt.getDtCadastro());
+					System.out.println(pdt.getPontuacao());
+				}
+			}*/
+			System.out.println(pes.getProdutosCategoria());
+			//System.out.println(pd.listarProdutoCategoria("Celulares"));
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
+	
 		//produto.setNome("Notebook Fatec");
 		//produto.setComent("Branco Fatec");
 		//produto.setDtCadastro('2018-02-08');

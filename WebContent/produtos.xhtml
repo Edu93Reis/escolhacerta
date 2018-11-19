@@ -92,7 +92,6 @@
 		</div>
 	</div>
 	<!-- Menu de categorias -->
-	<!-- Menu de categorias -->
 	<div class="d-none d-sm-block" id="nav">
 		<div class="fluid-continer">				
 			<ul class="menu">
@@ -162,9 +161,8 @@
 	<h2 style="color: #333; font-size: 22px; font-weight: heavy; padding: 2px; margin-top: 40;"> 
 		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultados: 
 	</h2>		
-	
 		<h:form id="produto">
-		
+		<ui:repeat value="#{pesquisaManagedBean.produtosCategoria}" var="produto">
 		<!-- Teste visual novo do produto -->
 			<div class="row" style="width: 285px; 
 									border: 1px solid #B4CDCD;
@@ -177,76 +175,31 @@
 									margin-bottom: 2px;
 										 	box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
 										 	-moz-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
-										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">			  					 	
+										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
+									margin-right: 35px;
+									float: left;">			  					 	
 			  <div class="col-sm-6 col-md-4">
-			    <h3 style="color: blue; font-size: 22px; width: 240px;">Nome Produto</h3>		
+			    <h3 style="color: blue; font-size: 22px; width: 240px;">
+			    	<h:outputText value="#{produto.nmProduto}" />
+			    </h3>		
 			    <div class="thumbnail">
 			      <div style="width: 242px; height: 200px; background: blue; 
 							 border-radius: 5px; float:left;
 							 padding-right: 5px;">
-							<h:graphicImage value="/resources/" />
+							<h:graphicImage value="/resources/#{produto.idModelo}.jpg" />
 				  </div>
 			      <div class="caption">
-			        <p style="font-size: 18px; paddint-top: 4px;">Modelo</p>
+			        <p style="font-size: 18px; paddint-top: 4px;">
+						<h:outputText value="#{produto.modelo}" />
+					</p>
 			      </div>
 			    </div>
 			  </div>
 			</div>
+		</ui:repeat>
 		<!-- fim -->
-			<h:dataTable rows="1" style="border: 1px solid blue;
-										 border-collapse:separate;
-											   -webkit-border-radius: 25px;
-										       -moz-border-radius: 25px;
-										            border-radius: 25px;
-										 width: 95%; 
-										 padding: 15px;
-										 margin-top: 5px;
-										 margin-bottom: 2px;
-										 	box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
-										 	-moz-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);
-										 	-webkit-box-shadow: 2px 3px 2px rgba(50,50,50, 0.4);">
-				<f:facet name="header">						 
-					<h2 style="color:blue; font-size: 21px; font-weight: heavy; padding: 2px;">
-						"Nome do Produto irá aqui"
-					</h2>
-				</f:facet>
-				<h:column>
-					<f:facet name="header" >
-						<div style="width: 120px; height: 120px; background: blue; 
-							 border-radius: 5px; float:left;
-							 padding-right: 5px;">
-							<h:graphicImage value="/resources/" />
-						</div>
-					</f:facet>
-				</h:column>
-				<h:column>
-					<f:facet name="header"> 
-							<div style="display: inline-block; color:white; 
-						 	  background: blue; font-weight: heavy; 
-						 	  font-size: 18px; padding: 3px; 
-						 	  margin-top: 5px; width: 100%;"> Nome: 
-						 	 </div>
-					</f:facet>
-					<f:facet name="header">
-							<div style="display: inline-block; color:white; 
-						 	  background: blue; font-weight: heavy; 
-						 	  font-size: 18px; padding: 3px; 
-						 	  margin-top: 5px; width: 100%;">
-						 	  Marca:
-						 	</div> 
-					</f:facet>
-					<f:facet name="header">
-							<div style="display: inline-block; color:white; 
-						 	  background: blue; font-weight: heavy; 
-						 	  font-size: 18px; padding: 3px; 
-						 	  margin-top: 5px; width: 100%;"> 
-						 	  Modelo: 
-						 	</div>
-				    </f:facet>
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</div>
+	</h:form>
+</div>
 		
 	<!-- footer -->
 	<!-- <div id="footer" class="nav-container">

@@ -208,10 +208,11 @@ public class ProdutoDAO {
 	}	
 	
 	public List<Produto> listarProdutoCategoria(String nmCategoria) throws SQLException {
-		String sql = "SELECT Modelo.idModelo, Produto.nmProduto, Produto.dsDescricao, Produto.dtCadastro, Produto.idCategoria, "
-				+ "Categoria.nmCategoria, Modelo.nmModelo, Modelo.cdPreco, Modelo.pontuacao"+
-					 "FROM Produto inner join Categoria inner join Modelo ON Categoria.nmCategoria = ?" +
-				     "WHERE Produto.idCategoria = Categoria.idCategoria";
+		String sql = "SELECT m.idModelo, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
+				+ "c.nmCategoria, m.nmModelo, m.cdPreco, m.pontuacao"+
+					 " FROM Produto p inner join Categoria c ON c.nmCategoria = ? and p.idCategoria = c.idCategoria" +
+				     " inner join Modelo m";
+		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		Produto p;
@@ -221,6 +222,8 @@ public class ProdutoDAO {
 			
 			while(rs.next()){
 				p = new Produto();
+				//p.setModelo(rs.getNString("nmModelo"));
+				p.setIdModelo(rs.getInt("idModelo"));
 				p.setNmProduto(rs.getString("nmProduto"));
 				p.setComent(rs.getString("dsDescricao"));
 				p.setDtCadastro(rs.getDate("dtCadastro"));

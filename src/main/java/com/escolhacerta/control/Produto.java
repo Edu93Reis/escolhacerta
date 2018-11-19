@@ -93,7 +93,13 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 		this.idCategoria = idCategoria;
 	}
 	
+	public Integer getIdModelo() {
+		return idModelo;
+	}
 	
+	public void setIdModelo(Integer idModelo) {
+		this.idModelo = idModelo;
+	}
 
 	@Override
 	public void pesquisa() {
