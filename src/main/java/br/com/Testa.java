@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.escolhacerta.control.Categoria;
@@ -26,6 +27,7 @@ public class Testa {
 		Categoria cat = new Categoria();
 		Usuario usuario = new Usuario();
 		Produto produto = new Produto();
+		List<Produto> lp = new ArrayList<Produto>();
 		ProdutoManagedBean p = new ProdutoManagedBean();
 		CadastroManagedBean c = new CadastroManagedBean();
 		PesquisaManagedBean pes = new PesquisaManagedBean();
@@ -47,9 +49,16 @@ public class Testa {
 		pd.adiciona(produto);
 		pd.adicionaModelo(produto);*/
 		
+		//System.out.println(p.getMediaPrecos());
 		//System.out.println(p.getMediaPontuacao());
-		//System.out.println(pd.listarProdutoCategoria("Eletrônicos"));
-		//System.out.println(pd.getPrecos("Testinho"));
+		//lp.addAll(pes.getProdutosCategoria());
+		//System.out.println(lp.get(1).getIdProduto());
+		//System.out.println(pes.getNome());
+		//System.out.println(pd.getNomeProduto(1));
+		//System.out.println(pd.listarProdutoId(1));
+		//System.out.println(pd.listarProdutoCategoria("Celulares"));
+		//System.out.println(pd.getPrecos("Celular Windows", "w-480"));
+		//System.out.println(pd.getPontuacao("Celular Windows", "w-480"));
 		
 		//System.out.println(u.loginUsuario("eu@eu.com", "123"));
 		//System.out.println(pd.getCategoria("Câmeras"));
@@ -94,21 +103,34 @@ public class Testa {
 					System.out.println(pdt.getPontuacao());
 				}
 			}*/
-			System.out.println(pes.getProdutosCategoria());
+			//System.out.println(pes.getProdutosCategoria());
+			//System.out.println(cD.listarAllCategoria());
 			//System.out.println(pd.listarProdutoCategoria("Celulares"));
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
 	
-		//produto.setNome("Notebook Fatec");
-		//produto.setComent("Branco Fatec");
-		//produto.setDtCadastro('2018-02-08');
-		/*produto.setModelo("AC1234");
-		produto.setPreco(new BigDecimal(2200.50));
-		produto.setPontuacao(4);
-		produto.setIdCategoria(1);
+		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 		
-		pd.adiciona(produto); */
+		
+		try {
+			java.util.Date d = data.parse("2018-02-08");
+			java.sql.Date da = new java.sql.Date(d.getTime());
+		
+			produto.setNmProduto("Notebook Fatec");
+			produto.setComent("Branco Fatec");
+			produto.setDtCadastro(da);
+			produto.setModelo("AC1234");
+			produto.setPreco(new BigDecimal(2200.50));
+			produto.setPontuacao(4);
+			produto.setIdCategoria(1);
+			
+			p.incluiProduto();
+		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//u.adiciona(usuario);
 		//try{
 			//System.out.println(

@@ -123,47 +123,16 @@
 		</div>
 	</div>
 	
-	<!--<div class="d-none d-sm-block">
-		<div class="fluid-continer">				
-			<ul>
-				<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
-						<li class="inline-items d-inline line-height: 1;" style="width: 190">
-							| #{fstcategoria}
-						</li>
-				</ui:repeat>
-				
-				<div class="btn-group">
-					<h:form id="categoria">						
-						<h:commandButton value="Mais Categorias"
-							styleClass="btn dropdown-toggle" 
-							jsf:data-toggle="dropdown" 
-							jsf:aria-haspopup="true" 
-							jsf:aria-expanded="false"							
-						/>
-																	
-						<ul class="dropdown-menu dropdown-menu-right">
-						   <li>
-						   		<h:commandLink value="#{categoriasBean.categoria}"
-									action="index_jsf"
-									styleClass="dropdown-item"
-								/>
-						   	</li>				   
-						</ul>
-					</h:form>
-					</div>					
-			</ul>
-		</div>
-	</div> -->
-
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="container" style="overflow: auto;">
 	
 	<h2 style="color: #333; font-size: 22px; font-weight: heavy; padding: 2px; margin-top: 40;"> 
-		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultados: 
+		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s): 
 	</h2>		
 		<h:form id="produto">
 		<ui:repeat value="#{pesquisaManagedBean.produtosCategoria}" var="produto">
 		<!-- Teste visual novo do produto -->
+		<a href="produto.xhtml?q=#{produto.idProduto}" style="text-decoration: none; color: black;">
 			<div class="row" style="width: 285px; 
 									border: 1px solid #B4CDCD;
 									padding: 15px 5px; 
@@ -186,7 +155,7 @@
 			      <div style="width: 242px; height: 200px; background: blue; 
 							 border-radius: 5px; float:left;
 							 padding-right: 5px;">
-							<h:graphicImage value="/resources/#{produto.idModelo}.jpg" />
+							<h:graphicImage value="/resources/img/produtos/#{produto.idProduto}.jpg" />
 				  </div>
 			      <div class="caption">
 			        <p style="font-size: 18px; paddint-top: 4px;">
@@ -196,6 +165,7 @@
 			    </div>
 			  </div>
 			</div>
+		</a>
 		</ui:repeat>
 		<!-- fim -->
 	</h:form>

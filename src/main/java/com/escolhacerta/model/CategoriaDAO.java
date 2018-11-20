@@ -13,6 +13,7 @@ import com.escolhacerta.util.ConnectionFactory;
 public class CategoriaDAO {
 	private Connection conn = null;
 	//private String categorias;
+	private List<Categoria> categoria = new ArrayList<Categoria>();
 	private List<String> categorias = new ArrayList<String>();
 	private List<String> fstcategories = new ArrayList<String>();
 	private List<String> sndcategories = new ArrayList<String>();
@@ -57,9 +58,29 @@ public class CategoriaDAO {
 			//conn.close();
 			
 			return categorias;
-			
-			//link ref
-			// https://www.devmedia.com.br/java-primefaces-criando-uma-tela-de-cadastro/31796
+		
+	}
+	
+	public List<Categoria> listarAllCategoria() throws SQLException {
+		String ctg = "SELECT * FROM categoria;";
+		PreparedStatement ps = conn.prepareStatement(ctg);
+		//Executa o comando de consulta aonde guarda os dados retornados dentro do ResultSet.
+		//Pelo fato de gerar uma lista de valores, é necessário percorrer os dados através do laço while
+		ResultSet rs = ps.executeQuery();
+		//Faz a verificação enquanto houverem registros, percorre e resgata os valores
+		while(rs.next()){				
+			Categoria c = new Categoria();
+			c.setIdCategoria(rs.getInt("idCategoria"));;
+			c.setCategoria(rs.getString("nmCategoria"));
+			categoria.add(c);
+		}
+		ps.execute();
+		rs.close();
+		ps.close();
+		//conn.close();
+		
+		return categoria;
+		
 	}
 	
 	

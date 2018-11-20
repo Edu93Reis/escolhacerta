@@ -23,6 +23,7 @@ public class ProdutoDAO {
 	private HtmlCommandLink btnCategoria;
 	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
 	private List<Integer> pontuacao = new ArrayList<Integer>();
+	private String nome;
 	
 	public ProdutoDAO()  {
 		//construtor abre a conexão
@@ -64,29 +65,11 @@ public class ProdutoDAO {
 	public void adiciona(Produto produto) {
 		//java.sql.Date nasc = new java.sql.Date(usuario.getNasc());
 		//this.usuario = usuario;
+		int idProduto = 0;
 		
 		try {
-			//"(nmProduto, dsDescricao, dtCadastro, nmModelo, cdPreco, pontuacao, idCategoria)"
-			/*PreparedStatement stmt = conn.prepareStatement("insert into produto "
-					+ "(nmProduto, nmMarca, nmModelo, cdPreco, dsDescricao, pontuacao, idCategoria)" + 
-										" values (?, ?, ?, ?, ?, ?, ?)");*/
-			/*PreparedStatement stmt = conn.prepareStatement("insert into produto "
-					+ "(nmProduto, nmModelo, cdPreco, dsDescricao, pontuacao, idCategoria)" + 
-										" values (?, ?, ?, ?, ?, ?)");*/
-			
-			/*
-				Preciso destes inserts:
-				
-				 INSERT INTO produto (nmProduto, dsDescricao, dtCadastro, idCategoria)
-					VALUES ('Teste', 'Teste maroto, Testando ...', default, 1);
-				 INSERT INTO modelo (nmModelo, cdPreco, pontuacao)
-					VALUES ('Testinho', 200.03, 5);
-				 
-			*/
-			
-			
-			String query = "insert into Produto (nmProduto, dsDescricao, idCategoria) values (?,?,?)";// +
-					//"insert into Modelo (nmModelo, cdPreco, pontuacao) values (?,?,?)";
+			String query = "insert into Produto (nmProduto, dsDescricao, idCategoria, nmModelo, cdPreco, pontuacao) "
+					+ "values (?,?,?,?,?,?)";
 			
 			PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -94,81 +77,55 @@ public class ProdutoDAO {
 				pstmt.setString(1, produto.getNmProduto());
 				pstmt.setString(2, produto.getComent());
 				pstmt.setInt(3, produto.getIdCategoria());
-				/*pstmt.setString(4, produto.getModelo());
+				pstmt.setString(4, produto.getModelo());
 				pstmt.setBigDecimal(5, produto.getPreco());
-				pstmt.setInt(6, produto.getPontuacao());*/
+				pstmt.setInt(6, produto.getPontuacao());
 				
 			pstmt.executeUpdate();
 			pstmt.close();
-			//cdstmt.executeUpdate();
-			//cdstmt.close();
+			
+			String id = "SELECT idProduto FROM Produto WHERE nmProduto = ?";
+			
+			PreparedStatement idstmt = conn.prepareStatement(id);
+			idstmt.setString(1, produto.getNmProduto());
+			ResultSet rs = idstmt.executeQuery();
+			
+			while(rs.next()){
+				idProduto = (rs.getInt("idProduto"));
+			}
+			
 			conn.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
 		//estou mexendo aqui
-		
-		//this.relacionaModelo(produto.getIdProduto(), idModelo);
-		//this.relacionaUsuario(idUsuario, idModelo);
+		this.relacionaUsuario(1, idProduto);
 	}
 	
-	// grava no banco de dados toda a instancia de um objeto Usuario
-	public void adicionaModelo(Produto produto) {
-		try {
-			String query = "insert into Modelo (nmModelo, cdPreco, pontuacao) values (?,?,?)";
-			
-			PreparedStatement pstmt = conn.prepareStatement(query);
-
-			
-				pstmt.setString(1, produto.getModelo());
-				pstmt.setBigDecimal(2, produto.getPreco());
-				pstmt.setInt(3, produto.getPontuacao());
-				
-			pstmt.executeUpdate();
-			pstmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public void relacionaModelo(String idProduto, String idModelo){
-		String query = "INSERT INTO modeloProduto (idProduto, idModelo) VALUES (?,?)";
-		
-		try{
-			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, idProduto);
-			stmt.setString(2, idModelo);
-			
-			stmt.executeUpdate();
-			stmt.close();
-		}catch (SQLException ex){
-			throw new RuntimeException(ex);
-		}
-	}
-	
-	public void relacionaUsuario(String idUsuario, String idProduto){
+	public void relacionaUsuario(int idUsuario, int idProduto){
 		String query = "INSERT INTO usuarioProduto (idProduto, idUsuario) VALUES (?,?)";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, idUsuario);
-			stmt.setString(2, idProduto);
+			stmt.setInt(1, idUsuario);
+			stmt.setInt(2, idProduto);
 			
 			stmt.executeUpdate();
 			stmt.close();
+			conn.close();
 		}catch (SQLException ex){
 			throw new RuntimeException(ex);
 		}
 	}
 	
-	public List<BigDecimal> getPrecos(String nmProduto){
-		String sql = "SELECT cdPreco FROM modelo as m join Produto as p WHERE nmProduto = ?";
+	public List<BigDecimal> getPrecos(String nmProduto, String nmModelo){
+		String sql = "SELECT cdPreco FROM Produto WHERE nmProduto like ? and nmModelo = ?";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nmProduto);
+			stmt.setString(2, nmModelo);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
@@ -185,12 +142,13 @@ public class ProdutoDAO {
 		return precos;
 	}
 	
-	public List<Integer> getPontuacao(String nmProduto){
-		String sql = "SELECT pontuacao FROM modelo as m join Produto as p WHERE nmProduto = ?";
+	public List<Integer> getPontuacao(String nmProduto, String nmModelo){
+		String sql = "SELECT pontuacao FROM Produto WHERE nmProduto like ? and nmModelo = ?";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nmProduto);
+			stmt.setString(2, nmModelo);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
@@ -207,11 +165,31 @@ public class ProdutoDAO {
 		return pontuacao;
 	}	
 	
+	
+	public String getNomeProduto(int idProduto){
+		String sql = "SELECT nmProduto FROM Produto WHERE idProduto = ?";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, idProduto);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				nome = rs.getString("nmProduto");
+			}
+			rs.close();
+			stmt.close();
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return nome;
+	}
+	
 	public List<Produto> listarProdutoCategoria(String nmCategoria) throws SQLException {
-		String sql = "SELECT m.idModelo, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
-				+ "c.nmCategoria, m.nmModelo, m.cdPreco, m.pontuacao"+
-					 " FROM Produto p inner join Categoria c ON c.nmCategoria = ? and p.idCategoria = c.idCategoria" +
-				     " inner join Modelo m";
+		String sql = "SELECT p.idProduto, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
+				+ "c.nmCategoria, p.nmModelo, p.cdPreco, p.pontuacao"+
+					 " FROM Produto p inner join Categoria c ON c.nmCategoria = ? and p.idCategoria = c.idCategoria";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
@@ -223,7 +201,49 @@ public class ProdutoDAO {
 			while(rs.next()){
 				p = new Produto();
 				//p.setModelo(rs.getNString("nmModelo"));
-				p.setIdModelo(rs.getInt("idModelo"));
+				p.setIdProduto(rs.getInt("idProduto"));
+				p.setNmProduto(rs.getString("nmProduto"));
+				p.setComent(rs.getString("dsDescricao"));
+				p.setDtCadastro(rs.getDate("dtCadastro"));
+				//adicionar nmCategoria ao produto, ou usar grande if com todas as opções de retorno por id
+				//p.setNmCategoria(rs.getInt("nmCategoria"));
+				p.setIdCategoria(rs.getInt("idCategoria"));
+				p.setModelo(rs.getString("nmModelo"));
+				p.setPreco(rs.getBigDecimal("cdPreco"));
+				p.setPontuacao(rs.getInt("pontuacao"));
+				produtoCategoria.add(p);
+			}
+			rs.close();
+			stmt.close();
+			//conn.close();
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+			//throw new RuntimeException(ex);
+		}
+		
+		return produtoCategoria;
+	}
+
+	
+	/** Recebe id do produto recuperado da url no ManagedBean faz o select **/
+	public List<Produto> listarProdutoId(int idProduto) throws SQLException {
+		String sql = "SELECT p.idProduto, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
+				+ "c.nmCategoria, p.nmModelo, p.cdPreco, p.pontuacao"+
+					 " FROM Produto p inner join Categoria c ON c.idCategoria = p.idCategoria and p.idProduto = ?";
+		
+		/*** Resgatar idModelo e idProduto registrado para o produto e aplicar **/
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		Produto p;
+		try{
+			stmt.setInt(1, idProduto);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				p = new Produto();
+				//p.setModelo(rs.getNString("nmModelo"));
+				p.setIdProduto(rs.getInt("idProduto"));
 				p.setNmProduto(rs.getString("nmProduto"));
 				p.setComent(rs.getString("dsDescricao"));
 				p.setDtCadastro(rs.getDate("dtCadastro"));
@@ -245,5 +265,5 @@ public class ProdutoDAO {
 		
 		return produtoCategoria;
 	}
-	
+
 }

@@ -11,7 +11,6 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 	private Integer idProduto;
 	private byte imagemProduto;
 	private String nmProduto;
-	private Integer idModelo;
 	private String modelo;
 	private String comentario;
 	private BigDecimal preco;
@@ -93,14 +92,6 @@ public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
 		this.idCategoria = idCategoria;
 	}
 	
-	public Integer getIdModelo() {
-		return idModelo;
-	}
-	
-	public void setIdModelo(Integer idModelo) {
-		this.idModelo = idModelo;
-	}
-
 	@Override
 	public void pesquisa() {
 		// TODO Auto-generated method stub

@@ -25,6 +25,10 @@ public class Categoria implements Serializable {
 		this.nomeCategoria = nomeCategoria;
 	}
 	
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+	
 	public Integer getId(){
 		return this.idCategoria;
 	}

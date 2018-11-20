@@ -40,7 +40,7 @@ public class ProdutoManagedBean {
 	private CategoriaDAO cd;
 	//private List<String> listaCategoria = new ArrayList<String>();
 	//@ManagedProperty(value = "#{categorias}")
-	private List<String> categorias;
+	private List<Categoria> categorias;
 	private List<String> fstcategorias = new ArrayList<String>();
 	private List<String> sndcategorias = new ArrayList<String>();
 	private List<Integer> avaliacoes = new ArrayList<Integer>();
@@ -65,9 +65,10 @@ public class ProdutoManagedBean {
 	//construtor
 	public ProdutoManagedBean(){
 		this.produtos = new ArrayList<Produto>();
-		this.categorias = new ArrayList<String>();
+		this.categorias = new ArrayList<Categoria>();
 		this.categoria = new Categoria();
 		this.produtoDAO = new ProdutoDAO();
+		this.produto = new Produto();
 		cd = new CategoriaDAO();
 	}
 	
@@ -78,7 +79,7 @@ public class ProdutoManagedBean {
 	}*/
 	
 	//retorna lista com o nome de todas as categorias armazenadas no Banco de Dados
-	public List<String> getCategorias() throws SQLException {
+	public List<Categoria> getCategorias() throws SQLException {
 		//List<String> listaCategoria = cd.listarCategoria();
 
 		/*for(String categoria : cd.listarCategoria()){
@@ -87,7 +88,7 @@ public class ProdutoManagedBean {
 			
 		//return listaCategoria;
 		try{
-			this.categorias = cd.listarCategoria();
+			this.categorias = cd.listarAllCategoria();
 			return categorias;
 		} catch(Exception ex){
 			FacesUtil.failure("Erro ao listar: " + ex);
@@ -156,12 +157,12 @@ public class ProdutoManagedBean {
 			int width = img.getWidth();*/
 		}
 		
-		int idCategoria = 0; 
+		//int idCategoria = 0; 
 		//point = valor recebido das estrelas 
 		
 		if(usuario != null){
-			produto.setIdCategoria(idCategoria);
-			produto.setPontuacao(point);
+			//produto.setIdCategoria(idCategoria);
+			//produto.setPontuacao(point);
 			produtoDAO.adiciona(produto);
 		
 			FacesUtil.success("Produto cadastrado com sucesso");
@@ -175,7 +176,7 @@ public class ProdutoManagedBean {
 	public Integer getMediaPontuacao(){
 		try{
 			//this.avaliacoes = produtoDAO.getPontuacao("Teste");
-			this.avaliacoes.addAll(produtoDAO.getPontuacao("Teste")) ;
+			this.avaliacoes.addAll(produtoDAO.getPontuacao("Celular Windows", "w-480")) ;
 			
 			for(Integer num: this.avaliacoes){
 				mediaPontuacao += num;
@@ -194,7 +195,7 @@ public class ProdutoManagedBean {
 		try{
 			//getPrecos() recebe nomeDoProduto 
 			//this.precos = produtoDAO.getPrecos("Teste"); 
-			this.precos.addAll(produtoDAO.getPrecos("Teste"));
+			this.precos.addAll(produtoDAO.getPrecos("Celular Windows", "w-480"));
 			
 			for(BigDecimal preco: this.precos){
 				//mediaPrecos.add(valor) nao funciona, é preciso usar atribuição

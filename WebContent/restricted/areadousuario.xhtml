@@ -27,134 +27,6 @@
 	<div class="link float-right pr-2"><a href="#" class="navbar-brand" action="areadousuario?faces-redirect=true" style="color: white;">Sair</a></div>
 </nav>
 <div class="row">
-	<!-- Cadastro mobile -->
-	<div class="d-block d-sm-none">
-		<h1 class="display-5 ml-5 mt-3">Cadastre-se</h1>
-		<div class="container ml-4">
-			<span role="presentation" class="active"><a href="#">Dados Cadastrados</a></span>
-			
-			<div class="list-group">
-				<h:form>
-				<p class="list-group-item">
-					Email: <h:inputText jsf:placeholder="Digite seu email ..."
-										jsf:type="email" 
-										styleClass="form-control"
-							  			jsf:aria-describedby="sizing-addon3" 
-							  			value="#{userArea.email}" />
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<p class="list-group-item">
-					Senha: <h:inputSecret jsf:placeholder="Digite sua senha ..."
-										  jsf:type="password" 
-										  styleClass="form-control" 
-										  jsf:aria-describedby="sizing-addon3" 
-										  value="#{userArea.senha}" />
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<p class="form-group">
-					<p class="list-group-item">Nasc.:</p>
-					<span class='input-group date' id='datetimepicker1'>				
-						<h:inputText jsf:placeholder="Digite seu nasc. ..."
-									 jsf:type="date" 
-									 styleClass="form-control" 
-									 value="#{userArea.nasc}" >
-							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</h:inputText>
-						<span class="input-group-addon">
-							<span class="fa fa-calendar"></span>
-						</span>
-					</span>
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<p class="list-group-item">	
-					CPF: <h:inputText jsf:placeholder="Digite seu CPF ..." 
-									  styleClass="form-control" 
-									  jsf:aria-describedby="sizing-addon3"  
-									  value="#{userArea.cpf}" />
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<p class="list-group-item">	Cidade: 
-					<h:inputText jsf:placeholder="Digite seu Cidade ..." 
-								 styleClass="form-control" 
-								 jsf:aria-describedby="sizing-addon3" 
-								 value="#{userArea.cidade}" />
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>								
-				<p class="list-group-item">
-					Estado:	
-					<h:selectOneMenu id="estado"
-												 styleClass="form-control col-md-4 col-lg-4"
-												 style="border: 1px solid blue;"
-												 required="true"
-												 requiredMessage="Selecione sua opção" 
-												 value="#{cadastroManagedBean.estados}">
-										<!-- #{cadastroManagedBean.usuario.estado} -->
-										<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
-										<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
-										<f:selectItem itemValue="Acre" itemLabel="Acre" />
-										<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
-										<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
-										<f:selectItem itemValue="Amazonas" itemLabel="Amazonas" />
-										<f:selectItem itemValue="Bahia" itemLabel="Bahia" />
-										<f:selectItem itemValue="Ceará" itemLabel="Ceará" />
-										<f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal" />
-										<f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo" />
-										<f:selectItem itemValue="Goiás" itemLabel="Goiás" />
-										<f:selectItem itemValue="Maranhão" itemLabel="Maranhão" />
-										<f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso" />
-										<f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul" />
-										<f:selectItem itemValue="Minas Gerais" itemLabel="Minas Gerais" />
-										<f:selectItem itemValue="Pará" itemLabel="Pará" />
-										<f:selectItem itemValue="Paraíba" itemLabel="Paraíba" />
-										<f:selectItem itemValue="Paraná" itemLabel="Paraná" />
-										<f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco" />
-										<f:selectItem itemValue="Piauí" itemLabel="Piauí" />
-										<f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro" />
-										<f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte" />
-										<f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul" />
-										<f:selectItem itemValue="Rondônia" itemLabel="Rondônia" />
-										<f:selectItem itemValue="Roraima" itemLabel="Roraima" />
-										<f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina" />
-										<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
-										<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
-										<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
-						</h:selectOneMenu> 								
-						<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<p class="list-group-item"> CEP:							
-					<h:inputText jsf:placeholder="Digite seu CEP ..."
-								 id="cep" 
-								 styleClass="form-control col-md-7 col-lg-7" 
-								 jsf:aria-describedby="sizing-addon3"  
-								 value="#{userArea.cep}" />
-					<h:link value="alterar" 
-							outcome=""
-							styleClass="alteradados" />
-				</p>
-				<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" class="btn btn-default" />
-			</h:form>
-		</div>
-		</div>
-		<div class="col-xs-4 col-offset-xs-4" aria-label="...">
-		  <ul class="pager">
-		    <li><a href="#"><span icon="far fa-circle"></span></a></li>
-		    <li><a href="#"><span icon="far fa-circle"></span></a></li>
-		  </ul>
-		</div>		
-	</div>
-	
 	<!-- Cadastro tablet and up -->
 	<aside class="form d-none d-sm-block col-xs-12 col-sm-8 col-md-8 col-lg-8 pb-5" style="overflow:auto;">			
 		<div role="main" class="">
@@ -356,20 +228,20 @@
 
 	<!-- Aqui começa o formulário que vocês devem editar -->
 	<!-- enctype="multipart/form-data" usado na preparação para envio de arquivos -->
-	<h:form id="ativaCadastro" enctype="multipart/form-data" style="margin: 35px;">
+	<h:form id="ativaCadastro" style="margin: 35px;">
 			<!-- Botão que deve liberar o formulário de cadastro -->
 			<!-- Talvez seja uma edição da classe display do css... Procurar como esconder e mostrar 
 			elemento html usando Javascript -->
-	<div style="width: 400px; height: 50px; margin: 0 auto;">
-			<h:commandButton value="Liberar Cadastro" 
-							 styleClass="btn btn-default ml-5" style="float:left;"
-							 binding="#{cadastroBean.btnCadastro}"
-							 actionListener="#{cadastroBean.desativaCadastroProduto}"/>
-	</div>
-	
+		<div style="width: 400px; height: 50px; margin: 0 auto;">
+				<h:commandButton value="Liberar Cadastro" 
+								 styleClass="btn btn-default ml-5" style="float:left;"
+								 binding="#{cadastroBean.btnCadastro}"
+								 actionListener="#{cadastroBean.desativaCadastroProduto}"/>
+		</div>
+	</h:form>
 	<div style="margin-top: 15px;">
 	<hr style="width:90%" />		
-	<!-- <h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" style="display:none;">  -->
+	<h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" enctype="multipart/form-data">
 		<!-- class="d-none" :: d-none é display none do Bootstrap -->
 		<!-- alinhar formulário, esse panelGrid é um elemento do JSF, 
 			collumns="2" faz com que cada a 2 elementos do formulário ele jogue os elementos para a linha de baixo 
@@ -428,15 +300,15 @@
 			
 			<h:outputLabel value="Categoria: " style="font-weight: bold; color:blue;" jsf:type="number" />
 			<h:panelGroup>
-				<h:inputText jsf:type="number"
+				<!-- <h:inputText jsf:type="number"
 						 id="categoria"									  		   
 						 styleClass="form-control"
 						 style="width: 65px;" 
 						 jsf:aria-describedby="sizing-addon3" 
 						 value="#{produtoManagedBean.produto.idCategoria}"
 						 required="true"
-						 requiredMessage="Campo categoria é obrigatório!" />
-				<!-- <h:selectOneMenu id="categoria"									  		   
+						 requiredMessage="Campo categoria é obrigatório!" />  -->
+				<h:selectOneMenu id="categoria"									  		   
 						 		 styleClass="form-control"
 						 		 style="width: 240px;" 
 						 		 jsf:aria-describedby="sizing-addon3" 
@@ -445,9 +317,9 @@
 					<f:selectItem itemValue="" itemLabel="Selecione categoria..." noSelectionOptions="true" />
 					<f:selectItems value="#{produtoManagedBean.categorias}" 
 								   var="categoria" 
-								   itemValue="#{categoria}" 
-								   itemLabel="#{categoria}" />
-				</h:selectOneMenu>  -->
+								   itemValue="#{categoria.id}" 
+								   itemLabel="#{categoria.categoria}" />
+				</h:selectOneMenu>
 				<h:message for="categoria" 
 					   showSummary="True"
 					   showDetail="True" />
@@ -523,13 +395,12 @@
 			<h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />
 			<!-- Esse botão irá cadastrar -->	
 			<h:commandButton value="Cadastrar Produto" id="cadastroBtn" 
-							 action="#{produtoManagedBean.incluiProduto}" 
+							 action="#{produtoManagedBean.incluiProduto()}" 
 							 update=":successMsg"
 							 styleClass="btn btn-default" style="float: right; margin-top: 5px;" />
 		</h:panelGrid>
-		</div>
 	</h:form>
-		
+</div>		
 		<!-- Aqui encerra o formulário que vocês devem editar -->
 		
 		

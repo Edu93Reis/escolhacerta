@@ -36,9 +36,25 @@ public class PesquisaManagedBean {
 		categoria = this.getIdentificador();
 		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();    
 		//categoria = request.getParameter("q");
-		
+		//categoria = "Celulares";
 		try{
 			produtos.addAll(produtoDAO.listarProdutoCategoria(categoria));
+			//this.setSizeProduto(produtos.size());
+		}catch(Exception ex){
+				throw new RuntimeException(ex);
+		}
+			
+		return produtos;
+	}
+	
+	public List<Produto> getProdutosId(){
+		categoria = this.getIdentificador();
+		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();    
+		//categoria = request.getParameter("q");
+		//categoria = "1";
+		
+		try{
+			produtos.addAll(produtoDAO.listarProdutoId(Integer.valueOf(categoria)));
 			//this.setSizeProduto(produtos.size());
 		}catch(Exception ex){
 				throw new RuntimeException(ex);
@@ -61,6 +77,7 @@ public class PesquisaManagedBean {
 		
 		return id;
 	}
+
 	
 	public int getSizeProduto(){
 		int size = 0;
@@ -73,6 +90,21 @@ public class PesquisaManagedBean {
 		}
 		
 		return size;
+	}
+	
+	/*public String getNome() {
+		return this.nome;
+	}*/
+	
+	public String getNome() {
+		//int cd = Integer.valueOf(this.getIdentificador());
+		int cd = 1;
+		Produto p = new Produto();
+		p.setNmProduto(produtoDAO.getNomeProduto(cd));
+		
+		String nome = p.getNmProduto();
+		
+		return nome;
 	}
 	
 	/*public void setSizeProduto(int size){

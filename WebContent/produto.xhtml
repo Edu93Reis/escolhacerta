@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="Produto clicado - EscolhaCerta"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>#{produto.Nome} - Escolha Certa</title>
+<title>#{pesquisaManagedBean.nome} - Escolha Certa</title>
 <h:outputStylesheet library="css" name="produto.css" />
 <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
   
@@ -92,102 +92,111 @@
 		</div>
 	</div>
 	<!-- Menu de categorias -->
-	<div class="d-none d-sm-block">
+	<div class="d-none d-sm-block" id="nav">
 		<div class="fluid-continer">				
-			<ul>
-				<ui:repeat var="categoria" value="#{categoriasBean.categorias}" >
-					<li class="inline-items d-inline line-height: 1;">
-						| #{produtoManagedBean.getCategoria()}
-					</li>					
-					<div class="btn-group">
-					<h:form id="categoria">						
-						<h:commandButton value="Mais Categorias"
-							styleClass="btn dropdown-toggle" 
-							jsf:data-toggle="dropdown" 
-							jsf:aria-haspopup="true" 
-							jsf:aria-expanded="false"							
-						/>
-																	
-						<ul class="dropdown-menu dropdown-menu-right">
-						   <li>
-						   		<h:commandLink value="#{categoriasBean.categoria}"
-									action="index_jsf"
-									styleClass="dropdown-item"
-								/>
-						   	</li>				   
+			<ul class="menu">
+				<!-- <ui:repeat var="categoria" value="#{produtoManagedBean.categorias}">  -->
+				<h:form id="categoria">
+					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
+						<a href="produtos.xhtml?q=#{fstcategoria}" style="text-decoration: none; color: black;">
+							<li class="inline-items d-inline line-height: 1;" style="width: 190; float:left; padding: 2px;">
+								| #{fstcategoria}
+							</li>
+						</a>
+					</ui:repeat>
+					<li class="drop" style="float:left;">
+						<h:commandLink styleClass="dropdown-toggle"
+									   jsf:data-toggle="dropdown">
+							Mais categorias <span class="caret"></span>		
+						</h:commandLink>
+						<ul class="itens">
+							 <ui:repeat value="#{produtoManagedBean.sndCategories}" var="sndcategoria">
+							 	<a href="produtos.xhtml?q=#{sndcategoria}" style="text-decoration: none; color: black;">
+									<li>#{sndcategoria}</li>
+								</a>
+							</ui:repeat>
 						</ul>
-					</h:form>
-					</div>					
-				</ui:repeat>
+					</li>				   
+							
+				</h:form>
 			</ul>
 		</div>
 	</div>
-	
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="fluid-container">
-	<div>
+<div>
 	
-	<div class="mt-4 ml-3" >
-		<h:panelGrid column="2" 
+  <div class="mt-4 ml-3" style="display: inline-block" >
+	<ui:repeat value="#{pesquisaManagedBean.produtosId}" var="produto">
+		<div id="prodImg" 
+			 style="width: 220px; height: 220px; 
+			 background: blue; 
+			 border-radius: 45px; float:left;"
+			 class="pb-4">
+			<h:graphicImage value="#{resquest.contextPath}/resources/img/produtos/#{produto.idProduto}.jpg"					
+							alt="#{produto.nmProduto}" />
+		</div>
+		<h:panelGrid column="1" 
 					 styleClass=""
-					 style="width: 60%; float:left;" >
-			
-			<f:facet name="header">
-				<h2 style="color:blue; font-size: 30px; font-weight: heavy; padding-bottom: 7px;">
-					Nome
+					 style="height: 220px; margi-left: 15px; width: 60%; float:left;" >
+			<f:facet name="header"
+					 styleClass="float-right pl-4" style="height: 220px; margin-left: 15px;">
+				<h2 style="color:blue; font-size: 30px; font-weight: heavy; padding-bottom: 3px; margin-left: 15px;">
+					#{produto.nmProduto}
 				</h2>
 			</f:facet>
-			
-			<div id="prodImg" 
-				 style="width: 220px; height: 220px; 
-				 background: blue; 
-				 border-radius: 45px; float:left;"
-				 class="pb-4">
-				<!-- <h:graphicImage value="/resources/img/logo-escolha-certa-mini.png"					
-							 alt="#{produto.nome}" /> -->
-			</div>
-			<div class="float-right pl-4" style="height: 220px">
-				<div style="display: inline-block; color:white; 
+			<f:facet name="header" 
+					 styleClass="float-right pl-4" style="margin-left: 15px;">
+				<p style="display: block; color:white; 
 					 background: blue; font-weight: heavy; 
 					 font-size: 21px; padding: 3px; 
-					 margin-top: 5px; width: 100%;">Marca: </div>
-				<div style="display: inline-block; color:white; 
+					 margin-top: 1px; margin-left: 15px; width:60%;">Modelo: <h:outputText value="#{produto.modelo}" /></p>
+			</f:facet>
+			<f:facet name="header" 
+					 styleClass="float-right pl-4" style="margin-left: 15px;">
+				<p style="display: block; color:white; 
 					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">Modelo:</div>
-				<div style="display: inline-block; color:white; 
+					 font-size: 21px; padding: 3px; 
+					 margin-top: 5px; margin-left: 15px; width:60%;">Comentário:
+					 <h:outputText value="#{produto.coment}" /></p>
+			</f:facet>
+			<f:facet name="header" 
+					 styleClass="float-right pl-4" style="margin-left: 15px;">
+				<p style="display: block; color:white; 
 					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">Preço médio: </div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 margin-top: 5px; width: 90%;">
-					 Faixa de preço: 
-				</div>
-				<div style="display: inline-block; color:white; 
-					 background: blue; font-weight: heavy; 
-					 font-size: 18px; padding: 3px; 
-					 width: 90%;"> 
-					 Preço: R$6,90
-					 <!-- <h:outputText value="R$6,90"> 
+					 font-size: 21px; padding: 3px; 
+					 margin-top: 5px; margin-left: 15px; width:60%;">
+					 Preço: 
+					 <h:outputText value="#{produto.preco}" >
+					 	<f:convertNumber type="currency" currentSymbol="R$" locale="pt_BR" />
+					 </h:outputText>	 
+				</p>
+			</f:facet>
+		</h:panelGrid>
+		<h:panelGrid column="2" 
+					  styleClass=""
+					  style="margin-left: 15px; height: 220px; width: 60%;">
+			<f:facet name="header"> 
+				 <p style="display: block; color: blue; 
+							border: 1px solid blue; font-weight: heavy; 
+							font-size: 18px; padding: 3px; 
+							width: 60%;">
+					 Faixa de Preço: 
+					 <h:outputText value="#{produtoManagedBean.mediaPrecos}" > 
 					 		<f:convertNumber type="currency" currentSymbol="R$" locale="pt_BR" />
-					 	  </h:outputText>
-					 Não fica na linha '¬¬ --> 
-				</div>
-			</div>
-			
-			<div style="width: 80%; margin-top: 10px;">
+					 </h:outputText>
+				 </p>
+			</f:facet>
 				<div id="comentarios" 
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
 					 		padding: 5px; margin-top: 10px;
 					 		width: 70%;">
-					<span>Comentários: </span>
+					<span>Comentários do modelo: </span>
 					<h:dataTable 
 							style="font-weight: heavy;
 					 	    color: blue; border: 1px solid blue;
-					 	    width: 56%; padding: 5px; float:left;">
+					 	    width: 56%; padding: 5px; float:left; display: inline-block;">
 						<h:column style="width: 50%; border: 1px solid blue; background: #339;">
 							<f:facet name="header"> + Relevantes</f:facet>
 							<h:outputText value="Aqui serão iterados os mais relevantes" />
@@ -197,7 +206,6 @@
 							<h:outputText value="Aqui serão iterados os menos relevantes" />
 						</h:column>
 					</h:dataTable>
-				</div>
 				<div id="avaliacao"
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
@@ -207,20 +215,27 @@
 						<h3 style="font-size: 16px;">Avaliação média:</h3>
 					</span>
 					<div class="stars"
+						 id="pontuacao" 
 						 style="font-weight: heavy;
 					 	    color: yellow; border: 1px solid blue; 
 					 		padding: 2px;">
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star"></i>
-					 			<i class="far fa-star-half"></i>
-					 			
+					 	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+						<label for="one"><i class="fas fa-star"></i></label>
+						<input type="radio" id="one" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="two"><i class="fas fa-star"></i></label>
+						<input type="radio" id="two" name="star" jsf:itemValue="2" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="three"><i class="fas fa-star"></i></label>
+						<input type="radio" id="three" name="star" jsf:itemValue="3" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="four"><i class="fas fa-star"></i></label>
+						<input type="radio" id="four" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="five"><i class="fas fa-star"></i></label>
+						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
 					</div>			
 				</div>
 			</div>
 		</h:panelGrid>	
-	</div>
+	</ui:repeat>
+</div>
 	
 	<!-- Aqui começa o Aside -->
 	
@@ -252,7 +267,7 @@
 					</h:column>
 				</h:dataTable>
 			</form>
-	</div>
+	 </div>
 </div>
 </div>
 		

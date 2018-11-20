@@ -6,85 +6,80 @@
 h:body{
 	color: blue;
 	overflow-x: hidden;
-	overflow-y: hidden;	
+	overflow-y: hidden;
 }
 			
-			h1 {
-				color: blue;
-				font-size: 26px;
-			}
+h1 {
+	color: blue;
+	font-size: 26px;
+}
+
+aside.form p {
+	color: blue;
+	font-weight: bold;				
+}
 			
-			aside.form p {
-				color: blue;
-				font-weight: bold;				
-			}
-			
-			aside.form input {
-				/*display: inline;*/
-			}
-			input.form-control{
-				display: inline-block;
-			}
-			
-			a.alteraDados{				
-				color:orange;
-				text-decoration: none;
-			}
-			a.alteraDados:hover{				
-				color:orange !important;
-				text-decoration: none;
-			}
-			aside.form{
-				height: 100vh;				
-			}
-			
-			aside.presentation{
-				background-color:orange;
-				color: white;
-				height: 100vh;
-			}
-			aside b {
-				color: blue;		
-				font-weight: normal;		
-			}		
-			
-			/*** Edita pontuacao ***/
-			.stars input[type=radio]{
-				display: none;
-			}
-			
-			.stars label i.fa-star:before{
-				content: '\f005';
-				color:yellow;
-			}
-			
-			.stars label i.fas:before{
-				/* \f005 é o código de identificacao das estrela no font-awesome */
-				content: '\f005';
-				color: yellow;
-				transition: all .15s;
-			}
-			
-			.stars input[type=radio]:checked ~ label i.fas:before{
-				color: #ccc;
-			}
-			/*** Edita pontuacao ***/
+aside.form input {
+	/*display: inline;*/
+}
+input.form-control{
+	display: inline-block;
+}
+a.alteraDados{				
+	color:orange;
+	text-decoration: none;
+}
+a.alteraDados:hover{				
+	color:orange !important;
+	text-decoration: none;
+}
+aside.form{
+	height: 100vh;				
+}
+aside.presentation{
+	background-color:orange;
+	color: white;
+	height: 100vh;
+}
+aside b {
+	color: blue;		
+	font-weight: normal;		
+}		
+
+/*** Edita pontuacao ***/
+.stars input[type=radio]{
+	display: none;
+}
+.stars label i.fa-star:before{
+	content: '\f005';
+	color:yellow;
+}
+.stars label i.fas:before{
+	/* \f005 é o código de identificacao das estrela no font-awesome */
+	content: '\f005';
+	color: yellow;
+	transition: all .15s;
+}
+.stars input[type=radio]:checked ~ label i.fas:before{
+	color: #ccc;
+}
+/*** Edita pontuacao ***/
 				
-			footer{
-				height: 10vh;
-			}
-			.btn.btn-default{
-				background:#0000cc; 
-				color:white;
-			}
-			h3.user{
-				font-size: 18px;
-				font-weight: bold;
-			}
-			p.text-box {
-				background-color: blue;				
-				display: inline;
-			}	
+footer{
+	height: 10vh;
+}
+.btn.btn-default{
+	background:#0000cc; 
+	color:white;
+}
+h3.user{
+	font-size: 18px;
+	font-weight: bold;
+}
+p.text-box {
+	background-color: blue;				
+	display: inline;
+}	
 			
 			/** Editando estrelas  **/
 			.disabled {

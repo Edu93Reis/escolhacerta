@@ -39,6 +39,153 @@
 <p>Sua pesquisa retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s).</p>
 
 #{pesquisaManagedBean.identificador}
+	<h:form id="ativaCadastro" enctype="multipart/form-data" style="margin: 35px;">
+			<!-- Botão que deve liberar o formulário de cadastro -->
+			<!-- Talvez seja uma edição da classe display do css... Procurar como esconder e mostrar 
+			elemento html usando Javascript -->
+		<div style="width: 400px; height: 50px; margin: 0 auto;">
+				<h:commandButton value="Liberar Cadastro" 
+								 styleClass="btn btn-default ml-5" style="float:left;"
+								 binding="#{cadastroBean.btnCadastro}"
+								 actionListener="#{cadastroBean.desativaCadastroProduto}"/>
+		</div>
+	</h:form>
+	<div style="margin-top: 15px;">
+	<hr style="width:90%" />		
+	<h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" enctype="multipart/form-data">
+		<h:panelGrid columns="2" style="width=100%; margin: 20px;" binding="#{cadastroBean.prodCadastro}" 
+					 id="cadastroProduto">
+			<h:outputLabel value="Nome: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+			<!-- Aqui começa o formulário de cadastro do produto -->
+			<!-- deve receber algum css para ficar oculto que será 
+				 manipulado por javascript para aparecer ao ser clicado -->
+				<h:inputText jsf:placeholder="Digite nome do produto ..." 
+							 id="nome-produto"
+							 styleClass="form-control"
+							 style="width: 240px;" 
+							 jsf:aria-describedby="sizing-addon3" 
+							 value="#{produtoManagedBean.produto.nmProduto}" 
+							 required="true"
+							 requiredMessage="Campo nome é obrigatório!" />
+				<h:message for="nome-produto" 
+						   showSummary="True"
+						   showDetail="True" />												  						  
+			</h:panelGroup>
+			
+			<h:outputLabel value="Imagem do produto: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+				<h:inputText jsf:type="file" 
+							 value="#{produtoManagedBean.produto.imagemProduto}" 
+							 id="upload" /> <br />
+				<h:outputLabel value="A imagem deve ser quadrada e maior que 400x400px" 
+							   required="true"
+							   requiredMessage="Upload de imagem é obrigatório!"
+							   style="color: #666; font-size:9px" />
+			  	<h:message for="upload" 
+					   showSummary="True"
+					   showDetail="True" />									
+			</h:panelGroup>							   
+			
+			<h:outputLabel value="Modelo: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+				<h:inputText jsf:placeholder="Digite modelo do produto ..."
+							 id="modelo" 
+							 styleClass="form-control"
+							 style="width: 240px;" 
+							 jsf:aria-describedby="sizing-addon3"  
+							 value="#{produtoManagedBean.produto.modelo}"
+							 required="true"
+							 requiredMessage="Campo modelo é obrigatório!" />
+				<h:message for="modelo" 
+						   showSummary="True"
+						   showDetail="True" />							
+			</h:panelGroup>
+			
+			<h:outputLabel value="Categoria: " style="font-weight: bold; color:blue;" jsf:type="number" />
+			<h:panelGroup>
+				<h:selectOneMenu id="categoria"									  		   
+						 		 styleClass="form-control"
+						 		 style="width: 240px;" 
+						 		 jsf:aria-describedby="sizing-addon3" 
+						 	     value="#{produtoManagedBean.produto.idCategoria}"
+						 		 required="true">
+					<f:selectItem itemValue="" itemLabel="Selecione categoria..." noSelectionOptions="true" />
+					<f:selectItems value="#{produtoManagedBean.categorias}" 
+								   var="categoria" 
+								   itemValue="#{categoria.id}" 
+								   itemLabel="#{categoria.categoria}" />
+				</h:selectOneMenu>
+				<h:message for="categoria" 
+					   showSummary="True"
+					   showDetail="True" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Preço: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+				<h:inputText jsf:placeholder="Digite preco do produto ..."
+							 id="preco" 
+							 styleClass="form-control"
+							 style="width: 240px;" 
+							 jsf:aria-describedby="sizing-addon3"  
+							 value="#{produtoManagedBean.produto.preco}"
+							 required="true"
+							 requiredMessage="Campo preço é obrigatório!">
+							 <f:convertNumber minFractionDigits="2" locale="pt_BR" />
+				</h:inputText>
+				<h:message for="preco" 
+						   showSummary="True"
+						   showDetail="True" />
+			</h:panelGroup>
+								   
+			<h:outputLabel value="Comentário: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+				<h:inputTextarea jsf:placeholder="Digite comentário sobre o produto ..."
+							 id="comentario" 
+							 styleClass="form-control"
+							 style="width: 430px; height: 135px;" 
+							 jsf:aria-describedby="sizing-addon3"  
+							 value="#{produtoManagedBean.produto.coment}"
+							 required="true" 
+							 requiredMessage="Campo comentário é obrigatório!" />
+				<h:message for="comentario" 
+						   showSummary="True"
+						   showDetail="True" />							
+			</h:panelGroup>
+			
+			<h:outputLabel value="Pontuacao: " style="font-weight: bold; color:blue;" />
+			<h:panelGroup>
+				<div class="stars"
+					 id="pontuacao" 
+					 style="font-weight: heavy; 
+					 padding: 2px; width: 117px;
+					 border: 1px solid blue;">
+					 	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+						<label for="one"><i class="fas fa-star"></i></label>
+						<input type="radio" id="one" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="two"><i class="fas fa-star"></i></label>
+						<input type="radio" id="two" name="star" jsf:itemValue="2" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="three"><i class="fas fa-star"></i></label>
+						<input type="radio" id="three" name="star" jsf:itemValue="3" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="four"><i class="fas fa-star"></i></label>
+						<input type="radio" id="four" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="five"><i class="fas fa-star"></i></label>
+						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+				</div>
+				<h:message for="pontuacao" 
+						   showSummary="True"
+						   showDetail="True" />							
+			</h:panelGroup>
+										  
+			<h:messages id="successMsg" sticky="true" style="color: red; font-weight: bold" />
+			<!-- Esse botão irá cadastrar -->	
+			<h:commandButton value="Cadastrar Produto" id="cadastroBtn" 
+							 action="#{produtoManagedBean.incluiProduto()}" 
+							 update=":successMsg"
+							 styleClass="btn btn-default" style="float: right; margin-top: 5px;" />
+		</h:panelGrid>
+	</h:form>
+	</div>
 
 <!-- Javascript das dependências do Bootstrap -->			
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>

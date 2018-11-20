@@ -4,8 +4,8 @@
    src: url('#{request.contextPath}/resources/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('glyphicons-halflings-regular.woff') format('woff'), url('glyphicons-halflings-regular.ttf') format('truetype'), url('glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 body{
-	overflow-x: hidden;
-	overflow-y: hidden;
+	/*overflow-x: hidden;
+	overflow-y: hidden;*/
 }
 /*** Edita pontuacao ***/
 .stars input[type=radio]{
