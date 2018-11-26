@@ -37,13 +37,11 @@ public class LoginManagedBean implements Serializable {
 		String url="";
 		boolean teste = u.loginUsuario(email, senha); 
 		try{
-			//if(email.equalsIgnoreCase("edu") && senha.equalsIgnoreCase("123")){
 			if(teste == true){
 				this.usuario = new Usuario();
 				this.log = true;
-				//usuario = u.getLoggedUser(email);
+				//this.usuario = u.getLoggedUser(email);
 				
-				//return "/restricted/areadousuario.xhtml?faces-redirect=true";
 				FacesContext context = FacesContext.getCurrentInstance();
 				url = "/restricted/areadousuario.xhtml?faces-redirect=true";
 			}

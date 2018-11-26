@@ -202,35 +202,27 @@
 					 		width: 70%;">
 					
 					<span>Comentários do modelo: </span>
-					<h:dataTable value="#{pesquisaManagedBean.bstComments}" var="bst" 
+					<h:dataTable var="comments" value="#{pesquisaManagedBean}" 
 							style="font-weight: heavy;
 					 	    color: blue; border: 1px solid blue;
 					 	    width: 56%; padding: 5px; float:left; display: inline-block;">
 						<h:column style="width: 50%; border: 1px solid blue; background: #339;">
 							<f:facet name="header"> + Relevantes</f:facet>
-							<ui:repeat var="#{pesquisaManagedBean.bstComments}" value="bst">
-								<h:outputText value="#{bst}" />
-							</ui:repeat>
+							<h:outputText value="#{comments.bstComments}" />
 						</h:column>
-						<h:column style="width: 50%; border: 1px solid white; background: blue;">
+						<h:column style="width: 50%; border: 1px solid blue; background: #339;">
 							<f:facet name="header"> - Relevantes</f:facet>
-							<ui:repeat var="#{pesquisaManagedBean.wstComments}" value="wst">
-								<h:outputText value="#{wst}" />
-							</ui:repeat>		
+							<h:outputText value="#{comments.wstComments}" />
 						</h:column>
 					</h:dataTable>
-					<ui:repeat var="#{pesquisaManagedBean.wstComments}" value="wst">
-						<h:outputText value="#{wst}" />
-					</ui:repeat>	
-					
 			</div>
-			
-	   <h:panelGroup>
-			<div id="avaliacao"
+		</h:panelGrid>
+		
+		<div id="avaliacao"
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
-					 		padding: 5px; margin-top: 10px;
-					 		width: 30%; float:right;">
+					 		padding: 5px; margin-top: 10px; margin-left: 15px; margin-right: 10px;
+					 		width: 180px; float:left;">
 					<span>
 						<h3 style="font-size: 16px;">Avaliação do Produto:</h3>
 					</span>
@@ -238,8 +230,8 @@
 						 id="pontuacao" 
 						 style="font-weight: heavy;
 					 	    color: yellow; border: 1px solid blue; 
-					 		padding: 2px;">
-						<h:outputText value="#{produto.pontuacao}" style="color: blue; font-size: 18px" />			 
+					 		padding: 2px; width: 160px;">
+						<h:outputText value="#{produto.pontuacao}/5" style="color: blue; font-size: 18px" />			 
 				<!--	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
 						<label for="one"><i class="fas fa-star"></i></label>
 						<input type="radio" id="one" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
@@ -258,7 +250,7 @@
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
 					 		padding: 5px; margin-top: 10px;
-					 		width: 30%; float:right;">
+					 		width: 160px; float:left;">
 					<span>
 						<h3 style="font-size: 16px;">Avaliação média do Modelo:</h3>
 					</span>
@@ -267,7 +259,7 @@
 						 style="font-weight: heavy;
 					 	    color: yellow; border: 1px solid blue; 
 					 		padding: 2px;">
-					 	<h:outputText value="#{produtoManagedBean.mediaPontuacao}" style="color: blue; font-size: 22px" />
+					 	<h:outputText value="#{produtoManagedBean.mediaPontuacao}/5" style="color: blue; font-size: 22px" /> 
 				<!--	<input type="radio" id="emptyM" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
 						<label for="one"><i class="fas fa-star"></i></label>
 						<input type="radio" id="oneM" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
@@ -281,114 +273,24 @@
 						<input type="radio" id="fiveM" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" /> -->
 					</div>			
 			</div>
-			</h:panelGroup>
-		</h:panelGrid>	
+		
+			
 	</ui:repeat>
 </div>
-	
-	<!-- Aqui começa o Aside -->
-	
-	<div id="asideRanking" 
-		 style="background: orange; float: right; width: 26%; 
-		 		height: 75vh;">
-			<h:form id="ranking">
-				<h:dataTable style="color: white; background: orange;">
-					<h:column>
-						<f:facet name="header">
-							<p style="color: blue; 
-									  background: white;
-									  display: inline-block;
-									  padding: 4px;
-									  width: 100%;">5 melhores da categoria</p>
-						</f:facet>
-						<ui:repeat var="bst" value="#{pesquisaManagedBean.bstProdutos}">
-							Produto: <h:outputText value="#{bst.nmProduto}" />
-							Modelo: <h:outputText value="#{bst.modelo}" />
-							Pontuação: <h:outputText value="#{bst.pontuacao}" />
-						</ui:repeat>
-						<f:facet name="header">
-								 <p style="color: blue; 
-									  background: white;
-									  display: inline-block;
-									  padding: 4px;
-									  width: 100%;">5 piores da categoria</p>
-						</f:facet>
-						<ui:repeat var="wst" value="">
-							<h:outputText value="" />
-							<h:outputText value="Marca dos mais relevantes" />
-						</ui:repeat>>
-					</h:column>
-				</h:dataTable>
-			</h:form>
-	 </div>
+<!-- Aside vai aqui -->
 </div>
-</div>
+</div>  
 		
-	<!-- footer -->
-	<div id="footer" class="nav-container">
-		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-	</div>		
+<!-- footer -->
+<div id="footer" class="nav-container">
+	<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+</div>		
 	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandButton styleClass="close" data-dismiss="modal">
-							<i class="fas fa-times"></i>
-						</h:commandButton>							
-				</div>
-			
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Login:</label>
-						<h:inputText name="username" 
-									 styleClass="form-control" 
-									 ui:placeholder="Nome do Usuário..."
-									 value="#{loginManagedBean.usuario.nome}"/>
-									 <!-- #{loginManagedBean.usuario.emailUsuario} -->									 
-					</div>
-					<div class="form-group">
-						<label>Senha:</label>
-						<h:inputSecret name="passowrd" 
-									 styleClass="form-control" 
-									 ui:placeholder="Digite senha..."
-									 value="#{loginManagedBean.usuario.senha}"/>
-						<!-- #{loginManagedBean.usuario.senha} -->									 
-					</div>
-				</div>
-						
-				<div class="modal-footer">
-				   <h:commandButton value="Logar"
-				   					styleClass="btn btn-sucess"
-				   					action="#{loginManagedbean.envia}"							   					
-				   />				   		
-				   <!--  -->		   
-				</div>
-			</div>
-		</div>	
-	</div> 
-	<!-- Modal fim -->
 	
 <!-- Javascript das dependências do Bootstrap -->		
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>			
 
-<!--
-<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-<h:outputScript name="popper.min.js" library="js" />
-<h:outputScript name="bootstrap.min.js" library="js" />					
- 
-<script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
- -->
 </h:body>
 </html>

@@ -271,8 +271,9 @@ public class ProdutoDAO {
 	/*** retorna comentários menos pontuados de um produto para todos os que tem o mesmo modelo modelo **/
 	
 	public List<String> getWstComments(String produto, String modelo){
+		//"WHERE nmProduto LIKE ? and nmModelo = ? "+
 		String query = "SELECT dsDescricao FROM Produto " +
-					   "WHERE nmProduto LIKE ? and nmModelo = ? "+
+					   "WHERE nmModelo = ? "+
 					   "ORDER BY pontuacao ASC";
 		
 		try{
@@ -280,8 +281,8 @@ public class ProdutoDAO {
 			
 			Produto p = new Produto();
 			
-			stmt.setString(1, "%"+produto+"%");
-			stmt.setString(2, modelo);
+			//stmt.setString(1, "%"+produto+"%");
+			stmt.setString(1, modelo);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
@@ -300,8 +301,9 @@ public class ProdutoDAO {
 		//String produto = "Notebook";
 		//String modelo = "";
 		
+		//"WHERE nmProduto LIKE ? and nmModelo = ? "+
 		String query = "SELECT dsDescricao FROM Produto " +
-						"WHERE nmProduto LIKE ? and nmModelo = ? "+
+						"WHERE nmModelo = ? "+
 						"ORDER BY pontuacao DESC";
 		
 		try{
@@ -309,8 +311,8 @@ public class ProdutoDAO {
 			
 			Produto p = new Produto();
 			
-			stmt.setString(1, "%"+produto+"%");
-			stmt.setString(2, modelo);
+			//stmt.setString(1, "%"+produto+"%");
+			stmt.setString(1, modelo);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){

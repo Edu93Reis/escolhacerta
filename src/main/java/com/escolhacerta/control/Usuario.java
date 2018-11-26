@@ -3,11 +3,7 @@ package com.escolhacerta.control;
 import java.io.Serializable;
 import java.util.Date;
 
-/* indica��o de que esta � uma entidade da JPA (persistencia Java) */
-//@Entity
-/* Indica��o do Hibernate de qual ser� a tabela em que ser�o persistidos os dados */
-//@Table(name="usuario")
-/* A cada requisi��o realizada o bean � gravado em um �map�, chamado de �view map� 
+/* A cada requisição realizada o bean � gravado em um map , chamado de  view map 
 ** e, por conta disso, este bean deve implementar a interface Serializable */
 public class Usuario implements Serializable {	
 	private static final long serialVersionUID = 3445560597837908750L;
@@ -23,12 +19,6 @@ public class Usuario implements Serializable {
 	private String estados;
 	private String cep;
 	
-	//indica��o do Hibernate por annotations de 
-	//@Id --> chave prim�ria, @GeneratedValue --> valor gerado automaticamente, e nome e caracter�sticas 
-	//das colunas que equivalem ao atributo (atributo idUsuario == coluna idUsuario no MySQL)  
-	//@Id
-	//@GeneratedValue
-	//@Column(name="idUsuario", nullable=false, unique=true)
 	public Integer getIdUser(){
 		return this.idUsuario;
 	}
@@ -121,8 +111,6 @@ public class Usuario implements Serializable {
 			this.estado = estado;
 		}
 	}
-	
-	//|| estado.equals("  ") || estado.getClass().toString() != "String"
 	
 	public String getCep() {
 		return cep;

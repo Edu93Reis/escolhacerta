@@ -10,11 +10,12 @@
 <meta name="description" content="Produto clicado - EscolhaCerta"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>Erro 404 - Escolha Certa</title>
-<h:outputStylesheet library="css" name="#{request.contextPath}/resources/404.css" />
+<h:outputStylesheet library="css" name="#{request.contextPath}/resources/css/404.css" />
 <h:outputStylesheet library="bootstrap/css" name="#{request.contextPath}/resources/bootstrap.min.css" />
   
 <!-- CSS do Bootstrap -->			  
 <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
+<link rel="stylesheet" href="resources/css/404.css" />
 <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
 </h:head>
@@ -69,9 +70,8 @@
 						/>
 					
 						<h:commandButton value="Login"
+							action="login?faces-redirect=true"
 							styleClass="navbar-brand" 
-							jsf:data-toggle="modal" 
-							jsf:data-target="#loginModal"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 						/>
@@ -137,36 +137,15 @@
 	</div>
 </div>
 	
-	<!-- footer -->
-	<div id="footer" class="nav-container">
-		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-	</div>		
-	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    
-	</div> 
-	<!-- Modal fim -->
+<!-- footer -->
+<div id="footer" class="nav-container">
+	<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
+</div>		
 	
 <!-- Javascript das dependências do Bootstrap -->			
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>		
 			
-<!--
-
-<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-<h:outputScript name="popper.min.js" library="js" />
-<h:outputScript name="bootstrap.min.js" library="js" />		
- 
-<script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
- -->
 </h:body>
 </html>

@@ -35,6 +35,8 @@
 				<!-- Display: determina tamanho do texto (mais alto menor), m-5 margem -->
 				<h1 class="display-5 ml-5 mt-3">Área do Usuário</h1>
 				
+				<h:outputText value="#{cadastroManagedBean.usuario.nome}" />
+						
 				<div class="ml-5 mt-4">
 					<div class="input-group">
 						<h:form>
@@ -42,7 +44,7 @@
 							<f:facet name="header"><p style="color: blue;">Seus Dados</p></f:facet>
 								<h:outputLabel value="E-mail:" style="color: blue; font-weight: 700;"/> 
 								<h:panelGroup>
-								<h:inputText jsf:placeholder="Digite seu email ..."
+								<h:inputText jsf:placeholder="#{cadastroManagedBean.usuario.nome}"
 												   jsf:type="email" 
 												   styleClass="form-control" 
 												   style="width: 350px; border: 1px solid blue;"

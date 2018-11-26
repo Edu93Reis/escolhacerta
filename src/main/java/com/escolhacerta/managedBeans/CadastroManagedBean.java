@@ -65,7 +65,6 @@ public class CadastroManagedBean implements Serializable {
 		return this.debuga;
 	}
 	
-	//@PostConstruct
 	public void incluiUsuario() {
 		if(usuario != null){
 			usuarioDAO.adiciona(usuario);

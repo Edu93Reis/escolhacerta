@@ -1,12 +1,12 @@
 package com.escolhacerta.control;
 
-import com.escolhacerta.control.PesquisaOld;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Produto extends AvaliaProduto implements PesquisaOld, Serializable {
+/*** Classe da camada de controle responsável pela criação dos Produtos, segue o modelo do DER ***/
+public class Produto implements Serializable {
 	private static final long serialVersionUID = -3295609497396391454L;
 	private Integer idProduto;
 	private byte imagemProduto;
@@ -16,6 +16,7 @@ public class Produto extends AvaliaProduto implements PesquisaOld, Serializable 
 	private BigDecimal preco;
 	private Date dtCadastro;
 	private Integer idCategoria;
+	private Integer pontuacao;
 	
 	public static List<Produto> produtos;
 	
@@ -47,8 +48,6 @@ public class Produto extends AvaliaProduto implements PesquisaOld, Serializable 
 		this.nmProduto = nmProduto;
 	}
 	
-	//@ManyToOne
-	//@JoinColumn(name="nmModelo")
 	public String getModelo() {
 		return modelo;
 	}
@@ -56,8 +55,6 @@ public class Produto extends AvaliaProduto implements PesquisaOld, Serializable 
 		this.modelo = modelo;
 	}
 	
-	//@ManyToMany
-	//@JoinColumn(name="comentario")
 	public String getComent(){
 		return comentario;
 	}
@@ -66,8 +63,6 @@ public class Produto extends AvaliaProduto implements PesquisaOld, Serializable 
 		this.comentario = comentario;
 	}
 	
-	//@ManyToMany
-	//@JoinColumn(name="cdPreco")
 	public BigDecimal getPreco() {
 		return preco;
 	}
@@ -92,8 +87,12 @@ public class Produto extends AvaliaProduto implements PesquisaOld, Serializable 
 		this.idCategoria = idCategoria;
 	}
 	
-	@Override
-	public void pesquisa() {
-		// TODO Auto-generated method stub
+	public Integer getPontuacao() {
+		return pontuacao;
 	}
+	
+	public void setPontuacao(Integer pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+
 }

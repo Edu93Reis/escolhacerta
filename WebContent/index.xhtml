@@ -12,10 +12,12 @@
   		<title>Escolha Certa</title>
   		<h:outputStylesheet library="css" name="index.css" />
   		<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+  		<h:outputStylesheet library="fontawesome/css" name="font-awesome.min.css" />
   
 		<!-- CSS do Bootstrap -->			  
 		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.ico" />
 		<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="resources/fontawesome/css/fontawesome.min.css" />
 		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" jsf:integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" jsf:crossorigin="anonymous" />
 		
@@ -60,7 +62,7 @@
 						
 						<h:link value="#{loginManagedBean.usuario.nome}"
 									styleClass="navbar-brand"
-									action="areadousuario?faces-redirect=true" 
+									action="/restricted/areadousuario?faces-redirect=true" 
 									style="float: left; color: white; width:25; line-height:1;"
 									rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
@@ -77,8 +79,6 @@
 						<h:commandButton value="Login"
 							action="login?faces-redirect=true"
 							styleClass="navbar-brand" 
-							data-toggle="modal" 
-							data-target="#loginModal"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 							rendered="#{loginManagedBean.log eq false}"
@@ -131,45 +131,11 @@
 				</h:form>
 			</ul>
 		</div>
-	</div>
-	<!--
-	Versão antiga menu
-	 <div class="d-none d-sm-block">
-		<div class="fluid-continer">				
-			<ul>
-				<h:form id="categoria">
-					<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
-						<li class="inline-items d-inline line-height: 1;" style="width: 190">
-							| #{fstcategoria}
-						</li>
-					</ui:repeat>
-																									
-					<li class="dropdown">
-						<h:commandLink styleClass="dropdown-toggle"
-									   jsf:data-toggle="dropdown">
-							Mais categorias <span class="caret"></span>		
-						</h:commandLink>
-						<ul class="dropdown-menu">
-						 	<ui:repeat value="#{produtoManagedBean.categorias}" var="categoria">
-								<li>#{categoria}</li>
-							</ui:repeat>
-						</ul>
-					</li>				   
-							
-				</h:form>
-			</ul>
-		</div>
-	</div>-->
-
-
-	<!-- Área das pesquisas --> 
+	</div>	<!-- Área das pesquisas --> 
 
 	<div id="section" class="background"> 
 		<!-- fluid-container -->
 		<div class="pt-5 fluid-container">  
-		<!-- align-self-center -->			
-			<!-- justify-content-center align-self-center -->
-			<!-- "d-none d-sm-block -->
 			  <div class="row">			  				  	
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 					<h:graphicImage value="/resources/img/logo-escolha-certa-big.png" 
@@ -205,62 +171,11 @@
 	<!-- footer -->
 	<div id="footer" class="nav-container">
 		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-	</div>		
-	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandLink styleClass="close" jsf:data-dismiss="modal"
-									   style="background: #e8eaed; border-bottom-left-radius: 0px; border-top-left-radius: 0px;">
-						 	<i class="fas fa-times"></i>
-						</h:commandLink>			
-				</div>
-			
-				<div class="modal-body">
-					<div class="form-group">
-						<label>E-mail:</label>
-						<h:inputText name="email" 
-									 styleClass="form-control" 
-									 jsf:placeholder="Email do Usuário..."
-									 value="#{LoginManagedBean.usuario.emailUsuario}"/>									 
-					</div>
-					<div class="form-group">
-						<label>Senha:</label>
-						<h:inputSecret name="passowrd" 
-									 styleClass="form-control" 
-									 jsf:placeholder="Digite senha..."
-									 value="#{LoginManagedBean.usuario.senha}"/>									 
-					</div>
-				</div>
-						
-				<div class="modal-footer">
-				   <h:commandButton value="Logar"
-				   					styleClass="btn btn-sucess" 
-				   					action="#{LoginManagedbean.inserirUsuario}"
-				   />				   				   
-				</div>
-			</div>
-		</div>	
-	</div> 
-	<!-- Modal fim -->
+	</div>	
 	
 <!-- Javascript das dependências do Bootstrap -->
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- 
-	<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-	<h:outputScript name="popper.min.js" library="js" />
-	<h:outputScript name="bootstrap.min.js" library="js" />					
- -->
 </h:body>
 </html>

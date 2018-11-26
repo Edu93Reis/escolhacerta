@@ -141,18 +141,17 @@ public class PesquisaManagedBean {
 		String produto = produtos.get(0).getNmProduto();
 		String modelo = produtos.get(0).getModelo();
 		
-		int cont = 0;
+		int cont = 1;
 		produtoDAO = new ProdutoDAO();
 		List<String> p = produtoDAO.getWstComments(produto, modelo);
 		for(String prod : p){
 			this.wstComments.add(prod);
 			cont ++;
-			if(cont>=2){
+			if(cont>=2 || cont == p.size()){
 				break;
 			}
 		}
 		
-		System.out.println(produto + " " + modelo + " " + produtoDAO.getWstComments("Celular Windows", "W-480").size());
 		return this.wstComments;
 	}
 
@@ -164,13 +163,15 @@ public class PesquisaManagedBean {
 		String modelo = produtos.get(0).getModelo();
 		int categoria = produtos.get(0).getIdCategoria();
 		//String modelo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("modelo");
-		int cont = 0;
+		int cont = 1;
 		produtoDAO = new ProdutoDAO();
 		
-		for(String prod : produtoDAO.getBstComments(produto, modelo)){
+		List<String> p = produtoDAO.getBstComments(produto, modelo);
+		//for(String prod : produtoDAO.getBstComments(produto, modelo)){
+		for(String prod : p){
 			this.bstComments.add(prod);
 			cont ++;
-			if(cont>=2){
+			if(cont>=2 || cont == p.size()){
 				break;
 			}
 		}
@@ -233,7 +234,7 @@ public class PesquisaManagedBean {
 		return query;
 	}
 	
-	public List<Produto> bstProdutos() throws SQLException{
+	public List<Produto> getBstProdutos() throws SQLException{
 		int idCategoria = 1;
 		
 		int i = 0;
@@ -255,7 +256,7 @@ public class PesquisaManagedBean {
 		return produtos;
 	}
 	
-	public List<Produto> wstProdutos() throws SQLException {
+	public List<Produto> getWstProdutos() throws SQLException {
 		int idCategoria = 1;
 		
 		try{

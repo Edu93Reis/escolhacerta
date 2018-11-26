@@ -69,9 +69,8 @@
 						/>
 					
 						<h:commandButton value="Login"
+							action="login?faces-redirect=true"
 							styleClass="navbar-brand" 
-							jsf:data-toggle="modal" 
-							jsf:data-target="#loginModal"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 							rendered="#{loginManagedBean.log eq false}"
@@ -172,71 +171,9 @@
 	</h:form>
 </div>
 		
-	<!-- footer -->
-	<!-- <div id="footer" class="nav-container">
-		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
-	</div>  -->		
-	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandButton styleClass="close" data-dismiss="modal">
-							<i class="fas fa-times"></i>
-						</h:commandButton>							
-				</div>
-			
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Login:</label>
-						<h:inputText name="username" 
-									 styleClass="form-control" 
-									 ui:placeholder="Nome do Usuário..."
-									 value="#{loginManagedBean.usuario.nome}"/>
-									 <!-- #{loginManagedBean.usuario.emailUsuario} -->									 
-					</div>
-					<div class="form-group">
-						<label>Senha:</label>
-						<h:inputSecret name="passowrd" 
-									 styleClass="form-control" 
-									 ui:placeholder="Digite senha..."
-									 value="#{loginManagedBean.usuario.senha}"/>
-						<!-- #{loginManagedBean.usuario.senha} -->									 
-					</div>
-				</div>
-						
-				<div class="modal-footer">
-				   <h:commandButton value="Logar"
-				   					styleClass="btn btn-sucess"
-				   					action="#{loginManagedbean.envia}"							   					
-				   />				   		
-				   <!--  -->		   
-				</div>
-			</div>
-		</div>	
-	</div> 
-	<!-- Modal fim -->
-	
 <!-- Javascript das dependências do Bootstrap -->			
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/popper.min.js"></script>
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>				
-
-<!-- 
-<h:outputScript name="jquery.min.js" library="bootstrap/js" />
-<h:outputScript name="popper.min.js" library="js" />
-<h:outputScript name="bootstrap.min.js" library="js" />					
-
-<script type="text/javascript" src="resources/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/popper.min.js"></script>
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
- -->
 </h:body>
 </html>
