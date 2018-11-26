@@ -56,7 +56,7 @@
 									styleClass="navbar-brand"
 									action="areadousuario?faces-redirect=true" 
 									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.usuario.idUser eq true}">
+									rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			
@@ -74,6 +74,7 @@
 							jsf:data-target="#loginModal"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
+							rendered="#{loginManagedBean.log eq false}"
 						/>
 					<!-- Renderiza a href :: value == saída de texto do botão
 						 outocme :: para onde o link enviará :: usar sem .xhtml? 
@@ -84,6 +85,7 @@
 							action="areadousuario?faces-redirect=true"
 							styleClass="navbar-brand"  
 							style="float: left; color: white; width:25; line-height:1;"
+							rendered="#{loginManagedBean.log}"
 						/> 
 
 			   </h:form>
@@ -128,21 +130,24 @@
 	
   <div class="mt-4 ml-3" style="display: inline-block" >
 	<ui:repeat value="#{pesquisaManagedBean.produtosId}" var="produto">
+	
 		<div id="prodImg" 
 			 style="width: 220px; height: 220px; 
 			 background: blue; 
 			 border-radius: 45px; float:left;"
 			 class="pb-4">
 			<h:graphicImage value="#{resquest.contextPath}/resources/img/produtos/#{produto.idProduto}.jpg"					
-							alt="#{produto.nmProduto}" />
+							alt="#{produto.nmProduto}"
+							style="width: 220px; height: 220px;" />
 		</div>
 		<h:panelGrid column="1" 
 					 styleClass=""
 					 style="height: 220px; margi-left: 15px; width: 60%; float:left;" >
 			<f:facet name="header"
-					 styleClass="float-right pl-4" style="height: 220px; margin-left: 15px;">
+					 styleClass="float-right pl-4" style="height: 220px; margin-left: 15px;"
+					 id="produto">
 				<h2 style="color:blue; font-size: 30px; font-weight: heavy; padding-bottom: 3px; margin-left: 15px;">
-					#{produto.nmProduto}
+					<h:outputText value="#{produto.nmProduto}" id="produto" name="produto" />
 				</h2>
 			</f:facet>
 			<f:facet name="header" 
@@ -150,7 +155,9 @@
 				<p style="display: block; color:white; 
 					 background: blue; font-weight: heavy; 
 					 font-size: 21px; padding: 3px; 
-					 margin-top: 1px; margin-left: 15px; width:60%;">Modelo: <h:outputText value="#{produto.modelo}" /></p>
+					 margin-top: 1px; margin-left: 15px; width:60%;">
+					 Modelo: <h:outputText value="#{produto.modelo}" id="modelo" name="modelo" />
+				</p>
 			</f:facet>
 			<f:facet name="header" 
 					 styleClass="float-right pl-4" style="margin-left: 15px;">
@@ -182,44 +189,58 @@
 							font-size: 18px; padding: 3px; 
 							width: 60%;">
 					 Faixa de Preço: 
-					 <h:outputText value="#{produtoManagedBean.mediaPrecos}" > 
+					 <h:outputText value="#{pesquisaManagedBean.mediaPrecos}" > 
 					 		<f:convertNumber type="currency" currentSymbol="R$" locale="pt_BR" />
 					 </h:outputText>
 				 </p>
 			</f:facet>
+			
 				<div id="comentarios" 
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
 					 		padding: 5px; margin-top: 10px;
 					 		width: 70%;">
+					
 					<span>Comentários do modelo: </span>
-					<h:dataTable 
+					<h:dataTable value="#{pesquisaManagedBean.bstComments}" var="bst" 
 							style="font-weight: heavy;
 					 	    color: blue; border: 1px solid blue;
 					 	    width: 56%; padding: 5px; float:left; display: inline-block;">
 						<h:column style="width: 50%; border: 1px solid blue; background: #339;">
 							<f:facet name="header"> + Relevantes</f:facet>
-							<h:outputText value="Aqui serão iterados os mais relevantes" />
+							<ui:repeat var="#{pesquisaManagedBean.bstComments}" value="bst">
+								<h:outputText value="#{bst}" />
+							</ui:repeat>
 						</h:column>
 						<h:column style="width: 50%; border: 1px solid white; background: blue;">
 							<f:facet name="header"> - Relevantes</f:facet>
-							<h:outputText value="Aqui serão iterados os menos relevantes" />
+							<ui:repeat var="#{pesquisaManagedBean.wstComments}" value="wst">
+								<h:outputText value="#{wst}" />
+							</ui:repeat>		
 						</h:column>
 					</h:dataTable>
-				<div id="avaliacao"
+					<ui:repeat var="#{pesquisaManagedBean.wstComments}" value="wst">
+						<h:outputText value="#{wst}" />
+					</ui:repeat>	
+					
+			</div>
+			
+	   <h:panelGroup>
+			<div id="avaliacao"
 					 style="font-weight: heavy; display: inline-block;
 					 	    color: blue; border: 1px solid blue; 
 					 		padding: 5px; margin-top: 10px;
 					 		width: 30%; float:right;">
 					<span>
-						<h3 style="font-size: 16px;">Avaliação média:</h3>
+						<h3 style="font-size: 16px;">Avaliação do Produto:</h3>
 					</span>
 					<div class="stars"
 						 id="pontuacao" 
 						 style="font-weight: heavy;
 					 	    color: yellow; border: 1px solid blue; 
 					 		padding: 2px;">
-					 	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+						<h:outputText value="#{produto.pontuacao}" style="color: blue; font-size: 18px" />			 
+				<!--	<input type="radio" id="empty" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
 						<label for="one"><i class="fas fa-star"></i></label>
 						<input type="radio" id="one" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
 						<label for="two"><i class="fas fa-star"></i></label>
@@ -229,10 +250,38 @@
 						<label for="four"><i class="fas fa-star"></i></label>
 						<input type="radio" id="four" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
 						<label for="five"><i class="fas fa-star"></i></label>
-						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" /> -->
 					</div>			
-				</div>
 			</div>
+			
+			<div id="avaliacaoMedia"
+					 style="font-weight: heavy; display: inline-block;
+					 	    color: blue; border: 1px solid blue; 
+					 		padding: 5px; margin-top: 10px;
+					 		width: 30%; float:right;">
+					<span>
+						<h3 style="font-size: 16px;">Avaliação média do Modelo:</h3>
+					</span>
+					<div class="stars"
+						 id="pontuacaoMedia" 
+						 style="font-weight: heavy;
+					 	    color: yellow; border: 1px solid blue; 
+					 		padding: 2px;">
+					 	<h:outputText value="#{produtoManagedBean.mediaPontuacao}" style="color: blue; font-size: 22px" />
+				<!--	<input type="radio" id="emptyM" name="star" jsf:itemValue="0" jsf:value="#{produtoManagedBean.produto.pontuacao}" checked="true"/>
+						<label for="one"><i class="fas fa-star"></i></label>
+						<input type="radio" id="oneM" name="star" jsf:itemValue="1" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="two"><i class="fas fa-star"></i></label>
+						<input type="radio" id="twoM" name="star" jsf:itemValue="2" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="three"><i class="fas fa-star"></i></label>
+						<input type="radio" id="threeM" name="star" jsf:itemValue="3" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="four"><i class="fas fa-star"></i></label>
+						<input type="radio" id="fourM" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
+						<label for="five"><i class="fas fa-star"></i></label>
+						<input type="radio" id="fiveM" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" /> -->
+					</div>			
+			</div>
+			</h:panelGroup>
 		</h:panelGrid>	
 	</ui:repeat>
 </div>
@@ -240,9 +289,9 @@
 	<!-- Aqui começa o Aside -->
 	
 	<div id="asideRanking" 
-		 style="background: orange; float: right; width: 30%; 
+		 style="background: orange; float: right; width: 26%; 
 		 		height: 75vh;">
-			<form id="ranking">
+			<h:form id="ranking">
 				<h:dataTable style="color: white; background: orange;">
 					<h:column>
 						<f:facet name="header">
@@ -252,9 +301,11 @@
 									  padding: 4px;
 									  width: 100%;">5 melhores da categoria</p>
 						</f:facet>
-						<h:outputText value="Nomes dos mais relevantes" />
-						<h:outputText value="Marca dos mais relevantes" />
-						
+						<ui:repeat var="bst" value="#{pesquisaManagedBean.bstProdutos}">
+							Produto: <h:outputText value="#{bst.nmProduto}" />
+							Modelo: <h:outputText value="#{bst.modelo}" />
+							Pontuação: <h:outputText value="#{bst.pontuacao}" />
+						</ui:repeat>
 						<f:facet name="header">
 								 <p style="color: blue; 
 									  background: white;
@@ -262,11 +313,13 @@
 									  padding: 4px;
 									  width: 100%;">5 piores da categoria</p>
 						</f:facet>
-						<h:outputText value="Nomes dos menos relevantes" />
-						<h:outputText value="Marca dos menos relevantes" />
+						<ui:repeat var="wst" value="">
+							<h:outputText value="" />
+							<h:outputText value="Marca dos mais relevantes" />
+						</ui:repeat>>
 					</h:column>
 				</h:dataTable>
-			</form>
+			</h:form>
 	 </div>
 </div>
 </div>

@@ -16,18 +16,20 @@ import com.escolhacerta.control.Usuario;
 import com.escolhacerta.model.UsuarioDAO;
 import com.escolhacerta.util.FacesUtil;
 
+import sun.security.action.GetLongAction;
+
 @SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
 public class LoginManagedBean implements Serializable {
 	private static final long serialVersionUID = 269534515641225657L;
 	private static Usuario usuario;
-	private String email;
-	private String senha;
+	private String email = "";
+	private String senha = "";
 	//private List<Usuario> listUser;
-	private UsuarioDAO u;
+	private UsuarioDAO u = new UsuarioDAO();
 	private Connection conn;
-	public static boolean log = false;
+	private boolean log = false;
 	
 	//https://www.devmedia.com.br/jsf-session-criando-um-modulo-de-login/30975
 	public String autentica(){
@@ -37,31 +39,27 @@ public class LoginManagedBean implements Serializable {
 		try{
 			//if(email.equalsIgnoreCase("edu") && senha.equalsIgnoreCase("123")){
 			if(teste == true){
-				usuario = new Usuario();
-				
+				this.usuario = new Usuario();
+				this.log = true;
 				//usuario = u.getLoggedUser(email);
 				
 				//return "/restricted/areadousuario.xhtml?faces-redirect=true";
+				FacesContext context = FacesContext.getCurrentInstance();
 				url = "/restricted/areadousuario.xhtml?faces-redirect=true";
 			}
-			FacesContext context = FacesContext.getCurrentInstance();
-			//if(!(email.equals("Edu"))){
-			/*if(!(email.equals())){
-				FacesUtil.failure("Email incorreto!");
-			}else if(!(senha.equals("123"))){
-				FacesUtil.failure("Senha incorreta!");
-			}*/
 			
 			return url;
 		}catch(Exception e){
+			FacesUtil.failure("Erro ao logar!");
 			throw new RuntimeException("Erro ao logar: ", e);
 		}
 	}
 	
 	public String logout (){
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		usuario = null;
-		return "/login.xhtml?faces-redirect=true";
+		this.usuario = null;
+		this.log = false;
+		return "/index.xhtml?faces-redirect=true";
 	}
 	
 	public Usuario getUsuario() {
@@ -88,4 +86,7 @@ public class LoginManagedBean implements Serializable {
 		this.senha = senha;
 	}
 	
+	public boolean getLog(){
+		return this.log;
+	}
 }

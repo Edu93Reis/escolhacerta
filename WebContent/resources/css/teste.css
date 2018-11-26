@@ -7,16 +7,21 @@ body{
 	/*overflow-x: hidden;
 	overflow-y: hidden;*/
 }
+
 /*** Edita pontuacao ***/
 .stars input[type=radio]{
 	display: none;
 }
-
+.stars label i.fa-star:before{
+	content: '\f005';
+	color:yellow;
+}
 .stars label i.fas:before{
+	/* \f005 é o código de identificacao das estrela no font-awesome */
 	content: '\f005';
 	color: yellow;
+	transition: all .15s;
 }
-
 .stars input[type=radio]:checked ~ label i.fas:before{
 	color: #ccc;
 }

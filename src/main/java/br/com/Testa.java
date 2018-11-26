@@ -106,11 +106,21 @@ public class Testa {
 			//System.out.println(pes.getProdutosCategoria());
 			//System.out.println(cD.listarAllCategoria());
 			//System.out.println(pd.listarProdutoCategoria("Celulares"));
+			//System.out.println(pd.getWstComments("Celular Windows", "W-480"));
+			/*System.out.println(pes.validaQuery("Mótöròllã"));
+			System.out.println(pes.validaQuery("BÌchínhü dî pelõcíà"));
+			System.out.println(pes.validaQuery("àbrà`çõès"));*/
+			//List<Produto> teste =  pd.listaProdutoQuery("Notebook");
+			//System.out.println(teste.get(teste.size()).getNmProduto());
+			//System.out.println(pd.listaProdutoQuery("Notebook"));
+			//System.out.println(pes.pesquisaString("Samsüng"));
+			//List<Produto> teste = pes.bstProdutos(0);
+			//System.out.println(pes.wstProdutos(1));
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
 	
-		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+		/*SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
 		try {
@@ -130,7 +140,7 @@ public class Testa {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		//u.adiciona(usuario);
 		//try{
 			//System.out.println(

@@ -41,35 +41,46 @@ public class ProdutoManagedBean {
 	//private List<String> listaCategoria = new ArrayList<String>();
 	//@ManagedProperty(value = "#{categorias}")
 	private List<Categoria> categorias;
-	private List<String> fstcategorias = new ArrayList<String>();
-	private List<String> sndcategorias = new ArrayList<String>();
-	private List<Integer> avaliacoes = new ArrayList<Integer>();
-	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
-	private List<Produto> fstProdutos = new ArrayList<Produto>();
-	private List<Produto> lstProdutos = new ArrayList<Produto>();
-	private BigDecimal mediaPrecos = new BigDecimal("0.0");
-	private int mediaPontuacao = 0;
+	private List<String> fstcategorias;
+	private List<String> sndcategorias;
+	private List<Integer> avaliacoes;
+	private List<BigDecimal> precos;
+	private List<Produto> fstProdutos;
+	private List<Produto> lstProdutos;
+	private BigDecimal mediaPrecos;
+	private int mediaPontuacao;
 	private Categoria categoria;
 	//vindos de cadastroMB
-	private Usuario usuario = new Usuario();
+	private Usuario usuario;
 	private ProdutoDAO produtoDAO;
 	private Produto produto;
 	private Integer idProduto;
 	private String nomeProduto;
 	private Part imagemProduto;
-	private static int codProduto = 1;
-	private int point = 0;
+	static int codProduto;
+	private int point;
 	private HtmlCommandLink star;
-	
+	private boolean form = false;
 	
 	//construtor
 	public ProdutoManagedBean(){
+		this.usuario = new Usuario();
+		this.fstcategorias = new ArrayList<String>();
+		this.sndcategorias = new ArrayList<String>();
+		this.avaliacoes = new ArrayList<Integer>();
+		this.precos = new ArrayList<BigDecimal>();
+		this.fstProdutos = new ArrayList<Produto>();
+		this.lstProdutos = new ArrayList<Produto>();
+		this.mediaPrecos = new BigDecimal("0.0");
+		this.mediaPontuacao = 0;
 		this.produtos = new ArrayList<Produto>();
 		this.categorias = new ArrayList<Categoria>();
 		this.categoria = new Categoria();
 		this.produtoDAO = new ProdutoDAO();
 		this.produto = new Produto();
-		cd = new CategoriaDAO();
+		this.cd = new CategoriaDAO();
+		this.codProduto = 9;
+		this.point = 0;
 	}
 	
 	/*@PostConstruct
@@ -132,7 +143,8 @@ public class ProdutoManagedBean {
 			//imagemURL = imagemURL + imagemProduto.getSubmittedFileName();
 			String nmImgProduto = String.valueOf(codProduto);
 			codProduto ++;
-			imagemURL = imagemURL + imagemProduto + nmImgProduto;
+			//imagemURL = imagemURL + imagemProduto + nmImgProduto;
+			imagemURL = imagemURL + nmImgProduto;
 			
 			try{
 				//cria espaço na memória para o conteúdo da imagem do tamanho da imagem
@@ -149,7 +161,7 @@ public class ProdutoManagedBean {
 				FOS.close();
 			}catch(Exception e){
 				throw new RuntimeException("Erro upload de imagem: ", e);
-			}
+			} 
 			
 			/*File imagemProduto = new File("C:/imagem.jpg");
 			BufferedImage img = ImageIO.read(imagemProduto);
@@ -160,10 +172,11 @@ public class ProdutoManagedBean {
 		//int idCategoria = 0; 
 		//point = valor recebido das estrelas 
 		
-		if(usuario != null){
+		if(produto != null){
 			//produto.setIdCategoria(idCategoria);
 			//produto.setPontuacao(point);
 			produtoDAO.adiciona(produto);
+			this.form = false;
 		
 			FacesUtil.success("Produto cadastrado com sucesso");
 		} else {
@@ -176,14 +189,15 @@ public class ProdutoManagedBean {
 	public Integer getMediaPontuacao(){
 		try{
 			//this.avaliacoes = produtoDAO.getPontuacao("Teste");
-			this.avaliacoes.addAll(produtoDAO.getPontuacao("Celular Windows", "w-480")) ;
-			
+			this.avaliacoes.addAll(produtoDAO.getPontuacao("Celular Windows", "W-480")) ;
+			//produto.getNmProduto(), produto.getNmModelo()
 			for(Integer num: this.avaliacoes){
 				mediaPontuacao += num;
 			}
 		
 			//mediaPontuacao = Math.round(mediaPontuacao/this.avaliacoes.size());
 			//pontuacao perdendo precisao
+			System.out.println(mediaPontuacao);
 			return mediaPontuacao/this.avaliacoes.size();
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
@@ -195,7 +209,7 @@ public class ProdutoManagedBean {
 		try{
 			//getPrecos() recebe nomeDoProduto 
 			//this.precos = produtoDAO.getPrecos("Teste"); 
-			this.precos.addAll(produtoDAO.getPrecos("Celular Windows", "w-480"));
+			this.precos.addAll(produtoDAO.getPrecos(produto.getNmProduto(), produto.getModelo()));
 			
 			for(BigDecimal preco: this.precos){
 				//mediaPrecos.add(valor) nao funciona, é preciso usar atribuição
@@ -262,6 +276,10 @@ public class ProdutoManagedBean {
 		
 	}
 	
+	public void ativaForm(){
+		this.setForm(true);
+	}
+	
 	public HtmlCommandLink getStar() {
 		return star;
 	}
@@ -278,4 +296,11 @@ public class ProdutoManagedBean {
 		this.produto = produto;
 	}
 	
+	public boolean getForm(){
+		return this.form;
+	}
+	
+	public void setForm(boolean form) {
+		this.form = form;
+	}
 }

@@ -131,7 +131,7 @@
 		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s): 
 	</h2>		
 		<h:form id="produto">
-		<ui:repeat value="#{pesquisaManagedBean.produtosCategoria}" var="produto">
+		<ui:repeat value="#{pesquisaManagedBean.pesquisaString}" var="produto">
 		<a href="produto.xhtml?q=#{produto.idProduto}" style="text-decoration: none; color: black;">
 			<div class="row" style="width: 285px; 
 									border: 1px solid #B4CDCD;

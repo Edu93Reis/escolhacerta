@@ -1,12 +1,12 @@
 package com.escolhacerta.control;
 
-import com.escolhacerta.control.Pesquisa;
+import com.escolhacerta.control.PesquisaOld;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Produto extends AvaliaProduto implements Pesquisa, Serializable {
+public class Produto extends AvaliaProduto implements PesquisaOld, Serializable {
 	private static final long serialVersionUID = -3295609497396391454L;
 	private Integer idProduto;
 	private byte imagemProduto;

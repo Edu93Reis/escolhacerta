@@ -235,19 +235,21 @@
 		<div style="width: 400px; height: 50px; margin: 0 auto;">
 				<h:commandButton value="Liberar Cadastro" 
 								 styleClass="btn btn-default ml-5" style="float:left;"
-								 binding="#{cadastroBean.btnCadastro}"
-								 actionListener="#{cadastroBean.desativaCadastroProduto}"/>
+								 action="#{produtoManagedBean.ativaForm}"
+								 rendered="#{produtoManagedBean.form eq false}"/>
 		</div>
 	</h:form>
 	<div style="margin-top: 15px;">
 	<hr style="width:90%" />		
-	<h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" enctype="multipart/form-data">
+	<h:form id="cadastroProduto" binding="#{cadastroBean.cadastroProduto}" enctype="multipart/form-data"
+			rendered="#{produtoManagedBean.form}">
 		<!-- class="d-none" :: d-none é display none do Bootstrap -->
 		<!-- alinhar formulário, esse panelGrid é um elemento do JSF, 
 			collumns="2" faz com que cada a 2 elementos do formulário ele jogue os elementos para a linha de baixo 
 			exemplo:: Nome + caixa de texto :: pula linha email+caixa de texto
 			caso haja um h:panelGroup ele conta tudo que estiver nessa tag como um único elemento. -->
-		<!-- styleClass="disabled" -->
+		
+		<h3 style="color: blue;">Cadastrar produto:</h3>
 		<h:panelGrid columns="2" style="width=100%; margin: 20px;" binding="#{cadastroBean.prodCadastro}" 
 					 id="cadastroProduto">
 			<h:outputLabel value="Nome: " style="font-weight: bold; color:blue;" />
@@ -313,7 +315,8 @@
 						 		 style="width: 240px;" 
 						 		 jsf:aria-describedby="sizing-addon3" 
 						 	     value="#{produtoManagedBean.produto.idCategoria}"
-						 		 required="true">
+						 		 required="true"
+						 		 converter="javax.faces.Integer" >
 					<f:selectItem itemValue="" itemLabel="Selecione categoria..." noSelectionOptions="true" />
 					<f:selectItems value="#{produtoManagedBean.categorias}" 
 								   var="categoria" 
@@ -369,8 +372,14 @@
 					<f:selectItem itemValue="5" itemLabel="five" id="five" name="star" styleClass="fas fa-star" />
 				</h:selectOneMenu>
 			 -->
-			
-				<div class="stars"
+		   <h:inputText jsf:type="number"
+						 id="pontuacao"									  		   
+						 styleClass="form-control"
+						 style="width: 65px;" 
+						 jsf:aria-describedby="sizing-addon3" 
+						 value="#{produtoManagedBean.produto.pontuacao}"
+						 required="true" />
+			<!-- <div class="stars"
 					 id="pontuacao" 
 					 style="font-weight: heavy; 
 					 padding: 2px; width: 117px;
@@ -386,7 +395,7 @@
 						<input type="radio" id="four" name="star" jsf:itemValue="4" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
 						<label for="five"><i class="fas fa-star"></i></label>
 						<input type="radio" id="five" name="star" jsf:itemValue="5" jsf:value="#{produtoManagedBean.produto.pontuacao}" />
-				</div>
+				</div>  -->
 				<h:message for="pontuacao" 
 						   showSummary="True"
 						   showDetail="True" />							

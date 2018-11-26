@@ -20,6 +20,8 @@ public class ProdutoDAO {
 	private Categoria categoria = new Categoria();
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private List<Produto> produtoCategoria = new ArrayList<Produto>();
+	private List<String> bstProdutosComments = new ArrayList<String>();
+	private List<String> wstProdutosComments = new ArrayList<String>();
 	private HtmlCommandLink btnCategoria;
 	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
 	private List<Integer> pontuacao = new ArrayList<Integer>();
@@ -65,7 +67,7 @@ public class ProdutoDAO {
 	public void adiciona(Produto produto) {
 		//java.sql.Date nasc = new java.sql.Date(usuario.getNasc());
 		//this.usuario = usuario;
-		int idProduto = 0;
+		//int idProduto = 0;
 		
 		try {
 			String query = "insert into Produto (nmProduto, dsDescricao, idCategoria, nmModelo, cdPreco, pontuacao) "
@@ -84,7 +86,7 @@ public class ProdutoDAO {
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			String id = "SELECT idProduto FROM Produto WHERE nmProduto = ?";
+			/*String id = "SELECT idProduto FROM Produto WHERE nmProduto = ?";
 			
 			PreparedStatement idstmt = conn.prepareStatement(id);
 			idstmt.setString(1, produto.getNmProduto());
@@ -92,7 +94,7 @@ public class ProdutoDAO {
 			
 			while(rs.next()){
 				idProduto = (rs.getInt("idProduto"));
-			}
+			}*/
 			
 			conn.close();
 		} catch (SQLException e) {
@@ -100,7 +102,7 @@ public class ProdutoDAO {
 		}
 		
 		//estou mexendo aqui
-		this.relacionaUsuario(1, idProduto);
+		//this.relacionaUsuario(1, idProduto);
 	}
 	
 	public void relacionaUsuario(int idUsuario, int idProduto){
@@ -124,7 +126,7 @@ public class ProdutoDAO {
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, nmProduto);
+			stmt.setString(1, "%"+nmProduto+"%");
 			stmt.setString(2, nmModelo);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -258,6 +260,140 @@ public class ProdutoDAO {
 			rs.close();
 			stmt.close();
 			conn.close();
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+			//throw new RuntimeException(ex);
+		}
+		
+		return produtoCategoria;
+	}
+
+	/*** retorna comentários menos pontuados de um produto para todos os que tem o mesmo modelo modelo **/
+	
+	public List<String> getWstComments(String produto, String modelo){
+		String query = "SELECT dsDescricao FROM Produto " +
+					   "WHERE nmProduto LIKE ? and nmModelo = ? "+
+					   "ORDER BY pontuacao ASC";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);
+			
+			Produto p = new Produto();
+			
+			stmt.setString(1, "%"+produto+"%");
+			stmt.setString(2, modelo);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				p.setComent(rs.getString("dsDescricao"));
+				wstProdutosComments.add(p.getComent());
+			}
+		}catch(SQLException ex){
+			System.out.println(ex);
+		}
+		
+		return wstProdutosComments;
+	}
+	
+	/*** retorna comentários mais pontuados de um produto para todos os que tem o mesmo modelo modelo **/
+	public List<String> getBstComments(String produto, String modelo){
+		//String produto = "Notebook";
+		//String modelo = "";
+		
+		String query = "SELECT dsDescricao FROM Produto " +
+						"WHERE nmProduto LIKE ? and nmModelo = ? "+
+						"ORDER BY pontuacao DESC";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);
+			
+			Produto p = new Produto();
+			
+			stmt.setString(1, "%"+produto+"%");
+			stmt.setString(2, modelo);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				p.setComent(rs.getString("dsDescricao"));
+				bstProdutosComments.add(p.getComent());
+			}
+		}catch(SQLException ex){
+			System.out.println(ex);
+		}
+		
+		return bstProdutosComments;
+	}
+	
+	public List<Produto> listaProdutoQuery(String query) throws SQLException {
+		String sql = "SELECT p.idProduto, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
+				+ "c.nmCategoria, p.nmModelo, p.cdPreco, p.pontuacao"+
+					 " FROM Produto p inner join Categoria c ON p.nmProduto LIKE ? and p.idCategoria = c.idCategoria";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		Produto p;
+		try{
+			stmt.setString(1, "%"+query+"%");
+			//stmt.setString(2, "%"+query+"%");
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				p = new Produto();
+				//p.setModelo(rs.getNString("nmModelo"));
+				p.setIdProduto(rs.getInt("idProduto"));
+				p.setNmProduto(rs.getString("nmProduto"));
+				p.setComent(rs.getString("dsDescricao"));
+				p.setDtCadastro(rs.getDate("dtCadastro"));
+				//adicionar nmCategoria ao produto, ou usar grande if com todas as opções de retorno por id
+				//p.setNmCategoria(rs.getInt("nmCategoria"));
+				p.setIdCategoria(rs.getInt("idCategoria"));
+				p.setModelo(rs.getString("nmModelo"));
+				p.setPreco(rs.getBigDecimal("cdPreco"));
+				p.setPontuacao(rs.getInt("pontuacao"));
+				produtos.add(p);
+			}
+			rs.close();
+			stmt.close();
+			//conn.close();
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+			//throw new RuntimeException(ex);
+		}
+		
+		return produtos;
+	}
+	
+	public List<Produto> listarProdutoCategoria(int idCategoria) throws SQLException {
+		String sql = "SELECT p.idProduto, p.nmProduto, p.dsDescricao, p.dtCadastro, p.idCategoria, "
+				+ "c.nmCategoria, p.nmModelo, p.cdPreco, p.pontuacao"+
+				  " FROM Produto p inner join Categoria c ON c.idCategoria = ? and p.idCategoria = c.idCategoria"
+				+" order by p.pontuacao";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		Produto p;
+		try{
+			stmt.setInt(1, idCategoria);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				p = new Produto();
+				//p.setModelo(rs.getNString("nmModelo"));
+				p.setIdProduto(rs.getInt("idProduto"));
+				p.setNmProduto(rs.getString("nmProduto"));
+				p.setComent(rs.getString("dsDescricao"));
+				p.setDtCadastro(rs.getDate("dtCadastro"));
+				//adicionar nmCategoria ao produto, ou usar grande if com todas as opções de retorno por id
+				//p.setNmCategoria(rs.getInt("nmCategoria"));
+				p.setIdCategoria(rs.getInt("idCategoria"));
+				p.setModelo(rs.getString("nmModelo"));
+				p.setPreco(rs.getBigDecimal("cdPreco"));
+				p.setPontuacao(rs.getInt("pontuacao"));
+				produtoCategoria.add(p);
+			}
+			rs.close();
+			stmt.close();
+			//conn.close();
 		}catch(SQLException ex){
 			System.out.println(ex.getMessage());
 			//throw new RuntimeException(ex);

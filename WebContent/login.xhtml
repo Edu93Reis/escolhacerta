@@ -64,7 +64,7 @@
 									styleClass="navbar-brand"
 									action="areadousuario?faces-redirect=true" 
 									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.usuario.idUser eq true}">
+									rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			
@@ -93,6 +93,7 @@
 							action="#{loginManagedBean.logout()}"
 							styleClass="navbar-brand"  
 							style="float: left; color: white; width:25; line-height:1;"
+							rendered="#{loginManagedBean.log}"
 						/> 
 			   </h:form>
 			   </h:panelGrid>						 				
@@ -132,38 +133,6 @@
 		</div>
 	</div>
 	
-	<!--  <div class="d-none d-sm-block" id="nav">
-		<div class="fluid-continer">				
-			<ul>
-				<ui:repeat value="#{produtoManagedBean.fstCategories}" var="fstcategoria">
-						<li class="inline-items d-inline line-height: 1;" style="width: 190">
-							| #{fstcategoria}
-						</li>
-					</ui:repeat>
-								
-					<div class="btn-group">
-						<h:form id="categoria">						
-							<h:commandButton value="Mais Categorias"
-								styleClass="btn dropdown-toggle" 
-								jsf:data-toggle="dropdown" 
-								jsf:aria-haspopup="true" 
-								jsf:aria-expanded="false"							
-							/>
-																		
-							<ul class="dropdown-menu dropdown-menu-right">
-							   <li>
-							   		<h:commandLink value="#{produtoManagedBean.categorias}"
-										action="index_jsf"
-										styleClass="dropdown-item"
-									/>
-							   	</li>				   
-							</ul>
-						</h:form>
-					</div>					
-			</ul>
-		</div>
-	</div> -->
-
 	<!-- Login --> 
 	<div class="modal-dialog" id="section">
 			<div class="modal-content">
