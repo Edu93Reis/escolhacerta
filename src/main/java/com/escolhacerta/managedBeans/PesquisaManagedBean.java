@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 //import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.component.html.HtmlDataTable;
@@ -28,19 +29,23 @@ public class PesquisaManagedBean {
 	private HtmlDataTable dataTable;
 	private ProdutoDAO produtoDAO;
 	private List<Produto> produtos;
+	private List<Produto> produtosCategoria;
+	//private List<Produto> size;
 	private String categoria;
 	//private List<Produto> produtosPesquisa; 
 	private List<String> wstComments = new ArrayList<String>();
 	private List<String> bstComments = new ArrayList<String>();
 	private BigDecimal mediaPrecos;
 	private List<BigDecimal> precos;
-	//private Integer size = 0;
+	static int size = 0;
 	
 	public PesquisaManagedBean(){
 		this.pesquisa = new Pesquisa();
 		this.produto = new Produto();
 		this.produtoDAO = new ProdutoDAO();
 		this.produtos = new ArrayList<Produto>();
+		//this.size = new ArrayList<Produto>();
+		this.produtosCategoria = new ArrayList<Produto>();
 		this.mediaPrecos = new BigDecimal("0.0");
 		this.precos = new ArrayList<BigDecimal>();
 		//this.produtosPesquisa = new ArrayList<Produto>();
@@ -50,20 +55,18 @@ public class PesquisaManagedBean {
 	//String categoria
 	public List<Produto> getProdutosCategoria(){
 		categoria = this.getIdentificador();
-		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();    
-		//categoria = request.getParameter("q");
-		//categoria = "Celulares";
 		try{
 			for(Produto p : produtoDAO.listarProdutoCategoria(categoria)){
-				produtos.add(p);
+				produtosCategoria.add(p);
 			}
-			//produtos.addAll(produtoDAO.listarProdutoCategoria(categoria));
-			//this.setSizeProduto(produtos.size());
+			//produtosCategoria.addAll(produtoDAO.listarProdutoCategoria(categoria));
+			//size = produtosCategoria.size();
 		}catch(Exception ex){
 			throw new RuntimeException(ex);
 		}
+		PesquisaManagedBean.size = produtosCategoria.size();
 			
-		return produtos;
+		return produtosCategoria;
 	}
 	
 	public List<Produto> getProdutosId(){
@@ -106,17 +109,34 @@ public class PesquisaManagedBean {
 
 	/** recebe idCategoria, passa para o DAO que alimenta a lista produtos, 
 	 * o size() desta lista alimenta a quantidade de retornos para a busca **/
-	public int getSizeProduto(){
-		int s = 0;
+	/*public int getSizeProduto(){
+		String query = this.getIdentificador();
+		
 		try{
-			categoria = this.getIdentificador();
-			produtos.addAll(produtoDAO.listarProdutoCategoria(categoria));
-			s = produtos.size();
-		}catch(SQLException ex){
+			size = produtoDAO.listaProdutoQuery(this.validaQuery(query)).size();
+			
+		}catch(Exception ex){
 			throw new RuntimeException(ex);
 		}
 		
-		return s;
+		return size;
+	}
+	
+	public int getSizeProdutoCategoria(){
+		categoria = this.getIdentificador();
+		
+		try{
+			size = produtoDAO.listarProdutoCategoria(categoria).size();
+		}catch(Exception ex){
+			throw new RuntimeException(ex);
+		}
+		
+		return size;
+	}*/
+	
+	public int getSizeProduto(){
+		System.out.println("Tamanho na função size: "+ PesquisaManagedBean.size);
+		return PesquisaManagedBean.size;
 	}
 	
 	/*public String getNome() {
@@ -217,9 +237,12 @@ public class PesquisaManagedBean {
 			for(Produto p : produtoDAO.listaProdutoQuery(this.validaQuery(query))){
 				produtos.add(p);
 			}
+			//PesquisaManagedBean.size = produtos.size();
 		}catch(SQLException ex){
 			throw new RuntimeException(ex);
 		}
+		PesquisaManagedBean.size = produtos.size();
+		//System.out.println("Tamanho: "+ PesquisaManagedBean.size);
 	 	
 		return produtos;
 	}
@@ -289,5 +312,9 @@ public class PesquisaManagedBean {
 		String query = pesquisa.getQuery();
 		
 		return "/pesquisa?q="+query;
+	}
+	
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 }

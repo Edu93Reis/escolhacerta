@@ -52,11 +52,10 @@
 				 
 						<!-- Equivalente ao a href :: value aponta para link -->
 						
-						<h:link value="#{loginManagedBean.usuario.nome}"
-									styleClass="navbar-brand"
-									action="areadousuario?faces-redirect=true" 
-									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.log}">
+						<h:link styleClass="navbar-brand"
+								action="areadousuario?faces-redirect=true" 
+								style="float: left; color: white; width:25; line-height:1;"
+								rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			
@@ -70,8 +69,7 @@
 					
 						<h:commandButton value="Login"
 							styleClass="navbar-brand" 
-							jsf:data-toggle="modal" 
-							jsf:data-target="#loginModal"
+							action="login?faces-redirect=true"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 							rendered="#{loginManagedBean.log eq false}"
@@ -128,7 +126,7 @@
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="container" style="overflow: auto;">
 	<h2 style="color: #333; font-size: 22px; font-weight: heavy; padding: 2px; margin-top: 40;"> 
-		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s): 
+		 Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s):
 	</h2>		
 		<h:form id="produto">
 		<ui:repeat value="#{pesquisaManagedBean.produtosCategoria}" var="produto">
@@ -176,53 +174,6 @@
 	<!-- <div id="footer" class="nav-container">
 		<div class="page-header p-4" style="background-color:#f1f1f1;"></div>
 	</div>  -->		
-	
-	<!-- Modal Login -->
-	<div class="modal fade" 
-		 jsf:role="dialog" 
-		 id="loginModal" 
-		 jsf:tabindex="-1" 
-		 jsf:aria-labelledby="exampleModalLabel" 
-		 jsf:aria-hidden="true">
-	    <div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">Efetue Login</h3>
-						<h:commandButton styleClass="close" data-dismiss="modal">
-							<i class="fas fa-times"></i>
-						</h:commandButton>							
-				</div>
-			
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Login:</label>
-						<h:inputText name="username" 
-									 styleClass="form-control" 
-									 ui:placeholder="Nome do Usuário..."
-									 value="#{loginManagedBean.usuario.nome}"/>
-									 <!-- #{loginManagedBean.usuario.emailUsuario} -->									 
-					</div>
-					<div class="form-group">
-						<label>Senha:</label>
-						<h:inputSecret name="passowrd" 
-									 styleClass="form-control" 
-									 ui:placeholder="Digite senha..."
-									 value="#{loginManagedBean.usuario.senha}"/>
-						<!-- #{loginManagedBean.usuario.senha} -->									 
-					</div>
-				</div>
-						
-				<div class="modal-footer">
-				   <h:commandButton value="Logar"
-				   					styleClass="btn btn-sucess"
-				   					action="#{loginManagedbean.envia}"							   					
-				   />				   		
-				   <!--  -->		   
-				</div>
-			</div>
-		</div>	
-	</div> 
-	<!-- Modal fim -->
 	
 <!-- Javascript das dependências do Bootstrap -->			
 <script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/jquery.min.js"></script>

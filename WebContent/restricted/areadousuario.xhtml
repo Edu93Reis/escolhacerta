@@ -35,7 +35,10 @@
 				<!-- Display: determina tamanho do texto (mais alto menor), m-5 margem -->
 				<h1 class="display-5 ml-5 mt-3">Área do Usuário</h1>
 				
-				<h:outputText value="#{cadastroManagedBean.usuario.nome}" />
+				<!-- <h:outputText value="#{loginManagedBean.usuario.nome}" />
+				<h:outputText value="#{loginManagedBean.email}" /> -->
+				
+				<h:outputText value="#{loginManagedBean.session.getParam('usuario')}" />
 						
 				<div class="ml-5 mt-4">
 					<div class="input-group">
@@ -44,14 +47,15 @@
 							<f:facet name="header"><p style="color: blue;">Seus Dados</p></f:facet>
 								<h:outputLabel value="E-mail:" style="color: blue; font-weight: 700;"/> 
 								<h:panelGroup>
-								<h:inputText jsf:placeholder="#{cadastroManagedBean.usuario.nome}"
+								<h:inputText jsf:placeholder="#{loginManagedBean.usuario.email}"
+											 value="#{loginManagedBean.usuario.email}"
 												   jsf:type="email" 
 												   styleClass="form-control" 
 												   style="width: 350px; border: 1px solid blue;"
 									     		   jsf:aria-describedby="sizing-addon3" 
 									     		   binding="#{cadastroBean.email}"
 									     		   disabled="true" />
-									     		   <!-- value="#{userArea.email}" -->
+
 								<h:commandLink value="alterar" 
 									styleClass="alteradados"
 									style="color: orange; font-weight: 700;"
@@ -62,7 +66,8 @@
 							
 								<h:outputLabel value="Senha:" style="color: blue; font-weight: 700;" />
 								<h:panelGroup> 
-									<h:inputSecret jsf:placeholder="Digite sua senha ..."
+									<h:inputSecret jsf:placeholder="#{loginManagedBean.usuario.senha}"
+											 	   value="#{loginManagedBean.usuario.senha}"
 														 jsf:type="password" 
 														 styleClass="form-control"
 														 style="width: 220px; border: 1px solid blue;" 
@@ -84,7 +89,8 @@
 							<h:outputLabel value="Nasc.: " style="color: blue; font-weight: 700;"/>
 							<h:panelGroup>
 								<span class='input-group date' id='datetimepicker1' style="width: 220px">				
-									<h:inputText jsf:placeholder="Digite seu nasc. ..."
+									<h:inputText jsf:placeholder="#{loginManagedBean.usuario.nasc}"
+											 	 value="#{loginManagedBean.usuario.nasc}"
 												 jsf:type="date" 
 												 styleClass="form-control" 
 												 style="border: 1px solid blue;"
@@ -109,7 +115,8 @@
 							<h:outputLabel value="CPF:" style="color: blue; font-weight: 700;" />
 								
 							<h:panelGroup>
-								<h:inputText jsf:placeholder="Digite seu CPF ..." 
+								<h:inputText jsf:placeholder="#{loginManagedBean.usuario.CPF}"
+											 value="#{loginManagedBean.usuario.CPF}" 
 												      styleClass="form-control" 
 												      style="width: 190px; border: 1px solid blue;"
 												      jsf:aria-describedby="sizing-addon3"
@@ -128,14 +135,13 @@
 							
 							<h:outputLabel value="Cidade:" style="color: blue; font-weight: 700;" />
 								<h:panelGroup> 
-									<h:inputText jsf:placeholder="Digite seu Cidade ..." 
+									<h:inputText jsf:placeholder="#{loginManagedBean.usuario.cidade}"
+											 	 value="#{loginManagedBean.usuario.cidade}" 
 												 styleClass="form-control"
 												 style="width: 190px; border: 1px solid blue;" 
 												 jsf:aria-describedby="sizing-addon3"
 												 binding="#{cadastroBean.cidade}"
 												 disabled="true" />
-												 <!-- 
-												 value="#{userArea.cidade}" -->
 									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
 										style="color: orange; font-weight: 700;"
@@ -146,46 +152,14 @@
 							
 							<h:outputLabel value="Estado: " style="color: blue; font-weight: 700;" />	
 								<h:panelGroup>
-									<h:selectOneMenu id="estado"
-													 styleClass="form-control col-md-4 col-lg-4"
-													 style="border: 1px solid blue;"
-													 required="true"
-													 requiredMessage="Selecione sua opção"
-													 binding="#{cadastroBean.estado}"
-													 disabled="true" >
-													 <!-- 
-													 value="#{cadastroManagedBean.estados}" -->
-											<!-- #{cadastroManagedBean.usuario.estado} -->
-											<!-- <f:selectItems value="#{cadastroManagedBean.estados}" />  -->
-											<f:selectItem itemValue="inválido" itemLabel="Selecione opção ..." />
-											<f:selectItem itemValue="Acre" itemLabel="Acre" />
-											<f:selectItem itemValue="Alagoas" itemLabel="Alagoas" />
-											<f:selectItem itemValue="Amapá" itemLabel="Amapá" />
-											<f:selectItem itemValue="Amazonas" itemLabel="Amazonas" />
-											<f:selectItem itemValue="Bahia" itemLabel="Bahia" />
-											<f:selectItem itemValue="Ceará" itemLabel="Ceará" />
-											<f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal" />
-											<f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo" />
-											<f:selectItem itemValue="Goiás" itemLabel="Goiás" />
-											<f:selectItem itemValue="Maranhão" itemLabel="Maranhão" />
-											<f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso" />
-											<f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul" />
-											<f:selectItem itemValue="Minas Gerais" itemLabel="Minas Gerais" />
-											<f:selectItem itemValue="Pará" itemLabel="Pará" />
-											<f:selectItem itemValue="Paraíba" itemLabel="Paraíba" />
-											<f:selectItem itemValue="Paraná" itemLabel="Paraná" />
-											<f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco" />
-											<f:selectItem itemValue="Piauí" itemLabel="Piauí" />
-											<f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro" />
-											<f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte" />
-											<f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul" />
-											<f:selectItem itemValue="Rondônia" itemLabel="Rondônia" />
-											<f:selectItem itemValue="Roraima" itemLabel="Roraima" />
-											<f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina" />
-											<f:selectItem itemValue="São Paulo" itemLabel="São Paulo" />
-											<f:selectItem itemValue="Sergipe" itemLabel="Sergipe" />
-											<f:selectItem itemValue="Tocantins" itemLabel="Tocantins" />
-									</h:selectOneMenu> 
+									<h:inputText jsf:placeholder="#{loginManagedBean.usuario.estado}"
+											 	 value="#{loginManagedBean.usuario.estado}"
+											 	 id="estado" 
+												 styleClass="form-control"
+												 style="width: 190px; border: 1px solid blue;" 
+												 jsf:aria-describedby="sizing-addon3"
+												 binding="#{cadastroBean.estado}"
+												 disabled="true" />
 									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
 										style="color: orange; font-weight: 700;"
@@ -195,7 +169,8 @@
 								</h:panelGroup>
 								<h:outputLabel value="CEP:" style="color: blue; font-weight: 700;" />
 								<h:panelGroup> 
-									<h:inputText jsf:placeholder="Digite seu CEP ..." 
+									<h:inputText jsf:placeholder="#{loginManagedBean.usuario.cep}"
+											 	 value="#{loginManagedBean.usuario.cep}" 
 												 styleClass="form-control"
 												 style="width: 190px; border: 1px solid blue;" 
 												 jsf:aria-describedby="sizing-addon3"
@@ -212,8 +187,11 @@
 								</h:panelGroup>
 							
 							<p>
-								<h:commandButton value="Salvar" action="#{userArea.incluiUsuario}" 
+								<h:commandButton value="Atualizar Usuário" action="#{loginManagedBean.incluiUsuario}" 
 												styleClass="btn btn-default" style="float:right"/>
+								<h:commandButton value="Deletar Usuário" action="#{loginManagedBean.excluiUsuario}" 
+												styleClass="btn btn-default" style="float:right"/>
+								
 							</p>
 							</h:panelGrid>
 						</h:form>
@@ -413,12 +391,47 @@
 	</h:form>
 </div>		
 		<!-- Aqui encerra o formulário que vocês devem editar -->
-		
-		
-		<div class="produtos-cadastrados mt-3 mb-3 ml-5"
-		     style="background: orange; width: 100%; height:auto; padding: 5px; margint-top: 10px;">
-			<h3 style="color:white; font-size: 18px; text-align: center;">Seus produtos cadastrados</h3>
-		</div>	
+		<div class="produtos-cadastrados"
+				     style="background: orange; width: 100%; height:auto; margint-top: 10px;">
+				<h3 style="color:white; font-size: 18px; text-align: center; padding: 5px 2px;">
+					<h:outputText value="Seus produtos cadastrados"/>
+				</h3>
+		</div>
+		<table>
+		  <tbody style="border: 1px solid grey;">
+			<ui:repeat value="#{produtoManagedBean.produtosUsuario}" var="p">
+				<tr style="color: white; background: orange; border: 1px solid grey;">
+					<th style="padding: 5px 2px;">Id de Produto</th>
+					<th style="padding: 5px 2px;">Nome do Produto</th>
+					<th style="padding: 5px 2px;">Modelo</th>
+					<th style="padding: 5px 2px;">Descrição</th>
+					<th style="padding: 5px 2px;">Pontuação</th>
+					<th style="padding: 5px 2px;">Data de Cadastro</th>
+				</tr>
+				<tr style="color: grey; padding: 5px 2px; border: 1px solid grey;">
+					<td style="padding: 5px 2px;">#{p.idProduto}</td>
+					<td style="padding: 5px 2px;">#{p.nmProduto}</td>
+					<td style="padding: 5px 2px;">#{p.modelo}</td>
+					<td style="font-size: 14px; padding: 5px 2px;">#{p.coment}</td>
+					<td style="padding: 5px 2px;">#{p.pontuacao}</td>
+					<td style="padding: 5px 2px;">#{p.dtCadastro}</td>
+				</tr>					
+				<tr style="padding: 5px 2px;">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><h:commandButton value="Alterar Produto" 
+										 style="background: blue; color: white; padding: 5px 2px;"
+										 styleClass="btn btn-default" /></td>
+					<td><h:commandButton value="Deletar Produto" 
+										 style="background: red; color: white; padding: 5px 2px;"
+										 styleClass="btn btn-default" /></td>
+				</tr>
+			</ui:repeat>
+		  </tbody>
+		</table>
+			
 	</div>	
 </div>		
 </aside>

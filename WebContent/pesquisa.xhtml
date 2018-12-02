@@ -52,11 +52,10 @@
 				 
 						<!-- Equivalente ao a href :: value aponta para link -->
 						
-						<h:link value="#{loginManagedBean.usuario.nome}"
-									styleClass="navbar-brand"
-									action="areadousuario?faces-redirect=true" 
-									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.log}">
+						<h:link styleClass="navbar-brand"
+								action="areadousuario?faces-redirect=true" 
+								style="float: left; color: white; width:25; line-height:1;"
+								rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			
@@ -127,7 +126,7 @@
 <!-- Retorno das pesquisas :: produtos -->
 <div id="section" class="container" style="overflow: auto;">
 	<h2 style="color: #333; font-size: 22px; font-weight: heavy; padding: 2px; margin-top: 40;"> 
-		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s): 
+		Sua busca retornou <h:outputText value="#{pesquisaManagedBean.sizeProduto}" /> resultado(s):
 	</h2>		
 		<h:form id="produto">
 		<ui:repeat value="#{pesquisaManagedBean.pesquisaString}" var="produto">

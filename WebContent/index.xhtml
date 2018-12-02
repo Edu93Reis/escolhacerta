@@ -60,11 +60,10 @@
 				 
 						<!-- Equivalente ao a href :: value aponta para link -->
 						
-						<h:link value="#{loginManagedBean.usuario.nome}"
-									styleClass="navbar-brand"
-									action="/restricted/areadousuario?faces-redirect=true" 
-									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.log}">
+						<h:link styleClass="navbar-brand"
+								action="/restricted/areadousuario?faces-redirect=true" 
+								style="float: left; color: white; width:25; line-height:1;"
+								rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			

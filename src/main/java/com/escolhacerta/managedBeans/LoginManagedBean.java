@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import com.escolhacerta.control.Usuario;
 import com.escolhacerta.model.UsuarioDAO;
 import com.escolhacerta.util.FacesUtil;
+import com.escolhacerta.util.SessionUtil;
 
 import sun.security.action.GetLongAction;
 
@@ -23,12 +24,13 @@ import sun.security.action.GetLongAction;
 @SessionScoped
 public class LoginManagedBean implements Serializable {
 	private static final long serialVersionUID = 269534515641225657L;
-	private static Usuario usuario;
+	static Usuario usuario;
 	private String email = "";
 	private String senha = "";
 	//private List<Usuario> listUser;
 	private UsuarioDAO u = new UsuarioDAO();
 	private Connection conn;
+	private SessionUtil session;
 	private boolean log = false;
 	
 	//https://www.devmedia.com.br/jsf-session-criando-um-modulo-de-login/30975
@@ -38,34 +40,83 @@ public class LoginManagedBean implements Serializable {
 		boolean teste = u.loginUsuario(email, senha); 
 		try{
 			if(teste == true){
-				this.usuario = new Usuario();
+				LoginManagedBean.usuario = new Usuario();
 				this.log = true;
-				//this.usuario = u.getLoggedUser(email);
+				this.setUsuario(email);
 				
-				FacesContext context = FacesContext.getCurrentInstance();
+				SessionUtil.getSession();
+				SessionUtil.setParam("usuario", this.getUsuario().getNome());
+				//FacesContext context = FacesContext.getCurrentInstance();
 				url = "/restricted/areadousuario.xhtml?faces-redirect=true";
+				
 			}
 			
 			return url;
 		}catch(Exception e){
 			FacesUtil.failure("Erro ao logar!");
 			throw new RuntimeException("Erro ao logar: ", e);
-		}
+		} 
+		
 	}
 	
 	public String logout (){
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		this.usuario = null;
+		SessionUtil.invalidate();
+		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		LoginManagedBean.usuario = null;
 		this.log = false;
 		return "/index.xhtml?faces-redirect=true";
+	}
+	
+	public void incluiUsuario() {
+		if(usuario != null){
+			//trocar adiciona para atualiza
+			//criar botão para remoção
+			u.adiciona(usuario);
+		
+			FacesUtil.success("Parabéns, você está cadastrado!");
+			//usuario = new Usuario();
+		} else {
+			FacesUtil.failure("Erro ao cadastrar!");
+			//usuario = new Usuario();
+		}
+	}
+	
+	/** Recebe usuário atualizado e, caso não nulo, exclui do banco de dados **/
+	public void excluiUsuario(){
+		if(usuario != null){
+			//trocar adiciona para atualiza
+			//criar botão para remoção
+			u.exclui(usuario);
+		
+			FacesUtil.success("Usuário excluídos com sucesso!");
+			//usuario = new Usuario();
+		} else {
+			FacesUtil.failure("Erro ao excluir!");
+			//usuario = new Usuario();
+		}
+	}
+	
+	/** Recebe usuário atualizado e, caso não nulo, atualiza no banco de dados **/
+	public void atualizaUsuario(){
+		if(usuario != null){
+			//trocar adiciona para atualiza
+			//criar botão para remoção
+			u.atualiza(usuario);
+		
+			FacesUtil.success("Dados atualizados com sucesso");
+			//usuario = new Usuario();
+		} else {
+			FacesUtil.failure("Erro ao atualizar!");
+			//usuario = new Usuario();
+		}
 	}
 	
 	public Usuario getUsuario() {
 		return usuario;
 	}
 	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(String email) {
+		LoginManagedBean.usuario = u.getLoggedUser(email);
 	}
 
 	public String getEmail() {
@@ -86,5 +137,11 @@ public class LoginManagedBean implements Serializable {
 	
 	public boolean getLog(){
 		return this.log;
+	}
+	
+	
+	//descobrir como acessar dados da sessão no JSF
+	public SessionUtil getSession() {
+		return session;
 	}
 }

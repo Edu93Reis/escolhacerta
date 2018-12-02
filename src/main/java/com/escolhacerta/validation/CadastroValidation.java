@@ -19,7 +19,7 @@ public class CadastroValidation {
 		String dia = data.substring(9, 11);
 		String mes = data.substring(5, 8);
 		//aqui está certo, último elemento é o 28
-		String ano = data.substring(25, 29);
+		String ano = data.substring(24, 28);
 		
 		if(mes.equals("jan")){
 			mes = "1";

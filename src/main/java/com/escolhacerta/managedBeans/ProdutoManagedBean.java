@@ -45,7 +45,7 @@ public class ProdutoManagedBean {
 	private List<String> sndcategorias;
 	private List<Integer> avaliacoes;
 	private List<BigDecimal> precos;
-	private List<Produto> fstProdutos;
+	private List<Produto> fstProdutos, produtosUsuario;
 	private List<Produto> lstProdutos;
 	private BigDecimal mediaPrecos;
 	private int mediaPontuacao;
@@ -71,6 +71,7 @@ public class ProdutoManagedBean {
 		this.precos = new ArrayList<BigDecimal>();
 		this.fstProdutos = new ArrayList<Produto>();
 		this.lstProdutos = new ArrayList<Produto>();
+		this.produtosUsuario = new ArrayList<Produto>();
 		this.mediaPrecos = new BigDecimal("0.0");
 		this.mediaPontuacao = 0;
 		this.produtos = new ArrayList<Produto>();
@@ -225,7 +226,18 @@ public class ProdutoManagedBean {
 			return null;
 		}
 	}
-
+	
+	/** Pega email de Usuario ativo, insere como parametro na função getProdutosUsuario(String emailUsuario)
+	 * e então retorna todos os produtos relacionados ao usuário ativo buscando a relação criada na tabela usuarioProduto **/
+	public List<Produto> getProdutosUsuario(){
+		try{
+			produtosUsuario.addAll(produtoDAO.getProdutosUsuario(LoginManagedBean.usuario.getEmail()));
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return produtosUsuario;
+	}
 	
 	public List<Produto> getFstProduto(){
 		//lista que recebe todos os produtos cadastrados de uma categoria

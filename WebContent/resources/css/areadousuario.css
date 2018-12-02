@@ -64,6 +64,11 @@ aside b {
 	color: #ccc;
 }
 /*** Edita pontuacao ***/
+
+.headerClass{
+	color: white; 
+	background: orange;	
+}
 				
 footer{
 	height: 10vh;

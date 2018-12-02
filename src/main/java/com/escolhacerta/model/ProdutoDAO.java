@@ -20,6 +20,7 @@ public class ProdutoDAO {
 	private Categoria categoria = new Categoria();
 	private List<Produto> produtos = new ArrayList<Produto>();
 	private List<Produto> produtoCategoria = new ArrayList<Produto>();
+	private List<Produto> produtosUsuario = new ArrayList<Produto>();
 	private List<String> bstProdutosComments = new ArrayList<String>();
 	private List<String> wstProdutosComments = new ArrayList<String>();
 	private HtmlCommandLink btnCategoria;
@@ -404,4 +405,36 @@ public class ProdutoDAO {
 		return produtoCategoria;
 	}
 
+	public List<Produto> getProdutosUsuario(String emailUsuario){
+		String query = "SELECT p.idProduto, p.nmProduto, p.nmModelo, p.dsDescricao, p.pontuacao, p.dtCadastro FROM produto as p "
+				+ "INNER JOIN usuario as u INNER JOIN usuarioProduto as up "
+				+  "ON u.emailUsuario = ? and up.idUsuario = u.idUsuario and up.idProduto = p.idProduto "
+				+ "INNER JOIN categoria as c ON c.idCategoria = p.idCategoria";
+		
+		Produto p ;
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, emailUsuario);
+			
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				p = new Produto();
+				p.setIdProduto(rs.getInt("idProduto"));
+				p.setNmProduto(rs.getString("nmProduto"));
+				p.setModelo(rs.getString("nmModelo"));
+				p.setComent(rs.getString("dsDescricao"));
+				p.setPontuacao(rs.getInt("pontuacao"));
+				p.setDtCadastro(rs.getDate("dtCadastro"));
+		
+				produtosUsuario.add(p);
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return produtosUsuario;
+	}
 }

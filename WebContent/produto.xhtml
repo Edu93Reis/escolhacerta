@@ -52,11 +52,10 @@
 				 
 						<!-- Equivalente ao a href :: value aponta para link -->
 						
-						<h:link value="#{loginManagedBean.usuario.nome}"
-									styleClass="navbar-brand"
-									action="areadousuario?faces-redirect=true" 
-									style="float: left; color: white; width:25; line-height:1;"
-									rendered="#{loginManagedBean.log}">
+						<h:link styleClass="navbar-brand"
+								action="areadousuario?faces-redirect=true" 
+								style="float: left; color: white; width:25; line-height:1;"
+								rendered="#{loginManagedBean.log}">
 								<!-- Ícone de usuário -->
 								<i class="far fa-user-circle"></i> #{loginManagedBean.usuario.nome}
 						</h:link>			
@@ -70,8 +69,7 @@
 					
 						<h:commandButton value="Login"
 							styleClass="navbar-brand" 
-							jsf:data-toggle="modal" 
-							jsf:data-target="#loginModal"
+							action="login?faces-redirect=true"
 							style="color: white; border:none; background:none; cursor: default;
 							float: left; width:25; line-height:1;"
 							rendered="#{loginManagedBean.log eq false}"

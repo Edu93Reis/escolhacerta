@@ -25,18 +25,16 @@ import com.escolhacerta.util.FacesUtil;
 public class CadastroManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//instância do DAO (Classe de persistência de Dados do usuário para ser manipulada pelo ManagedBean)
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	//private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	//instância da classe de Usuário
 	//private Usuario usuario = new Usuario();
-	private Usuario usuario;
+	private Usuario usuario = new Usuario();
 	private List<String> estados;
 	private List<Usuario> debuga;
 	
 	@SuppressWarnings("serial")
 	public CadastroManagedBean(){
-		this.usuarioDAO = new UsuarioDAO();
-		this.usuario = new Usuario();
 		this.estados = new ArrayList<String>(){
 			{
 				 add("Acre"); add("Alagoas"); add("Amapá"); add("Amazonas"); add("Bahia");
@@ -66,14 +64,19 @@ public class CadastroManagedBean implements Serializable {
 	}
 	
 	public void incluiUsuario() {
-		if(usuario != null){
-			usuarioDAO.adiciona(usuario);
-		
-			FacesUtil.success("Parabéns, você está cadastrado!");
-			//usuario = new Usuario();
-		} else {
+		try{
+			if(null != usuario){
+				usuarioDAO.adiciona(usuario);
+			
+				FacesUtil.success("Parabéns, você está cadastrado!");
+				usuario = new Usuario();
+			} else {
+				FacesUtil.failure("Erro ao cadastrar!");
+				//usuario = new Usuario();
+			}
+		}catch(Exception ex){
 			FacesUtil.failure("Erro ao cadastrar!");
-			//usuario = new Usuario();
+			System.out.println(ex);
 		}
 	}
 	

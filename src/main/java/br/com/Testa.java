@@ -67,23 +67,31 @@ public class Testa {
 		/*for(Usuario teste : u.loginUsuario()){
 			System.out.println(teste.getCPF());
 		}*/
-		/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
-		usuario.setNome("Son Goku");
-		usuario.setEmail("goku@bc.com");
-		usuario.setSenha("123");
+		usuario.setEmail("bonovox@u2.com");
+		usuario.setNome("Bono Vox");
+		usuario.setSenha("bonovox");
 		try {
-			usuario.setNasc(formatter.parse("1987-12-02"));
+			usuario.setNasc(formatter.parse("1963-08-12"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		usuario.setCep("00354150");
-		usuario.setCPF("081030192-20");
-		usuario.setCidade("Santos");
-		usuario.setEstado("São Paulo");		
+		usuario.setCPF("182.130.122-21");
+		usuario.setCidade("Rio de Janeiro");
+		usuario.setEstado("Rio de Janeiro");	
+		usuario.setCep("10342-151");
 		
-		System.out.println(u.adiciona(usuario)); */
+		//c.incluiUsuario(usuario);
+		System.out.println(pd.getProdutosUsuario("eduardo.reis93@gmail.com"));
+		
+		
+		//String teste = "Sun Jan 02 00:00:00 BRT 1927";
+		
+		//System.out.println(usuario.getNasc());
+		
+		//u.adiciona(usuario); 
 		
 		//System.out.println(pes.getProdutosCategoria("Celulares"));
 		
@@ -116,6 +124,11 @@ public class Testa {
 			//System.out.println(pes.pesquisaString("Samsüng"));
 			//List<Produto> teste = pes.bstProdutos(0);
 			//System.out.println(pes.wstProdutos(1));
+			
+			//System.out.println(u.getLoggedUser("eduardo.reis93@gmail.com"));
+			//l.setUsuario("eduardo.reis93@gmail.com");
+			//System.out.println(l.getUsuario().getNome());
+			//System.out.println(u.adiciona(usuario));
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
