@@ -83,8 +83,9 @@ public class Testa {
 		usuario.setEstado("Rio de Janeiro");	
 		usuario.setCep("10342-151");
 		
+		//System.out.println(l.atualizaUsuario(usuario));
 		//c.incluiUsuario(usuario);
-		System.out.println(pd.getProdutosUsuario("eduardo.reis93@gmail.com"));
+		//System.out.println(pd.getProdutosUsuario("eduardo.reis93@gmail.com"));
 		
 		
 		//String teste = "Sun Jan 02 00:00:00 BRT 1927";

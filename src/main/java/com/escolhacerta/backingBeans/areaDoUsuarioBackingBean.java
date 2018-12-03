@@ -19,6 +19,7 @@ public class AreaDoUsuarioBackingBean {
 	private HtmlInputText cidade;
 	private HtmlInputText cep;
 	private HtmlSelectOneMenu estado;
+	private HtmlInputText estadoInput;
 	private HtmlCommandLink linkEmail, linkSenha, linkData, linkCPF, linkCidade, linkEstado, linkCep;
 	private HtmlCommandButton btnCadastro;
 	private HtmlPanelGrid prodCadastro;
@@ -60,6 +61,13 @@ public class AreaDoUsuarioBackingBean {
 		if(this.cpf.isDisabled()){
 			this.cpf.setDisabled(false);
 			this.cpf.setStyle("background: white; width: 190px; border: 1px solid orange;");
+		}
+	}
+	
+	public void desativaEstadoInput(){
+		if(this.estadoInput.isDisabled()){
+			this.estadoInput.setDisabled(false);
+			this.estadoInput.setStyle("background: white; width: 190px; border: 1px solid orange;");
 		}
 	}
 	
@@ -212,4 +220,11 @@ public class AreaDoUsuarioBackingBean {
 		this.prodCadastro = prodCadastro;
 	}
 
+	public HtmlInputText getEstadoInput() {
+		return estadoInput;
+	}
+	
+	public void setEstadoInput(HtmlInputText estadoInput) {
+		this.estadoInput = estadoInput;
+	}
 }

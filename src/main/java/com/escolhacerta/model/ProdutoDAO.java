@@ -1,6 +1,7 @@
 package com.escolhacerta.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import javax.faces.component.html.HtmlCommandLink;
 
 import com.escolhacerta.control.Categoria;
 import com.escolhacerta.control.Produto;
+import com.escolhacerta.control.Usuario;
 import com.escolhacerta.util.ConnectionFactory;
 import java.math.BigDecimal;
 
@@ -138,7 +140,7 @@ public class ProdutoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
+			//conn.close();
 		}catch(Exception ex){
 			throw new RuntimeException(ex);
 		}
@@ -406,7 +408,7 @@ public class ProdutoDAO {
 	}
 
 	public List<Produto> getProdutosUsuario(String emailUsuario){
-		String query = "SELECT p.idProduto, p.nmProduto, p.nmModelo, p.dsDescricao, p.pontuacao, p.dtCadastro FROM produto as p "
+		String query = "SELECT p.idProduto, p.nmProduto, p.nmModelo, p.dsDescricao, p.pontuacao, p.cdPreco FROM produto as p "
 				+ "INNER JOIN usuario as u INNER JOIN usuarioProduto as up "
 				+  "ON u.emailUsuario = ? and up.idUsuario = u.idUsuario and up.idProduto = p.idProduto "
 				+ "INNER JOIN categoria as c ON c.idCategoria = p.idCategoria";
@@ -424,7 +426,7 @@ public class ProdutoDAO {
 				p.setModelo(rs.getString("nmModelo"));
 				p.setComent(rs.getString("dsDescricao"));
 				p.setPontuacao(rs.getInt("pontuacao"));
-				p.setDtCadastro(rs.getDate("dtCadastro"));
+				p.setPreco(rs.getBigDecimal("cdPreco"));
 		
 				produtosUsuario.add(p);
 			}
@@ -437,4 +439,30 @@ public class ProdutoDAO {
 		
 		return produtosUsuario;
 	}
+	
+	public boolean atualizaProduto(Produto produto) {
+		String sql = "UPDATE Produto as p INNER JOIN Categoria as c " +
+				"SET p.idProduto = ?, p.nmProduto = ?, p.dsDescricao = ?, p.nmModelo = ?, " + 
+				"p.cdPreco = ?, p.pontuacao = ? " +
+				"WHERE c.idCategoria = p.idCategoria and p.idProduto = ?";
+		
+		try { 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, produto.getIdProduto());
+			stmt.setString(2, produto.getNmProduto());
+			stmt.setString(3, produto.getComent());
+			stmt.setString(4, produto.getModelo());
+			stmt.setBigDecimal(5, produto.getPreco());
+			stmt.setInt(6, produto.getPontuacao());
+			stmt.setInt(7, produto.getIdProduto());
+			stmt.executeUpdate();
+			stmt.close();
+			
+			return true;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	
 }

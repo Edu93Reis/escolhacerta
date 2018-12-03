@@ -69,45 +69,33 @@ public class LoginManagedBean implements Serializable {
 	
 	public void incluiUsuario() {
 		if(usuario != null){
-			//trocar adiciona para atualiza
-			//criar botão para remoção
 			u.adiciona(usuario);
 		
 			FacesUtil.success("Parabéns, você está cadastrado!");
-			//usuario = new Usuario();
 		} else {
 			FacesUtil.failure("Erro ao cadastrar!");
-			//usuario = new Usuario();
 		}
 	}
 	
 	/** Recebe usuário atualizado e, caso não nulo, exclui do banco de dados **/
 	public void excluiUsuario(){
 		if(usuario != null){
-			//trocar adiciona para atualiza
-			//criar botão para remoção
 			u.exclui(usuario);
 		
 			FacesUtil.success("Usuário excluídos com sucesso!");
-			//usuario = new Usuario();
 		} else {
 			FacesUtil.failure("Erro ao excluir!");
-			//usuario = new Usuario();
 		}
 	}
 	
 	/** Recebe usuário atualizado e, caso não nulo, atualiza no banco de dados **/
 	public void atualizaUsuario(){
 		if(usuario != null){
-			//trocar adiciona para atualiza
-			//criar botão para remoção
 			u.atualiza(usuario);
 		
 			FacesUtil.success("Dados atualizados com sucesso");
-			//usuario = new Usuario();
 		} else {
 			FacesUtil.failure("Erro ao atualizar!");
-			//usuario = new Usuario();
 		}
 	}
 	

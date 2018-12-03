@@ -88,6 +88,60 @@ public class UsuarioDAO {
 		return res;
 	}
 	
+	public boolean exclui(Usuario usuario) {
+		try { 
+			//+ "(emailUsuario, nmUsuario, idPassword, dtNasc, nmCidade, nmEstado, cdCep)" +
+			PreparedStatement stmt = conn.prepareStatement("insert into usuario "
+					+ "(emailUsuario, nmUsuario, idPassword, dtNasc, cdCPF, nmCidade, nmEstado, cdCep)" + 
+										" values (?, ?, ?, ?, ?, ?, ?,?)");
+
+			stmt.setString(1, usuario.getEmail());
+			stmt.setString(2, usuario.getNome());
+			stmt.setString(3, usuario.getSenha());
+			Date data = cv.converteData(usuario.getNasc().toString());
+			stmt.setDate(4, data);
+			stmt.setString(5, usuario.getCPF());
+			stmt.setString(6, usuario.getCidade());
+			stmt.setString(7, usuario.getEstado());
+			stmt.setString(8, usuario.getCep());
+			stmt.execute();
+			stmt.close();
+			
+			return true;
+			//return true;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);			
+		}
+	}
+
+	public boolean atualiza(Usuario usuario) {
+		String sql = "UPDATE Usuario " +
+				"SET emailUsuario = ?, nmUsuario = ?, idPassword = ?, dtNasc = ?, " + 
+				"cdCPF = ?, nmCidade = ?, nmEstado = ?, cdCep = ? " +
+				"WHERE emailUsuario = ?";
+		
+		try { 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, usuario.getEmail());
+			stmt.setString(2, usuario.getNome());
+			stmt.setString(3, usuario.getSenha());
+			Date data = cv.converteData(usuario.getNasc().toString());
+			stmt.setDate(4, data);
+			stmt.setString(5, usuario.getCPF());
+			stmt.setString(6, usuario.getCidade());
+			stmt.setString(7, usuario.getEstado());
+			stmt.setString(8, usuario.getCep());
+			stmt.setString(9, usuario.getEmail());
+			stmt.executeUpdate();
+			stmt.close();
+			
+			return true;
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	
 	public Usuario getLoggedUser(String email){
 		try{
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM usuario WHERE emailUsuario = ?");

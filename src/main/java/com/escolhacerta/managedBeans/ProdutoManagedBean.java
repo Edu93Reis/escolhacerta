@@ -288,6 +288,17 @@ public class ProdutoManagedBean {
 		
 	}
 	
+	
+	public void atualizaProduto(){
+		if(produto != null){
+			produtoDAO.atualizaProduto(produto);
+		
+			FacesUtil.success("Produto atualizado com sucesso");
+		} else {
+			FacesUtil.failure("Erro ao atualizar!");
+		}
+	}
+	
 	public void ativaForm(){
 		this.setForm(true);
 	}

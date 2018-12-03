@@ -74,10 +74,6 @@
 														 jsf:aria-describedby="sizing-addon3" 
 														 binding="#{cadastroBean.senha}"
 														 disabled="true" />
-														 <!-- 
-														 value="#{userArea.senha}"
-														 binding="#{cadastroBean.senha}"
-														 disabled="true" -->
 									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
 										style="color: orange; font-weight: 700;"
@@ -96,8 +92,6 @@
 												 style="border: 1px solid blue;"
 												 binding="#{cadastroBean.data}"
 												 disabled="true" >
-												 <!--  
-												 value="#{userArea.nasc}" -->
 										<f:convertDateTime pattern="dd/MM/yyyy"/>
 									</h:inputText>
 									<span class="input-group-addon">
@@ -122,9 +116,6 @@
 												      jsf:aria-describedby="sizing-addon3"
 												      binding="#{cadastroBean.cpf}"
 												      disabled="true" />
-												      <!-- 
-												      value="#{userArea.cpf}"
-												       -->
 									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
 										style="color: orange; font-weight: 700;"
@@ -147,9 +138,7 @@
 										style="color: orange; font-weight: 700;"
 										binding="#{cadastroBean.linkCidade}"
 										action="#{cadastroBean.desativaCidade}"/>
-										<!-- outcome="" -->
 								</h:panelGroup>
-							
 							<h:outputLabel value="Estado: " style="color: blue; font-weight: 700;" />	
 								<h:panelGroup>
 									<h:inputText jsf:placeholder="#{loginManagedBean.usuario.estado}"
@@ -158,14 +147,13 @@
 												 styleClass="form-control"
 												 style="width: 190px; border: 1px solid blue;" 
 												 jsf:aria-describedby="sizing-addon3"
-												 binding="#{cadastroBean.estado}"
+												 binding="#{cadastroBean.estadoInput}"
 												 disabled="true" />
 									<h:commandLink value="alterar" 
 										styleClass="alteradados" 
 										style="color: orange; font-weight: 700;"
 										binding="#{cadastroBean.linkEstado}"
-										action="#{cadastroBean.desativaEstado}" />
-										<!-- outcome="" -->
+										action="#{cadastroBean.desativaEstadoInput}" />
 								</h:panelGroup>
 								<h:outputLabel value="CEP:" style="color: blue; font-weight: 700;" />
 								<h:panelGroup> 
@@ -187,11 +175,8 @@
 								</h:panelGroup>
 							
 							<p>
-								<h:commandButton value="Atualizar Usuário" action="#{loginManagedBean.incluiUsuario}" 
+								<h:commandButton value="Atualizar Usuário" action="#{loginManagedBean.atualizaUsuario}" 
 												styleClass="btn btn-default" style="float:right"/>
-								<h:commandButton value="Deletar Usuário" action="#{loginManagedBean.excluiUsuario}" 
-												styleClass="btn btn-default" style="float:right"/>
-								
 							</p>
 							</h:panelGrid>
 						</h:form>
@@ -296,7 +281,7 @@
 						 		 jsf:aria-describedby="sizing-addon3" 
 						 	     value="#{produtoManagedBean.produto.idCategoria}"
 						 		 required="true"
-						 		 converter="javax.faces.Integer" >
+						 		 converter="javax.faces.Integer" >  
 					<f:selectItem itemValue="" itemLabel="Selecione categoria..." noSelectionOptions="true" />
 					<f:selectItems value="#{produtoManagedBean.categorias}" 
 								   var="categoria" 
@@ -397,6 +382,7 @@
 					<h:outputText value="Seus produtos cadastrados"/>
 				</h3>
 		</div>
+		<h:form id="atualizaProduto">
 		<table>
 		  <tbody style="border: 1px solid grey;">
 			<ui:repeat value="#{produtoManagedBean.produtosUsuario}" var="p">
@@ -405,23 +391,46 @@
 					<th style="padding: 5px 2px;">Nome do Produto</th>
 					<th style="padding: 5px 2px;">Modelo</th>
 					<th style="padding: 5px 2px;">Descrição</th>
+					<th style="padding: 5px 2px;">Preço</th>
 					<th style="padding: 5px 2px;">Pontuação</th>
-					<th style="padding: 5px 2px;">Data de Cadastro</th>
 				</tr>
 				<tr style="color: grey; padding: 5px 2px; border: 1px solid grey;">
-					<td style="padding: 5px 2px;">#{p.idProduto}</td>
-					<td style="padding: 5px 2px;">#{p.nmProduto}</td>
-					<td style="padding: 5px 2px;">#{p.modelo}</td>
-					<td style="font-size: 14px; padding: 5px 2px;">#{p.coment}</td>
-					<td style="padding: 5px 2px;">#{p.pontuacao}</td>
-					<td style="padding: 5px 2px;">#{p.dtCadastro}</td>
+					<td style="padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.idProduto}"
+								 	 value="#{produtoManagedBean.produto.idProduto}"
+								 	 style="width: 20px;" />
+					</td>
+					<td style="padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.nmProduto}"
+								 	 value="#{produtoManagedBean.produto.nmProduto}" />
+					</td>
+					<td style="padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.modelo}" 
+								 	 value="#{produtoManagedBean.produto.modelo}"
+								 	 style="width: 65px;" />
+					</td>
+					<td style="font-size: 14px; padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.coment}" 
+								     value="#{produtoManagedBean.produto.coment}" />
+					</td>
+					<td style="padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.preco}" 
+									 value="#{produtoManagedBean.produto.preco}"
+									 style="width: 65px;" />
+					</td>
+					<td style="padding: 5px 2px;">
+						<h:inputText jsf:placeholder="#{p.pontuacao}"
+									 value="#{produtoManagedBean.produto.pontuacao}"
+									 style="width: 45px;" />	
+					</td>
 				</tr>					
 				<tr style="padding: 5px 2px;">
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><h:commandButton value="Alterar Produto" 
+					<td><h:commandButton action="#{produtoManagedBean.atualizaProduto}"
+										 value="Atualizar Produto" 
 										 style="background: blue; color: white; padding: 5px 2px;"
 										 styleClass="btn btn-default" /></td>
 					<td><h:commandButton value="Deletar Produto" 
@@ -431,7 +440,7 @@
 			</ui:repeat>
 		  </tbody>
 		</table>
-			
+		</h:form>	
 	</div>	
 </div>		
 </aside>
