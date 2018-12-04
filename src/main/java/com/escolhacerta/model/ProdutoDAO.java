@@ -149,7 +149,7 @@ public class ProdutoDAO {
 	}
 	
 	public void relacionaUsuario(int idUsuario, int idProduto){
-		String query = "INSERT INTO usuarioProduto (idProduto, idUsuario) VALUES (?,?)";
+		String query = "INSERT INTO usuarioProduto (idUsuario, idProduto) VALUES (?,?)";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(query);

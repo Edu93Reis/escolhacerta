@@ -25,6 +25,7 @@ import com.escolhacerta.util.FacesUtil;
 //import org.hibernate.criterion.Order;
 
 import com.escolhacerta.control.Produto;
+import com.escolhacerta.control.Upload;
 import com.escolhacerta.control.Usuario;
 import com.escolhacerta.model.CategoriaDAO;
 import com.escolhacerta.model.ProdutoDAO;
@@ -54,6 +55,7 @@ public class ProdutoManagedBean {
 	private Usuario usuario;
 	private ProdutoDAO produtoDAO;
 	private Produto produto;
+	private Upload up;
 	private Integer idProduto = 0, idUsuario = 0;
 	private String nomeProduto;
 	private Part imagemProduto;
@@ -139,44 +141,20 @@ public class ProdutoManagedBean {
 	public void incluiProduto() {
 		String imagemURL = "/resources/img/produtos/";
 		
-		if(imagemProduto != null && imagemProduto.getSubmittedFileName() != null){ 
-			//trocar nome para id
-			//imagemURL = imagemURL + imagemProduto.getSubmittedFileName();
-			String nmImgProduto = String.valueOf(codProduto);
-			codProduto ++;
-			//imagemURL = imagemURL + imagemProduto + nmImgProduto;
-			imagemURL = imagemURL + nmImgProduto;
-			
-			try{
-				//cria espaço na memória para o conteúdo da imagem do tamanho da imagem
-				byte[] bytesImagem = new byte[(int) imagemProduto.getSize()];
-				//lê contéudo da imagem e insere no array de bytes
-				imagemProduto.getInputStream().read(bytesImagem);
-				//cria referência para o arquivo que será enviado
-				File f = new File(imagemURL);
-				
-				//objeto recebe arquivo de referência para a manipulação
-				FileOutputStream FOS = new FileOutputStream(f);
-				//escreve o conteúdo da imagem recebida no arquivo (servidor)
-				FOS.write(bytesImagem);
-				FOS.close();
-			}catch(Exception e){
-				throw new RuntimeException("Erro upload de imagem: ", e);
-			} 
-			
-			/*File imagemProduto = new File("C:/imagem.jpg");
-			BufferedImage img = ImageIO.read(imagemProduto);
-			int height = img.getHeight();
-			int width = img.getWidth();*/
-		}
-		
-		//int idCategoria = 0; 
-		//point = valor recebido das estrelas 
-		
 		if(produto != null){
-			//produto.setIdCategoria(idCategoria);
-			//produto.setPontuacao(point);
 			produtoDAO.adiciona(produto);
+			
+			if(imagemProduto != null && imagemProduto.getSubmittedFileName() != null){ 
+				String nmImgProduto = String.valueOf(produtoDAO.getLastProdId());
+				
+				try{
+					up.write(imagemProduto, nmImgProduto);
+				}catch(Exception e){
+					throw new RuntimeException("Erro upload de imagem: ", e);
+				} 
+				
+			}
+			
 			idUsuario = LoginManagedBean.usuario.getIdUser();
 			idProduto = produtoDAO.getLastProdId();
 			produtoDAO.desativaConstraints();
@@ -331,5 +309,13 @@ public class ProdutoManagedBean {
 	
 	public void setForm(boolean form) {
 		this.form = form;
+	}
+	
+	public Part getImagemProduto() {
+		return imagemProduto;
+	}
+	
+	public void setImagemProduto(Part imagemProduto) {
+		this.imagemProduto = imagemProduto;
 	}
 }
