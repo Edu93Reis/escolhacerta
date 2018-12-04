@@ -29,6 +29,7 @@ public class ProdutoDAO {
 	private List<BigDecimal> precos = new ArrayList<BigDecimal>();
 	private List<Integer> pontuacao = new ArrayList<Integer>();
 	private String nome;
+	private int id = 0;
 	
 	public ProdutoDAO()  {
 		//construtor abre a conexão
@@ -89,23 +90,62 @@ public class ProdutoDAO {
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			/*String id = "SELECT idProduto FROM Produto WHERE nmProduto = ?";
-			
-			PreparedStatement idstmt = conn.prepareStatement(id);
-			idstmt.setString(1, produto.getNmProduto());
-			ResultSet rs = idstmt.executeQuery();
-			
-			while(rs.next()){
-				idProduto = (rs.getInt("idProduto"));
-			}*/
-			
-			conn.close();
+			//conn.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
-		//estou mexendo aqui
-		//this.relacionaUsuario(1, idProduto);
+	}
+	
+	/*** retorna id do último produto cadastrado para registro na tabela usuarioProduto ***/
+	public int getLastProdId(){
+		String query = "SELECT MAX(idProduto) FROM produto";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);
+			
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while(rs.next()){
+				id = rs.getInt(1);
+			}
+			
+			stmt.close();
+			rs.close();
+		}catch (SQLException ex){
+			throw new RuntimeException(ex);
+		}
+		
+		return id;
+	
+	}
+	
+	public void desativaConstraints(){
+		String query = "SET foreign_key_checks = 0";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);	
+			
+			stmt.executeUpdate();
+			stmt.close();
+			//conn.close();
+		}catch (SQLException ex){
+			throw new RuntimeException(ex);
+		}
+	}
+	
+	public void ativaConstraints(){
+		String query = "SET foreign_key_checks = 1";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);	
+			
+			stmt.executeUpdate();
+			stmt.close();
+			//conn.close();
+		}catch (SQLException ex){
+			throw new RuntimeException(ex);
+		}
 	}
 	
 	public void relacionaUsuario(int idUsuario, int idProduto){
@@ -118,7 +158,7 @@ public class ProdutoDAO {
 			
 			stmt.executeUpdate();
 			stmt.close();
-			conn.close();
+			//conn.close();
 		}catch (SQLException ex){
 			throw new RuntimeException(ex);
 		}

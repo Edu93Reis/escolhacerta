@@ -54,7 +54,7 @@ public class ProdutoManagedBean {
 	private Usuario usuario;
 	private ProdutoDAO produtoDAO;
 	private Produto produto;
-	private Integer idProduto;
+	private Integer idProduto = 0, idUsuario = 0;
 	private String nomeProduto;
 	private Part imagemProduto;
 	static int codProduto;
@@ -177,8 +177,14 @@ public class ProdutoManagedBean {
 			//produto.setIdCategoria(idCategoria);
 			//produto.setPontuacao(point);
 			produtoDAO.adiciona(produto);
+			idUsuario = LoginManagedBean.usuario.getIdUser();
+			idProduto = produtoDAO.getLastProdId();
+			produtoDAO.desativaConstraints();
+			produtoDAO.relacionaUsuario(idUsuario, idProduto);
+			produtoDAO.ativaConstraints();
 			this.form = false;
 		
+			System.out.println("Id do Usuario: " + idUsuario + "Id do Produto: " + idProduto);
 			FacesUtil.success("Produto cadastrado com sucesso");
 		} else {
 			FacesUtil.failure("Erro ao cadastrar produto!");

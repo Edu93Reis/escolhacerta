@@ -130,6 +130,8 @@ public class Testa {
 			//l.setUsuario("eduardo.reis93@gmail.com");
 			//System.out.println(l.getUsuario().getNome());
 			//System.out.println(u.adiciona(usuario));
+			
+			System.out.println(pd.getLastProdId());
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
